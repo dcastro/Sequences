@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Sequences
     /// Elements are only evaluated when they're needed, and <see cref="Sequence{T}"/> employs memoization to store the computed values and avoid re-evaluation.
     /// </summary>
     /// <typeparam name="T">The type of elements in the sequence.</typeparam>
-    public class Sequence<T>
+    public class Sequence<T> : IEnumerable<T>
     {
         private readonly T _head;
         private readonly Lazy<Sequence<T>> _tail;
@@ -69,6 +70,28 @@ namespace Sequences
         {
             _head = head;
             _tail = tail;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the <see cref="Sequence{T}"/>.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator{T}"/> for the sequence.</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            //we use an iterative proccess, instead of recursively calling Tail.GetEnumerator
+            //to avoid a stack overflow exception
+            Sequence<T> sequence = this;
+
+            while (!sequence.IsEmpty)
+            {
+                yield return sequence.Head;
+                sequence = sequence.Tail;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private class EmptySequence : Sequence<T>
