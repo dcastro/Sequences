@@ -15,7 +15,7 @@ namespace Sequences
         /// Creates an infinite sequence starting at <paramref name="start"/> and incrementing by <paramref name="step"/> in each step.
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
-        /// <param name="step">The value to increment in each step.</param>
+        /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
         public static Sequence<int> From(int start, int step)
         {
@@ -36,9 +36,9 @@ namespace Sequences
         /// Creates an infinite sequence starting at <paramref name="start"/> and incrementing by <paramref name="step"/> in each step.
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
-        /// <param name="step">The value to increment in each step.</param>
+        /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<long> From(long start, int step)
+        public static Sequence<long> From(long start, long step)
         {
             return new Sequence<long>(start, () => From(start + step, step));
         }
@@ -57,9 +57,9 @@ namespace Sequences
         /// Creates an infinite sequence starting at <paramref name="start"/> and incrementing by <paramref name="step"/> in each step.
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
-        /// <param name="step">The value to increment in each step.</param>
+        /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<BigInteger> From(BigInteger start, int step)
+        public static Sequence<BigInteger> From(BigInteger start, BigInteger step)
         {
             return new Sequence<BigInteger>(start, () => From(start + step, step));
         }
@@ -72,6 +72,57 @@ namespace Sequences
         public static Sequence<BigInteger> From(BigInteger start)
         {
             return From(start, 1);
+        }
+
+        /// <summary>
+        /// Creates a sequence containing equally spaced values in some integer interval.
+        /// </summary>
+        /// <param name="start">The start value of the collection.</param>
+        /// <param name="end">The exclusive upper bound.</param>
+        /// <param name="step">The value to increment in each step (positive or negative).</param>
+        /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
+        /// up to, but excluding <paramref name="end"/>.</returns>
+        public static Sequence<int> Range(int start, int end, int step)
+        {
+            if ((step > 0 && start >= end) ||
+                (step <= 0 && start <= end))
+                return Sequence<int>.Empty;
+
+            return new Sequence<int>(start, () => Range(start + step, end, step));
+        }
+
+        /// <summary>
+        /// Creates a sequence containing equally spaced values in some integer interval.
+        /// </summary>
+        /// <param name="start">The start value of the collection.</param>
+        /// <param name="end">The exclusive upper bound.</param>
+        /// <param name="step">The value to increment in each step (positive or negative).</param>
+        /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
+        /// up to, but excluding <paramref name="end"/>.</returns>
+        public static Sequence<long> Range(long start, long end, long step)
+        {
+            if ((step > 0 && start >= end) ||
+                (step <= 0 && start <= end))
+                return Sequence<long>.Empty;
+
+            return new Sequence<long>(start, () => Range(start + step, end, step));
+        }
+
+        /// <summary>
+        /// Creates a sequence containing equally spaced values in some integer interval.
+        /// </summary>
+        /// <param name="start">The start value of the collection.</param>
+        /// <param name="end">The exclusive upper bound.</param>
+        /// <param name="step">The value to increment in each step (positive or negative).</param>
+        /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
+        /// up to, but excluding <paramref name="end"/>.</returns>
+        public static Sequence<BigInteger> Range(BigInteger start, BigInteger end, BigInteger step)
+        {
+            if ((step > 0 && start >= end) ||
+                (step <= 0 && start <= end))
+                return Sequence<BigInteger>.Empty;
+
+            return new Sequence<BigInteger>(start, () => Range(start + step, end, step));
         }
     }
 }
