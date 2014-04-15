@@ -63,13 +63,13 @@
     <Compile Include="TailTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sequences\Sequences.csproj">
-      <Project>{1e1a1db4-6326-446b-b5d9-297a767c1c10}</Project>
-      <Name>Sequences</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\src\Sequences\Sequences.csproj">
+      <Project>{6c9f9e66-e026-4966-aeb2-9b29b5f0df85}</Project>
+      <Name>Sequences</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
