@@ -107,12 +107,12 @@ namespace Sequences
 
             public override T Head
             {
-                get { throw new InvalidOperationException(); }
+                get { throw new InvalidOperationException("An empty sequence doesn't have a head."); }
             }
 
             public override Sequence<T> Tail
             {
-                get { throw new InvalidOperationException(); }
+                get { throw new InvalidOperationException("An empty sequence doesn't have a tail."); }
             }
         }
     }

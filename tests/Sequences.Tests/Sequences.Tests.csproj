@@ -55,6 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="EmptySequenceTests.cs" />
     <Compile Include="EnumerableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TailTests.cs" />
