@@ -4,12 +4,39 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 using Xunit;
 
 namespace Sequences.Tests
 {
     public class FactoryMethodsTests
     {
+        [Fact]
+        public void Continually_ContinuouslyRepeatsElement()
+        {
+            var sequence = Sequence.Continually(1);
+
+            Assert.True(sequence
+                            .Take(10)
+                            .All(i => i == 1));
+        }
+
+        [Fact]
+        public void Continually_ContinuouslyEvaluatedDelegate()
+        {
+            //Arrange
+            var elemFuncMock = new Mock<Func<int>>();
+            elemFuncMock.Setup(tail => tail()).Returns(1);
+
+            var sequence = Sequence.Continually(elemFuncMock.Object);
+
+            //realize sequence
+            var list = sequence.Take(10).ToList();
+
+            //Assert
+            elemFuncMock.Verify(f => f(), Times.Exactly(10));
+        }
+
         [Fact]
         public void FromInt_Generates_ConsecutiveIntegers()
         {

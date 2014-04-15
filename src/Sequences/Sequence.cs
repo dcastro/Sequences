@@ -12,6 +12,28 @@ namespace Sequences
     public static class Sequence
     {
         /// <summary>
+        /// Create an infinite sequence containing the given element expression.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="elem">The element to be continuously repeated.</param>
+        /// <returns>A sequence containing an infinite number of <paramref name="elem"/></returns>
+        public static Sequence<T> Continually<T>(T elem)
+        {
+            return new Sequence<T>(elem, () => Continually(elem));
+        }
+
+        /// <summary>
+        /// Create an infinite sequence containing the given element expression (which is computed for each occurrence).
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="elemFunc">A delegate that will be continuously evaluated.</param>
+        /// <returns>A sequence containing an infinite number of elements returned by the <paramref name="elemFunc"/> delegate.</returns>
+        public static Sequence<T> Continually<T>(Func<T> elemFunc)
+        {
+            return new Sequence<T>(elemFunc(), () => Continually(elemFunc));
+        }
+
+        /// <summary>
         /// Creates an infinite sequence starting at <paramref name="start"/> and incrementing by <paramref name="step"/> in each step.
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
