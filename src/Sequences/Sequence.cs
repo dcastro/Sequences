@@ -17,7 +17,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="items">The elements for which a sequence will be created.</param>
         /// <returns>A sequence created from the elements in <paramref name="items"/>.</returns>
-        public static Sequence<T> For<T>(params T[] items)
+        public static ISequence<T> For<T>(params T[] items)
         {
             return For(items.AsEnumerable());
         }
@@ -28,12 +28,12 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="items">The enumerable to be evaluated.</param>
         /// <returns>A sequence created by lazily-evaluating <paramref name="items"/>.</returns>
-        public static Sequence<T> For<T>(IEnumerable<T> items)
+        public static ISequence<T> For<T>(IEnumerable<T> items)
         {
             return For(items.GetEnumerator());
         }
 
-        private static Sequence<T> For<T>(IEnumerator<T> iterator)
+        private static ISequence<T> For<T>(IEnumerator<T> iterator)
         {
             return iterator.MoveNext()
                        ? new Sequence<T>(iterator.Current, () => For(iterator))
@@ -47,7 +47,7 @@ namespace Sequences
         /// <param name="elem">The delegate to be repeatedly evaluated.</param>
         /// <param name="count">The number of times to repeat <paramref name="elem"/>.</param>
         /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
-        public static Sequence<T> Fill<T>(Func<T> elem, int count)
+        public static ISequence<T> Fill<T>(Func<T> elem, int count)
         {
             return (count <= 0)
                        ? Sequence<T>.Empty
@@ -61,7 +61,7 @@ namespace Sequences
         /// <param name="elem">The element to be repeated.</param>
         /// <param name="count">The number of times to repeat <paramref name="elem"/>.</param>
         /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
-        public static Sequence<T> Fill<T>(T elem, int count)
+        public static ISequence<T> Fill<T>(T elem, int count)
         {
             return Fill(() => elem, count);
         }
@@ -72,7 +72,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="elem">A delegate that will be continuously evaluated.</param>
         /// <returns>A sequence containing an infinite number of elements returned by the <paramref name="elem"/> delegate.</returns>
-        public static Sequence<T> Continually<T>(Func<T> elem)
+        public static ISequence<T> Continually<T>(Func<T> elem)
         {
             return new Sequence<T>(elem(), () => Continually(elem));
         }
@@ -83,7 +83,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="elem">The element to be continuously repeated.</param>
         /// <returns>A sequence containing an infinite number of <paramref name="elem"/></returns>
-        public static Sequence<T> Continually<T>(T elem)
+        public static ISequence<T> Continually<T>(T elem)
         {
             return Continually(() => elem);
         }
@@ -94,7 +94,7 @@ namespace Sequences
         /// <param name="start">The start value of the sequence.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<int> From(int start, int step)
+        public static ISequence<int> From(int start, int step)
         {
             return new Sequence<int>(start, () => From(start + step, step));
         }
@@ -104,7 +104,7 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<int> From(int start)
+        public static ISequence<int> From(int start)
         {
             return From(start, 1);
         }
@@ -115,7 +115,7 @@ namespace Sequences
         /// <param name="start">The start value of the sequence.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<long> From(long start, long step)
+        public static ISequence<long> From(long start, long step)
         {
             return new Sequence<long>(start, () => From(start + step, step));
         }
@@ -125,7 +125,7 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<long> From(long start)
+        public static ISequence<long> From(long start)
         {
             return From(start, 1);
         }
@@ -136,7 +136,7 @@ namespace Sequences
         /// <param name="start">The start value of the sequence.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<BigInteger> From(BigInteger start, BigInteger step)
+        public static ISequence<BigInteger> From(BigInteger start, BigInteger step)
         {
             return new Sequence<BigInteger>(start, () => From(start + step, step));
         }
@@ -146,7 +146,7 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
-        public static Sequence<BigInteger> From(BigInteger start)
+        public static ISequence<BigInteger> From(BigInteger start)
         {
             return From(start, 1);
         }
@@ -159,7 +159,7 @@ namespace Sequences
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
-        public static Sequence<int> Range(int start, int end, int step)
+        public static ISequence<int> Range(int start, int end, int step)
         {
             if ((step > 0 && start >= end) ||
                 (step <= 0 && start <= end))
@@ -176,7 +176,7 @@ namespace Sequences
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
-        public static Sequence<long> Range(long start, long end, long step)
+        public static ISequence<long> Range(long start, long end, long step)
         {
             if ((step > 0 && start >= end) ||
                 (step <= 0 && start <= end))
@@ -193,7 +193,7 @@ namespace Sequences
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
-        public static Sequence<BigInteger> Range(BigInteger start, BigInteger end, BigInteger step)
+        public static ISequence<BigInteger> Range(BigInteger start, BigInteger end, BigInteger step)
         {
             if ((step > 0 && start >= end) ||
                 (step <= 0 && start <= end))

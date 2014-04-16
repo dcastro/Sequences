@@ -11,10 +11,10 @@ namespace Sequences
     /// Elements are only evaluated when they're needed, and <see cref="Sequence{T}"/> employs memoization to store the computed values and avoid re-evaluation.
     /// </summary>
     /// <typeparam name="T">The type of elements in the sequence.</typeparam>
-    public class Sequence<T> : IEnumerable<T>
+    public class Sequence<T> : ISequence<T>
     {
         private readonly T _head;
-        private readonly Lazy<Sequence<T>> _tail;
+        private readonly Lazy<ISequence<T>> _tail;
 
         /// <summary>
         /// Tests whether the sequence is empty.
@@ -35,18 +35,18 @@ namespace Sequences
         /// <summary>
         /// Returns a sequence of all elements except the first.
         /// </summary>
-        public virtual Sequence<T> Tail
+        public virtual ISequence<T> Tail
         {
             get { return _tail.Value; }
         }
 
-        private static readonly Lazy<Sequence<T>> _empty =
-            new Lazy<Sequence<T>>(() => new EmptySequence());
+        private static readonly Lazy<ISequence<T>> _empty =
+            new Lazy<ISequence<T>>(() => new EmptySequence());
 
         /// <summary>
         /// Returns an empty sequence.
         /// </summary>
-        public static Sequence<T> Empty
+        public static ISequence<T> Empty
         {
             get { return _empty.Value; }
         }
@@ -56,7 +56,8 @@ namespace Sequences
         /// </summary>
         /// <param name="head">The first element of the sequence.</param>
         /// <param name="tail">A delegate that will be used to realize the sequence's tail when needed.</param>
-        public Sequence(T head, Func<Sequence<T>> tail) : this(head, new Lazy<Sequence<T>>(tail))
+        public Sequence(T head, Func<ISequence<T>> tail)
+            : this(head, new Lazy<ISequence<T>>(tail))
         {
         }
 
@@ -65,7 +66,7 @@ namespace Sequences
         /// </summary>
         /// <param name="head">The first element of the sequence.</param>
         /// <param name="tail">The tail of the sequence.</param>
-        protected Sequence(T head, Lazy<Sequence<T>> tail)
+        protected Sequence(T head, Lazy<ISequence<T>> tail)
         {
             _head = head;
             _tail = tail;
@@ -79,7 +80,7 @@ namespace Sequences
         {
             //we use an iterative proccess, instead of recursively calling Tail.GetEnumerator
             //to avoid a stack overflow exception
-            Sequence<T> sequence = this;
+            ISequence<T> sequence = this;
 
             while (!sequence.IsEmpty)
             {
@@ -95,7 +96,8 @@ namespace Sequences
 
         private class EmptySequence : Sequence<T>
         {
-            public EmptySequence() : base(default(T), null as Lazy<Sequence<T>>)
+            public EmptySequence()
+                : base(default(T), null as Lazy<ISequence<T>>)
             {
             }
 
@@ -109,7 +111,7 @@ namespace Sequences
                 get { throw new InvalidOperationException("An empty sequence doesn't have a head."); }
             }
 
-            public override Sequence<T> Tail
+            public override ISequence<T> Tail
             {
                 get { throw new InvalidOperationException("An empty sequence doesn't have a tail."); }
             }

@@ -15,7 +15,7 @@ namespace Sequences.Tests
         public void Tail_Is_LazilyEvaluated()
         {
             //Arrange
-            var tailMock = new Mock<Func<Sequence<int>>>();
+            var tailMock = new Mock<Func<ISequence<int>>>();
             tailMock.Setup(tail => tail()).Returns(Sequence<int>.Empty);
 
             var sequence = new Sequence<int>(1, tailMock.Object);
