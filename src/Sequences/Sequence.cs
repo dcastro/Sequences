@@ -12,25 +12,80 @@ namespace Sequences
     public static class Sequence
     {
         /// <summary>
-        /// Create an infinite sequence containing the given element expression.
+        /// Creates a sequence from a given array.
         /// </summary>
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
-        /// <param name="elem">The element to be continuously repeated.</param>
-        /// <returns>A sequence containing an infinite number of <paramref name="elem"/></returns>
-        public static Sequence<T> Continually<T>(T elem)
+        /// <param name="items">The elements for which a sequence will be created.</param>
+        /// <returns>A sequence created from the elements in <paramref name="items"/>.</returns>
+        public static Sequence<T> For<T>(params T[] items)
         {
-            return new Sequence<T>(elem, () => Continually(elem));
+            return For(items.AsEnumerable());
+        }
+
+        /// <summary>
+        /// Creates a sequence from a given enumerable.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="items">The enumerable to be evaluated.</param>
+        /// <returns>A sequence created by lazily-evaluating <paramref name="items"/>.</returns>
+        public static Sequence<T> For<T>(IEnumerable<T> items)
+        {
+            return For(items.GetEnumerator());
+        }
+
+        private static Sequence<T> For<T>(IEnumerator<T> iterator)
+        {
+            return iterator.MoveNext()
+                       ? new Sequence<T>(iterator.Current, () => For(iterator))
+                       : Sequence<T>.Empty;
+        }
+
+        /// <summary>
+        /// Creates a finite sequence containing the given element a number of times.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="elem">The delegate to be repeatedly evaluated.</param>
+        /// <param name="count">The number of times to repeat <paramref name="elem"/>.</param>
+        /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
+        public static Sequence<T> Fill<T>(Func<T> elem, int count)
+        {
+            return (count <= 0)
+                       ? Sequence<T>.Empty
+                       : new Sequence<T>(elem(), () => Fill(elem, count - 1));
+        }
+
+        /// <summary>
+        /// Creates a finite sequence containing the given element a number of times.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="elem">The element to be repeated.</param>
+        /// <param name="count">The number of times to repeat <paramref name="elem"/>.</param>
+        /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
+        public static Sequence<T> Fill<T>(T elem, int count)
+        {
+            return Fill(() => elem, count);
         }
 
         /// <summary>
         /// Create an infinite sequence containing the given element expression (which is computed for each occurrence).
         /// </summary>
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
-        /// <param name="elemFunc">A delegate that will be continuously evaluated.</param>
-        /// <returns>A sequence containing an infinite number of elements returned by the <paramref name="elemFunc"/> delegate.</returns>
-        public static Sequence<T> Continually<T>(Func<T> elemFunc)
+        /// <param name="elem">A delegate that will be continuously evaluated.</param>
+        /// <returns>A sequence containing an infinite number of elements returned by the <paramref name="elem"/> delegate.</returns>
+        public static Sequence<T> Continually<T>(Func<T> elem)
         {
-            return new Sequence<T>(elemFunc(), () => Continually(elemFunc));
+            return new Sequence<T>(elem(), () => Continually(elem));
+        }
+
+        /// <summary>
+        /// Create an infinite sequence containing the given element.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="elem">The element to be continuously repeated.</param>
+        /// <returns>A sequence containing an infinite number of <paramref name="elem"/></returns>
+        public static Sequence<T> Continually<T>(T elem)
+        {
+            return Continually(() => elem);
         }
 
         /// <summary>

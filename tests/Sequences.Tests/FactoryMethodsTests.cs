@@ -12,6 +12,42 @@ namespace Sequences.Tests
     public class FactoryMethodsTests
     {
         [Fact]
+        public void For_WrapsEnumerable()
+        {
+            IEnumerable<int> enumerable = new[] {1,2,3};
+            Assert.Equal(enumerable, Sequence.For(enumerable));
+        }
+
+        [Fact]
+        public void For_WrapsArray()
+        {
+            int[] enumerable = { 1, 2, 3 };
+            Assert.Equal(enumerable, Sequence.For(enumerable));
+        }
+
+        [Fact]
+        public void Fill_RepeatsElement()
+        {
+            Assert.Equal(new[] {1, 1, 1}, Sequence.Fill(1, 3));
+        }
+
+        [Fact]
+        public void Fill_ContinuouslyEvaluatesDelegate()
+        {
+            //Arrange
+            var elemFuncMock = new Mock<Func<int>>();
+            elemFuncMock.Setup(tail => tail()).Returns(1);
+
+            var sequence = Sequence.Fill(elemFuncMock.Object, 3);
+
+            //realize sequence
+            var list = sequence.ToList();
+
+            //Assert
+            elemFuncMock.Verify(f => f(), Times.Exactly(3));
+        }
+
+        [Fact]
         public void Continually_ContinuouslyRepeatsElement()
         {
             var sequence = Sequence.Continually(1);
@@ -22,7 +58,7 @@ namespace Sequences.Tests
         }
 
         [Fact]
-        public void Continually_ContinuouslyEvaluatedDelegate()
+        public void Continually_ContinuouslyEvaluatesDelegate()
         {
             //Arrange
             var elemFuncMock = new Mock<Func<int>>();
