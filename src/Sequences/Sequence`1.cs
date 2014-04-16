@@ -19,7 +19,7 @@ namespace Sequences
         /// <summary>
         /// Tests whether the sequence is empty.
         /// </summary>
-        public virtual bool IsEmpty
+        public bool IsEmpty
         {
             get { return false; }
         }
@@ -27,7 +27,7 @@ namespace Sequences
         /// <summary>
         /// Returns the first element of this sequence.
         /// </summary>
-        public virtual T Head
+        public T Head
         {
             get { return _head; }
         }
@@ -35,20 +35,9 @@ namespace Sequences
         /// <summary>
         /// Returns a sequence of all elements except the first.
         /// </summary>
-        public virtual ISequence<T> Tail
+        public ISequence<T> Tail
         {
             get { return _tail.Value; }
-        }
-
-        private static readonly Lazy<ISequence<T>> _empty =
-            new Lazy<ISequence<T>>(() => new EmptySequence());
-
-        /// <summary>
-        /// Returns an empty sequence.
-        /// </summary>
-        public static ISequence<T> Empty
-        {
-            get { return _empty.Value; }
         }
 
         /// <summary>
@@ -92,29 +81,6 @@ namespace Sequences
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        private class EmptySequence : Sequence<T>
-        {
-            public EmptySequence()
-                : base(default(T), null as Lazy<ISequence<T>>)
-            {
-            }
-
-            public override bool IsEmpty
-            {
-                get { return true; }
-            }
-
-            public override T Head
-            {
-                get { throw new InvalidOperationException("An empty sequence doesn't have a head."); }
-            }
-
-            public override ISequence<T> Tail
-            {
-                get { throw new InvalidOperationException("An empty sequence doesn't have a tail."); }
-            }
         }
     }
 }

@@ -14,8 +14,7 @@ namespace Sequences.Tests
         {
             var sequence = new Sequence<int>(1, () =>
                                 new Sequence<int>(2, () =>
-                                    new Sequence<int>(3, () =>
-                                        Sequence<int>.Empty)));
+                                    new Sequence<int>(3, Sequence.Empty<int>)));
 
             Assert.Equal(new []{1,2,3}, sequence);
         }

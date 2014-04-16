@@ -12,6 +12,16 @@ namespace Sequences
     public static class Sequence
     {
         /// <summary>
+        /// Returns an empty sequence.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static ISequence<T> Empty<T>()
+        {
+            return EmptySequence<T>.Instance;
+        } 
+
+        /// <summary>
         /// Creates a sequence from a given array.
         /// </summary>
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
@@ -37,7 +47,7 @@ namespace Sequences
         {
             return iterator.MoveNext()
                        ? new Sequence<T>(iterator.Current, () => For(iterator))
-                       : Sequence<T>.Empty;
+                       : Empty<T>();
         }
 
         /// <summary>
@@ -49,9 +59,9 @@ namespace Sequences
         /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
         public static ISequence<T> Fill<T>(Func<T> elem, int count)
         {
-            return (count <= 0)
-                       ? Sequence<T>.Empty
-                       : new Sequence<T>(elem(), () => Fill(elem, count - 1));
+            return (count > 0)
+                       ? new Sequence<T>(elem(), () => Fill(elem, count - 1))
+                       : Empty<T>();
         }
 
         /// <summary>
@@ -163,7 +173,7 @@ namespace Sequences
         {
             if ((step > 0 && start >= end) ||
                 (step <= 0 && start <= end))
-                return Sequence<int>.Empty;
+                return Empty<int>();
 
             return new Sequence<int>(start, () => Range(start + step, end, step));
         }
@@ -180,7 +190,7 @@ namespace Sequences
         {
             if ((step > 0 && start >= end) ||
                 (step <= 0 && start <= end))
-                return Sequence<long>.Empty;
+                return Empty<long>();
 
             return new Sequence<long>(start, () => Range(start + step, end, step));
         }
@@ -197,7 +207,7 @@ namespace Sequences
         {
             if ((step > 0 && start >= end) ||
                 (step <= 0 && start <= end))
-                return Sequence<BigInteger>.Empty;
+                return Empty<BigInteger>();
 
             return new Sequence<BigInteger>(start, () => Range(start + step, end, step));
         }

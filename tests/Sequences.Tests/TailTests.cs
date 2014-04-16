@@ -16,14 +16,14 @@ namespace Sequences.Tests
         {
             //Arrange
             var tailMock = new Mock<Func<ISequence<int>>>();
-            tailMock.Setup(tail => tail()).Returns(Sequence<int>.Empty);
+            tailMock.Setup(tail => tail()).Returns(Sequence.Empty<int>());
 
             var sequence = new Sequence<int>(1, tailMock.Object);
 
             //Act & Assert
             tailMock.Verify(tail => tail(), Times.Never);
 
-            Assert.Equal(Sequence<int>.Empty, sequence.Tail);
+            Assert.Equal(Sequence.Empty<int>(), sequence.Tail);
             tailMock.Verify(tail => tail(), Times.Once);
         }
     }

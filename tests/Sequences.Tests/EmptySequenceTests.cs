@@ -12,19 +12,19 @@ namespace Sequences.Tests
         [Fact]
         public void Sequence_HasNoTail()
         {
-            Assert.Throws<InvalidOperationException>(() => Sequence<int>.Empty.Tail);
+            Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().Tail);
         }
 
         [Fact]
         public void Sequence_HasNoHead()
         {
-            Assert.Throws<InvalidOperationException>(() => Sequence<int>.Empty.Head);
+            Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().Head);
         }
 
         [Fact]
         public void Sequence_IsEmpty()
         {
-            Assert.True(Sequence<int>.Empty.IsEmpty);
+            Assert.True(Sequence.Empty<int>().IsEmpty);
         }
     }
 }
