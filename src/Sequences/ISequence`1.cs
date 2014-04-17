@@ -25,6 +25,6 @@ namespace Sequences
         /// <summary>
         /// Returns a sequence of all elements except the first.
         /// </summary>
-        ISequence<T> Tail { get; } 
+        ISequence<T> Tail { get; }
     }
 }
