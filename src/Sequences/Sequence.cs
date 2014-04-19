@@ -250,6 +250,76 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Bypasses a specified number of elements in a sequence and then returns the remaining elements.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">A sequence to return elements from.</param>
+        /// <param name="count">The number of elements to skip before returning the remaining elements.</param>
+        /// <returns>A sequence that contains the elements that occur after the specified index in the input sequence.</returns>
+        public static ISequence<TSource> Skip<TSource>(this ISequence<TSource> source, int count)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            ISequence<TSource> seq = source;
+
+            while (!seq.IsEmpty && count-- > 0)
+                seq = seq.Tail;
+
+            return seq;
+        }
+
+        /// <summary>
+        /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">A sequence to return elements from.</param>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
+        public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
+                                                            Func<TSource, bool> predicate)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
+
+            ISequence<TSource> seq = source;
+
+            while (!seq.IsEmpty && predicate(seq.Head))
+                seq = seq.Tail;
+
+            return seq;
+        }
+
+        /// <summary>
+        /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
+        /// The element's index is used in the logic of the predicate function.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The sequence to return elements from.</param>
+        /// <param name="predicate">A function to test each element for a condition; the second parameter of the function represents the index of the element.</param>
+        /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
+        public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
+                                                            Func<TSource, int, bool> predicate)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
+
+            ISequence<TSource> seq = source;
+            int index = 0;
+
+            while (!seq.IsEmpty && predicate(seq.Head, index++))
+                seq = seq.Tail;
+
+            return seq;
+        }
+
+        /// <summary>
         /// Projects each element of a sequence into a new sequence.
         /// </summary>
         /// <typeparam name="TResult">The type of the elements returned by <paramref name="selector"/>.</typeparam>
@@ -368,45 +438,6 @@ namespace Sequences
                                                         Func<TSource, int, bool> predicate)
         {
             return Enumerable.Where(source, predicate).AsSequence();
-        }
-
-        /// <summary>
-        /// Bypasses a specified number of elements in a sequence and then returns the remaining elements.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">A sequence to return elements from.</param>
-        /// <param name="count">The number of elements to skip before returning the remaining elements.</param>
-        /// <returns>A sequence that contains the elements that occur after the specified index in the input sequence.</returns>
-        public static ISequence<TSource> Skip<TSource>(this ISequence<TSource> source, int count)
-        {
-            return Enumerable.Skip(source, count).AsSequence();
-        }
-
-        /// <summary>
-        /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">A sequence to return elements from.</param>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
-        public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
-                                                            Func<TSource, bool> predicate)
-        {
-            return Enumerable.SkipWhile(source, predicate).AsSequence();
-        }
-
-        /// <summary>
-        /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
-        /// The element's index is used in the logic of the predicate function.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">The sequence to return elements from.</param>
-        /// <param name="predicate">A function to test each element for a condition; the second parameter of the function represents the index of the element.</param>
-        /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
-        public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
-                                                            Func<TSource, int, bool> predicate)
-        {
-            return Enumerable.SkipWhile(source, predicate).AsSequence();
         }
 
         /// <summary>

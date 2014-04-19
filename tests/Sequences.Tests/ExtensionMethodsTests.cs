@@ -54,6 +54,117 @@ namespace Sequences.Tests
         }
 
         [Fact]
+        public void Skip_ReturnsRemainingElements()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Equal(new[] {3, 4, 5}, sequence.Skip(2));
+        }
+
+        [Fact]
+        public void Skip_ReturnsSameSequence_When_CountIsZero()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Same(sequence, sequence.Skip(0));
+        }
+
+        [Fact]
+        public void Skip_ReturnsSameSequence_When_CountIsNegative()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Same(sequence, sequence.Skip(-5));
+        }
+
+        [Fact]
+        public void Skip_ReturnsEmptySequence_When_CountIsHigherThanLength()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.True(sequence.Skip(10).IsEmpty);
+        }
+
+        [Fact]
+        public void Skip_ReturnsEmptySequence_When_CountIsEqualToLength()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.True(sequence.Skip(5).IsEmpty);
+        }
+
+        [Fact]
+        public void Skip_ThrowsException_When_SourceIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => (null as ISequence<int>).Skip(1));
+        }
+
+        [Fact]
+        public void SkipWhile_ReturnsRemainingElements()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Equal(new[] {4, 5}, sequence.SkipWhile(i => i <= 3));
+        }
+
+        [Fact]
+        public void SkipWhile_RetursSameSequence_When_PredicateFailsForFirstElem()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Same(sequence, sequence.SkipWhile(i => i < 0));
+        }
+
+        [Fact]
+        public void SkipWhile_ReturnsEmptySequence_When_PredicateSucceedsForAllElements()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.True(sequence.SkipWhile(i => i < 10).IsEmpty);
+        }
+
+        [Fact]
+        public void SkipWhile_ThrowsException_When_SourceIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => (null as ISequence<int>).SkipWhile(i => true));
+        }
+
+        [Fact]
+        public void SkipWhile_ThrowsException_When_PredicateIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => Sequence.For(1)
+                              .SkipWhile(null as Func<int, bool>));
+        }
+
+        [Fact]
+        public void SkipWhile_WithIndex_ReturnsRemainingElements()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Equal(new[] {4, 5}, sequence.SkipWhile((i, index) => index <= 2));
+        }
+
+        [Fact]
+        public void SkipWhile_WithIndex_RetursSameSequence_When_PredicateFailsForFirstElem()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.Same(sequence, sequence.SkipWhile((i, index) => index < 0));
+        }
+
+        [Fact]
+        public void SkipWhile_WithIndex_ReturnsEmptySequence_When_PredicateSucceedsForAllElements()
+        {
+            var sequence = Sequence.Range(1, 6, 1);
+            Assert.True(sequence.SkipWhile((i, index) => index <= 4).IsEmpty);
+        }
+
+        [Fact]
+        public void SkipWhile_WithIndex_ThrowsException_When_SourceIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => (null as ISequence<int>).SkipWhile((i, index) => true));
+        }
+
+        [Fact]
+        public void SkipWhile_WithIndex_ThrowsException_When_PredicateIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => Sequence.For(1)
+                              .SkipWhile(null as Func<int, int, bool>));
+        }
+
+        [Fact]
         public void Select()
         {
             Assert.Equal(_enumerable.Select(i => i + 1),
@@ -111,27 +222,6 @@ namespace Sequences.Tests
         {
             Assert.Equal(_enumerable.Where((i, index) => i + index%2 == 0),
                          _sequence.Where((i, index) => i + index%2 == 0));
-        }
-
-        [Fact]
-        public void Skip()
-        {
-            Assert.Equal(_enumerable.Skip(3),
-                         _sequence.Skip(3));
-        }
-
-        [Fact]
-        public void SkipWhile()
-        {
-            Assert.Equal(_enumerable.SkipWhile(i => i < 5),
-                         _sequence.SkipWhile(i => i < 5));
-        }
-
-        [Fact]
-        public void SkipWhile_With_Index()
-        {
-            Assert.Equal(_enumerable.SkipWhile((i, index) => index < 5),
-                         _sequence.SkipWhile((i, index) => index < 5));
         }
 
         [Fact]
