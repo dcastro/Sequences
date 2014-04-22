@@ -26,5 +26,28 @@ namespace Sequences
         /// Returns a sequence of all elements except the first.
         /// </summary>
         ISequence<T> Tail { get; }
+
+        /// <summary>
+        /// Returns the length of this sequence.
+        /// If this sequence represents an infinite series, this will never return!
+        /// </summary>
+        int Count { get; }
+
+        /// <summary>
+        /// Tests whether this sequence is known to have a finite size.
+        /// </summary>
+        bool HasDefiniteSize { get; }
+
+        /// <summary>
+        /// Checks whether this sequence's tail has been evaluated.
+        /// </summary>
+        bool IsTailDefined { get; }
+
+        /// <summary>
+        /// Forces evaluation of the whole sequence and returns it.
+        /// If this sequence represents an infinite series, the method will never return!
+        /// </summary>
+        /// <returns></returns>
+        ISequence<T> Force();
     }
 }

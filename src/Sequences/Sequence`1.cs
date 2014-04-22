@@ -15,6 +15,8 @@ namespace Sequences
     {
         private readonly T _head;
         private readonly Lazy<ISequence<T>> _tail;
+        private int _count = int.MinValue;
+        private bool _hasDefiniteSize = false;
 
         /// <summary>
         /// Tests whether the sequence is empty.
@@ -38,6 +40,49 @@ namespace Sequences
         public virtual ISequence<T> Tail
         {
             get { return _tail.Value; }
+        }
+
+        /// <summary>
+        /// Returns the length of this sequence.
+        /// If this sequence represents an infinite series, this will never return!
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                if (_count < 0)
+                    _count = this.Count();
+
+                return _count;
+            }
+        }
+
+        /// <summary>
+        /// Tests whether this sequence is known to have a finite size.
+        /// </summary>
+        public bool HasDefiniteSize
+        {
+            get
+            {
+                if (! _hasDefiniteSize)
+                {
+                    ISequence<T> left = this;
+                    while (! left.IsEmpty && left.IsTailDefined)
+                        left = left.Tail;
+
+                    _hasDefiniteSize = left.IsEmpty;
+                }
+
+                return _hasDefiniteSize;
+            }
+        }
+
+        /// <summary>
+        /// Checks whether this sequence's tail has been evaluated.
+        /// </summary>
+        public bool IsTailDefined
+        {
+            get { return _tail.IsValueCreated; }
         }
 
         /// <summary>
@@ -81,6 +126,17 @@ namespace Sequences
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Forces evaluation of the whole sequence and returns it.
+        /// If this sequence represents an infinite series, the method will never return!
+        /// </summary>
+        /// <returns></returns>
+        public ISequence<T> Force()
+        {
+            foreach (var elem in this) { }
+            return this;
         }
     }
 }
