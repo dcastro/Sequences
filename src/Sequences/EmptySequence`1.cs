@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Sequences
 {
-    internal class EmptySequence<T> : ISequence<T>
+    internal class EmptySequence<T> : Sequence<T>
     {
         private static readonly Lazy<ISequence<T>> Empty = new Lazy<ISequence<T>>(() => new EmptySequence<T>());
 
-        private EmptySequence()
+        private EmptySequence() : base(default(T), null as Lazy<ISequence<T>>)
         {
         }
 
@@ -19,27 +19,17 @@ namespace Sequences
             get { return Empty.Value; }
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            yield break;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public bool IsEmpty
+        public override bool IsEmpty
         {
             get { return true; }
         }
 
-        public T Head
+        public override T Head
         {
             get { throw new InvalidOperationException("An empty sequence doesn't have a head."); }
         }
 
-        public ISequence<T> Tail
+        public override ISequence<T> Tail
         {
             get { throw new InvalidOperationException("An empty sequence doesn't have a tail."); }
         }

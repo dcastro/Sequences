@@ -19,7 +19,7 @@ namespace Sequences
         /// <summary>
         /// Tests whether the sequence is empty.
         /// </summary>
-        public bool IsEmpty
+        public virtual bool IsEmpty
         {
             get { return false; }
         }
@@ -27,7 +27,7 @@ namespace Sequences
         /// <summary>
         /// Returns the first element of this sequence.
         /// </summary>
-        public T Head
+        public virtual T Head
         {
             get { return _head; }
         }
@@ -35,7 +35,7 @@ namespace Sequences
         /// <summary>
         /// Returns a sequence of all elements except the first.
         /// </summary>
-        public ISequence<T> Tail
+        public virtual ISequence<T> Tail
         {
             get { return _tail.Value; }
         }
