@@ -229,27 +229,6 @@ namespace Sequences
         #region Extension Methods
 
         /// <summary>
-        /// Concatenates two sequences.
-        /// </summary>
-        /// <typeparam name="T1">The type of the elements of the <paramref name="first"/> sequence.</typeparam>
-        /// <typeparam name="T2">The type of the elements of the <paramref name="second"/> sequence.</typeparam>
-        /// <param name="first">The first sequence to concatenate.</param>
-        /// <param name="second">The second sequence to evaluate; will be lazily evaluated.</param>
-        /// <returns>A <see cref="Sequence{T}"/> that contains the concatenated elements of the two input sequences.</returns>
-        public static ISequence<T2> Concat<T1, T2>(this ISequence<T1> first, Func<IEnumerable<T2>> second) where T1 : T2
-        {
-            if (first == null)
-                throw new ArgumentNullException("first");
-
-            if (second == null)
-                throw new ArgumentNullException("second");
-
-            return first.IsEmpty
-                       ? second().AsSequence()
-                       : new Sequence<T2>(first.Head, () => first.Tail.Concat(second));
-        }
-
-        /// <summary>
         /// Bypasses a specified number of elements in a sequence and then returns the remaining elements.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>

@@ -64,10 +64,10 @@ namespace Sequences
         {
             get
             {
-                if (! _hasDefiniteSize)
+                if (!_hasDefiniteSize)
                 {
                     ISequence<T> left = this;
-                    while (! left.IsEmpty && left.IsTailDefined)
+                    while (!left.IsEmpty && left.IsTailDefined)
                         left = left.Tail;
 
                     _hasDefiniteSize = left.IsEmpty;
@@ -135,8 +135,42 @@ namespace Sequences
         /// <returns></returns>
         public ISequence<T> Force()
         {
-            foreach (var elem in this) { }
+            foreach (var elem in this)
+            {
+            }
             return this;
+        }
+
+        /// <summary>
+        /// Returns a copy of this sequence with the given element appended.
+        /// </summary>
+        /// <param name="elem">The element to append to this sequence.</param>
+        /// <returns>A copy of this sequence with the given element appended.</returns>
+        public ISequence<T> Append(T elem)
+        {
+            return Concat(() => new Sequence<T>(elem, Sequence.Empty<T>));
+        }
+
+        /// <summary>
+        /// Returns a copy of this sequence with the given element prepended.
+        /// </summary>
+        /// <param name="elem">The element to prepend.</param>
+        /// <returns>A copy of this sequence with the given element prepended.</returns>
+        public ISequence<T> Prepend(T elem)
+        {
+            return new Sequence<T>(elem, () => this);
+        }
+
+        /// <summary>
+        /// Returns a copy of this sequence concatenated with <paramref name="otherSequence"/>.
+        /// </summary>
+        /// <param name="otherSequence">The sequence with which to concatenate this sequence; will be lazily evaluated.</param>
+        /// <returns>A copy of this sequence concatenated with <paramref name="otherSequence"/>.</returns>
+        public ISequence<T> Concat(Func<IEnumerable<T>> otherSequence)
+        {
+            return IsEmpty
+                       ? otherSequence().AsSequence()
+                       : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
         }
     }
 }

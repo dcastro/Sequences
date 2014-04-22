@@ -21,39 +21,6 @@ namespace Sequences.Tests
         }
 
         [Fact]
-        public void Concat_ThrowsException_When_FirstIsNull()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => (null as Sequence<int>).Concat(
-                    Sequence.Empty<int>));
-        }
-
-        [Fact]
-        public void Concat_ThrowsException_When_SecondIsNull()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => Sequence.Empty<int>().Concat(
-                    () => (null as Sequence<int>)));
-        }
-
-        [Fact]
-        public void Concat_ThrowsException_When_SecondFunctionIsNull()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => Sequence.Empty<int>().Concat(
-                    null as Func<ISequence<int>>));
-        }
-
-        [Fact]
-        public void Concat_ConcatenatesInputSequences()
-        {
-            var first = Sequence.For(1, 2, 3);
-            var second = Sequence.For(4, 5, 6);
-
-            Assert.Equal(new[] {1, 2, 3, 4, 5, 6}, first.Concat(() => second));
-        }
-
-        [Fact]
         public void Skip_ReturnsRemainingElements()
         {
             var sequence = Sequence.Range(1, 6, 1);
