@@ -102,5 +102,21 @@ namespace Sequences
         /// <param name="op">The operation to perform on successive elements of the sequence.</param>
         /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
         T ReduceRight(Func<T, T, T> op);
+
+        /// <summary>
+        /// Crates a new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.
+        /// </summary>
+        /// <param name="seed">The initial value for the scan.</param>
+        /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
+        /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
+        ISequence<T> Scan(T seed, Func<T, T, T> op);
+
+        /// <summary>
+        /// Crates a new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements right to left.
+        /// </summary>
+        /// <param name="seed">The initial value for the scan.</param>
+        /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
+        /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
+        ISequence<T> ScanRight(T seed, Func<T, T, T> op);
     }
 }

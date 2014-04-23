@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,6 +105,46 @@ namespace Sequences.Tests
         public void ReduceRight_Throws_When_SequenceIsEmpty()
         {
             Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().ReduceRight((a, b) => a + b));
+        }
+
+        [Fact]
+        public void Scan_Returns_ListOfAccumulations()
+        {
+            var sequence = Sequence.For(1, 2, 3, 4);
+            var scan = sequence.Scan(0, (a, b) => a + b);
+            var expected = new[] {0, 1, 3, 6, 10};
+
+            Assert.Equal(expected, scan);
+        }
+
+        [Fact]
+        public void Scan_Returns_Seed_When_SequenceIsEmpty()
+        {
+            var sequence = Sequence.Empty<int>();
+            var scan = sequence.Scan(0, (a, b) => a + b);
+            var expected = new[] {0};
+
+            Assert.Equal(expected, scan);
+        }
+
+        [Fact]
+        public void ScanRight_Returns_ListOfAccumulations()
+        {
+            var sequence = Sequence.For(1, 2, 3, 4);
+            var scan = sequence.ScanRight(0, (a, b) => a + b);
+            var expected = new[] {10, 9, 7, 4, 0};
+
+            Assert.Equal(expected, scan);
+        }
+
+        [Fact]
+        public void ScanRight_Returns_Seed_When_SequenceIsEmpty()
+        {
+            var sequence = Sequence.Empty<int>();
+            var scan = sequence.ScanRight(0, (a, b) => a + b);
+            var expected = new[] {0};
+
+            Assert.Equal(expected, scan);
         }
     }
 }

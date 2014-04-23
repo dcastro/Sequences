@@ -226,5 +226,42 @@ namespace Sequences
 
             return op(Head, Tail.ReduceRight(op));
         }
+
+        /// <summary>
+        /// Crates a new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.
+        /// </summary>
+        /// <param name="seed">The initial value for the scan.</param>
+        /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
+        /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
+        public ISequence<T> Scan(T seed, Func<T, T, T> op)
+        {
+            if (IsEmpty)
+                return Sequence.For(seed);
+
+            return new Sequence<T>(seed, () =>
+                                         Tail.Scan(op(seed, Head), op));
+        }
+
+        /// <summary>
+        /// Crates a new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements right to left.
+        /// </summary>
+        /// <param name="seed">The initial value for the scan.</param>
+        /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
+        /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
+        public ISequence<T> ScanRight(T seed, Func<T, T, T> op)
+        {
+            var scanned = new Stack<T>();
+            scanned.Push(seed);
+
+            var acc = seed;
+
+            foreach (var elem in this.Reverse())
+            {
+                acc = op(elem, acc);
+                scanned.Push(acc);
+            }
+
+            return Sequence.For(scanned as IEnumerable<T>);
+        }
     }
 }
