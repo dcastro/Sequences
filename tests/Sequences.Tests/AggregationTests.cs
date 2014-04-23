@@ -79,5 +79,31 @@ namespace Sequences.Tests
 
             Assert.Equal(expectedAdditions, additions);
         }
+
+        [Fact]
+        public void Reduce_AccumulatesValues()
+        {
+            int sum = Sequence.For(1, 2, 3, 4).Reduce((a, b) => a + b);
+            Assert.Equal(10, sum);
+        }
+
+        [Fact]
+        public void Reduce_Throws_When_SequenceIsEmpty()
+        {
+            Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().Reduce((a, b) => a + b));
+        }
+
+        [Fact]
+        public void ReduceRight_AccumulatesValues()
+        {
+            int sum = Sequence.For(1, 2, 3, 4).ReduceRight((a, b) => a + b);
+            Assert.Equal(10, sum);
+        }
+
+        [Fact]
+        public void ReduceRight_Throws_When_SequenceIsEmpty()
+        {
+            Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().ReduceRight((a, b) => a + b));
+        }
     }
 }

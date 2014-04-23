@@ -88,5 +88,19 @@ namespace Sequences
         /// <param name="op">A function that takes an element of this sequence and the accumulator, and computes the new accumulator.</param>
         /// <returns>The result of applying <paramref name="op"/> between all the elements and <paramref name="seed"/>.</returns>
         T FoldRight(T seed, Func<T, T, T> op);
+
+        /// <summary>
+        /// Reduces the elements of this sequence using the specified function.
+        /// </summary>
+        /// <param name="op">The operation to perform on successive elements of the sequence.</param>
+        /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
+        T Reduce(Func<T, T, T> op);
+
+        /// <summary>
+        /// Reduces the elements of this sequence using the specified function, going right to left. 
+        /// </summary>
+        /// <param name="op">The operation to perform on successive elements of the sequence.</param>
+        /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
+        T ReduceRight(Func<T, T, T> op);
     }
 }

@@ -198,5 +198,33 @@ namespace Sequences
                 return seed;
             return op(Head, Tail.FoldRight(seed, op));
         }
+
+        /// <summary>
+        /// Reduces the elements of this sequence using the specified function.
+        /// </summary>
+        /// <param name="op">The operation to perform on successive elements of the sequence.</param>
+        /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
+        public T Reduce(Func<T, T, T> op)
+        {
+            if (IsEmpty)
+                throw new InvalidOperationException("Cannot reduce empty sequence.");
+
+            return Tail.Fold(Head, op);
+        }
+
+        /// <summary>
+        /// Reduces the elements of this sequence using the specified function, going right to left. 
+        /// </summary>
+        /// <param name="op">The operation to perform on successive elements of the sequence.</param>
+        /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
+        public T ReduceRight(Func<T, T, T> op)
+        {
+            if (IsEmpty)
+                throw new InvalidOperationException("Cannot reduce empty sequence.");
+            if (Tail.IsEmpty)
+                return Head;
+
+            return op(Head, Tail.ReduceRight(op));
+        }
     }
 }
