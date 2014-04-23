@@ -172,5 +172,31 @@ namespace Sequences
                        ? otherSequence().AsSequence()
                        : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
         }
+
+        /// <summary>
+        /// Folds the elements of this sequence using the specified accumulator function. 
+        /// </summary> 
+        /// <example><code>int sum = Sequence.For(1,2,3,4).Fold(0, (a, b) => a + b);</code></example>
+        /// <param name="seed">The initial accumulator value. A neutral value for the fold operation (e.g., empty list, or 0 for adding the elements of this sequence, or 1 for multiplication).</param>
+        /// <param name="op">A function that takes the accumulator and an element of this sequence, and computes the new accumulator.</param>
+        /// <returns>The result of applying <paramref name="op"/> between all the elements and <paramref name="seed"/>.</returns>
+        public T Fold(T seed, Func<T, T, T> op)
+        {
+            return this.Aggregate(seed, op);
+        }
+
+        /// <summary>
+        /// Folds the elements of this sequence using the specified accumulator function, going right to left. 
+        /// </summary> 
+        /// <example><code>int sum = Sequence.For(1,2,3,4).FoldRight(0, (a, b) => a + b);</code></example>
+        /// <param name="seed">The initial accumulator value. A neutral value for the fold operation (e.g., empty list, or 0 for adding the elements of this sequence, or 1 for multiplication).</param>
+        /// <param name="op">A function that takes an element of this sequence and the accumulator, and computes the new accumulator.</param>
+        /// <returns>The result of applying <paramref name="op"/> between all the elements and <paramref name="seed"/>.</returns>
+        public T FoldRight(T seed, Func<T, T, T> op)
+        {
+            if (IsEmpty)
+                return seed;
+            return op(Head, Tail.FoldRight(seed, op));
+        }
     }
 }
