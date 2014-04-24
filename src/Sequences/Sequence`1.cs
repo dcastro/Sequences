@@ -334,5 +334,21 @@ namespace Sequences
                 return GetEnumerator();
             }
         }
+
+        /// <summary>
+        /// Returns a subsequence starting at index <paramref name="from"/> and extending up to (but not including) index <paramref name="until"/>.
+        /// </summary>
+        /// <param name="from">The lowest index to include from this sequence.</param>
+        /// <param name="until">The highest index to exclude from this sequence.</param>
+        /// <returns>A subsequence starting at index <paramref name="from"/> and extending up to (but not including) index <paramref name="until"/>.</returns>
+        public ISequence<T> Slice(int from, int until)
+        {
+            from = Math.Max(from, 0);
+
+            if (until <= from || IsEmpty)
+                return Sequence.Empty<T>();
+
+            return this.Skip(from).Take(until - from);
+        }
     }
 }

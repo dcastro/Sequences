@@ -133,5 +133,13 @@ namespace Sequences
         /// <param name="step">The number of elements to skip per iteration.</param>
         /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
         IEnumerable<ISequence<T>> Sliding(int size, int step);
+
+        /// <summary>
+        /// Returns a subsequence starting at index <paramref name="from"/> and extending up to (but not including) index <paramref name="until"/>.
+        /// </summary>
+        /// <param name="from">The lowest index to include from this sequence.</param>
+        /// <param name="until">The highest index to exclude from this sequence.</param>
+        /// <returns>A subsequence starting at index <paramref name="from"/> and extending up to (but not including) index <paramref name="until"/>.</returns>
+        ISequence<T> Slice(int from, int until);
     }
 }
