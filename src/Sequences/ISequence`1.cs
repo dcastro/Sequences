@@ -118,5 +118,20 @@ namespace Sequences
         /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
         /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
         ISequence<T> ScanRight(T seed, Func<T, T, T> op);
+
+        /// <summary>
+        /// Groups elements in fixed size blocks by passing a "sliding window" over them.
+        /// </summary>
+        /// <param name="size">The number of elements per group.</param>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
+        IEnumerable<ISequence<T>> Sliding(int size);
+
+        /// <summary>
+        /// Groups elements in fixed size blocks by passing a "sliding window" over them.
+        /// </summary>
+        /// <param name="size">The number of elements per group.</param>
+        /// <param name="step">The number of elements to skip per iteration.</param>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
+        IEnumerable<ISequence<T>> Sliding(int size, int step);
     }
 }

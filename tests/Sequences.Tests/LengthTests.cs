@@ -21,10 +21,8 @@ namespace Sequences.Tests
         {
             var sequence = Sequence.Range(0, 6, 1);
 
-            foreach (var elem in sequence.Take(5))
-            {
-            }
-
+            sequence.Take(5).Force();
+            
             Assert.False(sequence.HasDefiniteSize);
         }
 
@@ -33,9 +31,7 @@ namespace Sequences.Tests
         {
             var sequence = Sequence.Range(0, 6, 1);
 
-            foreach (var elem in sequence)
-            {
-            }
+            sequence.Force();
 
             Assert.True(sequence.HasDefiniteSize);
         }
@@ -48,6 +44,5 @@ namespace Sequences.Tests
 
             Assert.False(sequence.IsTailDefined);
         }
-
     }
 }
