@@ -183,6 +183,18 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the collection.</param>
         /// <param name="end">The exclusive upper bound.</param>
+        /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + 1, ...
+        /// up to, but excluding <paramref name="end"/>.</returns>
+        public static ISequence<int> Range(int start, int end)
+        {
+            return Range(start, end, 1);
+        }
+
+        /// <summary>
+        /// Creates a sequence containing equally spaced values in some integer interval.
+        /// </summary>
+        /// <param name="start">The start value of the collection.</param>
+        /// <param name="end">The exclusive upper bound.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
@@ -200,6 +212,18 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the collection.</param>
         /// <param name="end">The exclusive upper bound.</param>
+        /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + 1, ...
+        /// up to, but excluding <paramref name="end"/>.</returns>
+        public static ISequence<long> Range(long start, long end)
+        {
+            return Range(start, end, 1);
+        }
+
+        /// <summary>
+        /// Creates a sequence containing equally spaced values in some integer interval.
+        /// </summary>
+        /// <param name="start">The start value of the collection.</param>
+        /// <param name="end">The exclusive upper bound.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
@@ -210,6 +234,18 @@ namespace Sequences
                 return Empty<BigInteger>();
 
             return new Sequence<BigInteger>(start, () => Range(start + step, end, step));
+        }
+
+        /// <summary>
+        /// Creates a sequence containing equally spaced values in some integer interval.
+        /// </summary>
+        /// <param name="start">The start value of the collection.</param>
+        /// <param name="end">The exclusive upper bound.</param>
+        /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + 1, ...
+        /// up to, but excluding <paramref name="end"/>.</returns>
+        public static ISequence<BigInteger> Range(BigInteger start, BigInteger end)
+        {
+            return Range(start, end, 1);
         }
 
         /// <summary>
