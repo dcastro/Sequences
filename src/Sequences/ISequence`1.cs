@@ -148,5 +148,58 @@ namespace Sequences
         /// <param name="size">The number of elements per group.</param>
         /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if the elements don't divide evenly.</returns>
         IEnumerable<ISequence<T>> Grouped(int size);
+
+        /// <summary>
+        /// Produces the range of all indices of this sequence.
+        /// </summary>
+        IEnumerable<int> Indices { get; }
+
+        /// <summary>
+        /// Finds the index of the first occurrence of some value in this sequence.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        int IndexOf(T elem);
+
+        /// <summary>
+        /// Finds the index of the first occurrence of some value in this sequence, after or at some start index.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        int IndexOf(T elem, int from);
+
+        /// <summary>
+        /// Finds the index of the first occurrence of some value in this sequence, after or at some start index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="from">The start index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        int IndexOf(T elem, int from, int count);
+        
+        /// <summary>
+        /// Finds the index of the first element satisfying some predicate.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        int IndexWhere(Func<T, bool> predicate);
+
+        /// <summary>
+        /// Finds the index of the first element satisfying some predicate after or at some start index.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        int IndexWhere(Func<T, bool> predicate, int from);
+
+        /// <summary>
+        /// Finds the index of the first element satisfying some predicate after or at some start index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="from">The start index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        int IndexWhere(Func<T, bool> predicate, int from, int count);
     }
 }

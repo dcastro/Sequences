@@ -319,5 +319,107 @@ namespace Sequences
 
             return new GroupedIterator(this, size);
         }
+
+        /// <summary>
+        /// Produces the range of all indices of this sequence.
+        /// </summary>
+        public IEnumerable<int> Indices
+        {
+            get
+            {
+                return this.Select((elem, index) => index);
+            }
+        }
+
+        /// <summary>
+        /// Finds the index of the first occurrence of some value in this sequence.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        public int IndexOf(T elem)
+        {
+            return IndexOf(elem, 0);
+        }
+
+        /// <summary>
+        /// Finds the index of the first occurrence of some value in this sequence, after or at some start index.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        public int IndexOf(T elem, int from)
+        {
+            IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
+            return IndexWhere(current => comparer.Equals(current, elem), from);
+        }
+
+        /// <summary>
+        /// Finds the index of the first occurrence of some value in this sequence, after or at some start index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="from">The start index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        public int IndexOf(T elem, int from, int count)
+        {
+            IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
+            return IndexWhere(current => comparer.Equals(current, elem), from, count);
+        }
+
+        /// <summary>
+        /// Finds the index of the first element satisfying some predicate.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        public int IndexWhere(Func<T, bool> predicate)
+        {
+            return IndexWhere(predicate, 0);
+        }
+
+        /// <summary>
+        /// Finds the index of the first element satisfying some predicate after or at some start index.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        public int IndexWhere(Func<T, bool> predicate, int from)
+        {
+            if (from < 0)
+                from = 0;
+
+            int index = from;
+            foreach (var current in this.Skip(from))
+            {
+                if (predicate(current))
+                    return index;
+                index++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Finds the index of the first element satisfying some predicate after or at some start index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="from">The start index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        public int IndexWhere(Func<T, bool> predicate, int from, int count)
+        {
+            if (from < 0)
+                from = 0;
+
+            int index = from;
+            int until = from + count;
+            foreach (var current in this.Skip(from))
+            {
+                if (index >= until)
+                    break;
+                if (predicate(current))
+                    return index;
+                index++;
+            }
+            return -1;
+        }
     }
 }
