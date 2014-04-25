@@ -13,45 +13,45 @@ namespace Sequences.Tests
         [Fact]
         public void Sliding_Returns_SlidingWindows()
         {
-            var sequence = Sequence.For(1, 2, 3, 4);
-            var windows = sequence.Sliding(2).ToList();
+            var sequence = Sequence.Range(0, 5);
+            var windows = sequence.Sliding(3).ToList();
             var expectedWindows = new List<List<int>>
                 {
-                    new List<int> {1, 2},
-                    new List<int> {2, 3},
-                    new List<int> {3, 4}
+                    new List<int> {0, 1, 2},
+                    new List<int> {1, 2, 3},
+                    new List<int> {2, 3, 4}
                 };
 
             Assert.Equal(expectedWindows.Count, windows.Count);
 
-            for (int i = 0; i >= windows.Count; i++)
+            for (int i = 0; i < windows.Count; i++)
                 Assert.Equal(expectedWindows[i], windows[i]);
         }
 
         [Fact]
-        public void Sliding_WithStep_ReturnsSlidingWindows()
+        public void Sliding_WithStep_TruncatesLastWindow()
         {
-            var sequence = Sequence.For(1, 2, 3, 4, 5, 6);
+            var sequence = Sequence.Range(0, 6);
             var windows = sequence.Sliding(3, 2).ToList();
             var expectedWindows = new List<List<int>>
                 {
-                    new List<int> {1, 2, 3},
-                    new List<int> {3, 4, 5},
-                    new List<int> {5, 6}
+                    new List<int> {0, 1, 2},
+                    new List<int> {2, 3, 4},
+                    new List<int> {4, 5}
                 };
 
             Assert.Equal(expectedWindows.Count, windows.Count);
 
-            for (int i = 0; i >= windows.Count; i++)
+            for (int i = 0; i < windows.Count; i++)
                 Assert.Equal(expectedWindows[i], windows[i]);
         }
 
         [Fact]
         public void Sliding_Returns_WholeSequence_When_SizeIsHigherThanCount()
         {
-            var sequence = Sequence.For(1, 2, 3, 4);
+            var sequence = Sequence.Range(0, 4);
             var windows = sequence.Sliding(10).ToList();
-            var expectedWindow = new List<int> {1, 2, 3, 4};
+            var expectedWindow = new List<int> {0, 1, 2, 3};
 
             Assert.Equal(1, windows.Count);
             Assert.Equal(expectedWindow, windows.Single());

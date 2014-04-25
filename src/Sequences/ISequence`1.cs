@@ -123,7 +123,7 @@ namespace Sequences
         /// Groups elements in fixed size blocks by passing a "sliding window" over them.
         /// </summary>
         /// <param name="size">The number of elements per group.</param>
-        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than <paramref name="size"/>.</returns>
         IEnumerable<ISequence<T>> Sliding(int size);
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Sequences
         /// </summary>
         /// <param name="size">The number of elements per group.</param>
         /// <param name="step">The number of elements to skip per iteration.</param>
-        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than <paramref name="size"/>.</returns>
         IEnumerable<ISequence<T>> Sliding(int size, int step);
 
         /// <summary>
@@ -141,5 +141,12 @@ namespace Sequences
         /// <param name="until">The highest index to exclude from this sequence.</param>
         /// <returns>A subsequence starting at index <paramref name="from"/> and extending up to (but not including) index <paramref name="until"/>.</returns>
         ISequence<T> Slice(int from, int until);
+
+        /// <summary>
+        /// Partitions elements in fixed size sequences.
+        /// </summary>
+        /// <param name="size">The number of elements per group.</param>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if the elements don't divide evenly.</returns>
+        IEnumerable<ISequence<T>> Grouped(int size);
     }
 }

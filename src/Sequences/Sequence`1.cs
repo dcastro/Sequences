@@ -11,7 +11,7 @@ namespace Sequences
     /// Elements are only evaluated when they're needed, and <see cref="Sequence{T}"/> employs memoization to store the computed values and avoid re-evaluation.
     /// </summary>
     /// <typeparam name="T">The type of elements in the sequence.</typeparam>
-    public class Sequence<T> : ISequence<T>
+    public partial class Sequence<T> : ISequence<T>
     {
         private readonly T _head;
         private readonly Lazy<ISequence<T>> _tail;
@@ -268,7 +268,7 @@ namespace Sequences
         /// Groups elements in fixed size blocks by passing a "sliding window" over them.
         /// </summary>
         /// <param name="size">The number of elements per group.</param>
-        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than <paramref name="size"/>.</returns>
         public IEnumerable<ISequence<T>> Sliding(int size)
         {
             return Sliding(size, 1);
@@ -279,7 +279,7 @@ namespace Sequences
         /// </summary>
         /// <param name="size">The number of elements per group.</param>
         /// <param name="step">The number of elements to skip per iteration.</param>
-        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than size.</returns>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than <paramref name="size"/>.</returns>
         public IEnumerable<ISequence<T>> Sliding(int size, int step)
         {
             if (size <= 0)
@@ -289,50 +289,6 @@ namespace Sequences
 
 
             return new SlidingIterator(this, size, step);
-        }
-
-        private class SlidingIterator : IEnumerable<ISequence<T>>
-        {
-            private readonly ISequence<T> _sequence;
-            private readonly int _size;
-            private readonly int _step;
-
-            public SlidingIterator(ISequence<T> sequence, int size, int step)
-            {
-                _sequence = sequence;
-                _size = size;
-                _step = step;
-            }
-
-            public IEnumerator<ISequence<T>> GetEnumerator()
-            {
-                ISequence<T> seq = _sequence;
-                var buffer = new List<T>(_size);
-
-                bool hasMoreElems = !seq.IsEmpty;
-
-                while (hasMoreElems)
-                {
-                    //group elements into a buffer
-                    IEnumerator<T> iterator = seq.GetEnumerator();
-
-                    for (int i = 0; i < _size && iterator.MoveNext(); i++)
-                        buffer.Add(iterator.Current);
-
-                    //force the evaluation of the buffer's contents, before we clear the buffer.
-                    yield return buffer.AsSequence().Force();
-
-                    //keep going if there's at least one more element
-                    hasMoreElems = iterator.MoveNext();
-                    buffer.Clear();
-                    seq = seq.Skip(_step);
-                }
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
         }
 
         /// <summary>
@@ -349,6 +305,19 @@ namespace Sequences
                 return Sequence.Empty<T>();
 
             return this.Skip(from).Take(until - from);
+        }
+
+        /// <summary>
+        /// Partitions elements in fixed size sequences.
+        /// </summary>
+        /// <param name="size">The number of elements per group.</param>
+        /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if the elements don't divide evenly.</returns>
+        public IEnumerable<ISequence<T>> Grouped(int size)
+        {
+            if (size <= 0)
+                throw new ArgumentOutOfRangeException("size", "size must be a positive integer.");
+
+            return new GroupedIterator(this, size);
         }
     }
 }
