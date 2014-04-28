@@ -201,5 +201,53 @@ namespace Sequences
         /// <param name="count">The number of elements in the section to search.</param>
         /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
         int IndexWhere(Func<T, bool> predicate, int from, int count);
+
+        /// <summary>
+        /// Finds the index of the last occurrence of some value in this sequence.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        int LastIndexOf(T elem);
+
+        /// <summary>
+        /// Finds the index of the last occurrence of some value in this sequence, before or at some end index.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        int LastIndexOf(T elem, int end);
+
+        /// <summary>
+        /// Finds the index of the last occurrence of some value in this sequence, before or at some end index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="end">The end index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        int LastIndexOf(T elem, int end, int count);
+
+        /// <summary>
+        /// Finds the index of the last element satisfying some predicate.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        int LastIndexWhere(Func<T, bool> predicate);
+
+        /// <summary>
+        /// Finds the index of the last element satisfying some predicate before or at some end index.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        int LastIndexWhere(Func<T, bool> predicate, int end);
+
+        /// <summary>
+        /// Finds the index of the last element satisfying some predicate before or at some end index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="end">The end index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        int LastIndexWhere(Func<T, bool> predicate, int end, int count);
     }
 }

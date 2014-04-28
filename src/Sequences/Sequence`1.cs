@@ -421,5 +421,86 @@ namespace Sequences
             }
             return -1;
         }
+
+        /// <summary>
+        /// Finds the index of the last occurrence of some value in this sequence.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        public int LastIndexOf(T elem)
+        {
+            return LastIndexOf(elem, Count -1);
+        }
+
+        /// <summary>
+        /// Finds the index of the last occurrence of some value in this sequence, before or at some end index.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        public int LastIndexOf(T elem, int end)
+        {
+            return LastIndexOf(elem, end, Count);
+        }
+
+        /// <summary>
+        /// Finds the index of the last occurrence of some value in this sequence, before or at some end index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="elem">The value to search for.</param>
+        /// <param name="end">The end index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        public int LastIndexOf(T elem, int end, int count)
+        {
+            IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
+            return LastIndexWhere(current => comparer.Equals(current, elem), end, count);
+        }
+
+        /// <summary>
+        /// Finds the index of the last element satisfying some predicate.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        public int LastIndexWhere(Func<T, bool> predicate)
+        {
+            return LastIndexWhere(predicate, Count -1);
+        }
+
+        /// <summary>
+        /// Finds the index of the last element satisfying some predicate before or at some end index.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        public int LastIndexWhere(Func<T, bool> predicate, int end)
+        {
+            return LastIndexWhere(predicate, end, Count);
+        }
+
+        /// <summary>
+        /// Finds the index of the last element satisfying some predicate before or at some end index and within the range specified by <paramref name="count"/>.
+        /// </summary>
+        /// <param name="predicate">The predicate used to test elements.</param>
+        /// <param name="end">The end index.</param>
+        /// <param name="count">The number of elements in the section to search.</param>
+        /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        public int LastIndexWhere(Func<T, bool> predicate, int end, int count)
+        {
+            int index = end - count +1;
+            if (index < 0)
+                index = 0;
+
+            var lastIndex = -1;
+
+            foreach (var current in this.Skip(index))
+            {
+                if (index > end)
+                    break;
+                if (predicate(current))
+                    lastIndex = index;
+                index++;
+            }
+            return lastIndex;
+        }
     }
 }

@@ -91,5 +91,77 @@ namespace Sequences.Tests
 
             Assert.Equal(-1, index);
         }
+
+        [Fact]
+        public void LastIndexOf_Returns_IndexOfElement()
+        {
+            var sequence = Sequence.For(1, 1, 2, 2, 3, 3);
+            var index = sequence.LastIndexOf(2);
+
+            Assert.Equal(3, index);
+        }
+
+        [Fact]
+        public void LastIndexOf_Returns_MinusOne_When_ElementIsNotFound()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var index = sequence.LastIndexOf(5);
+
+            Assert.Equal(-1, index);
+        }
+
+        [Fact]
+        public void LastIndexOf_Returns_MinusOne_When_ElementIsAfterEnd()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var index = sequence.LastIndexOf(4, end: 3);
+
+            Assert.Equal(-1, index);
+        }
+
+        [Fact]
+        public void LastIndexOf_WithCount_Returns_MinusOne_When_ElementIsNotWithinRange()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var index = sequence.LastIndexOf(1, end: 3, count: 2);
+
+            Assert.Equal(-1, index);
+        }
+
+        [Fact]
+        public void LastIndexWhere_Returns_IndexOfElement()
+        {
+            var sequence = Sequence.For(1, 1, 2, 2, 3, 3);
+            var index = sequence.LastIndexWhere(i => i == 2);
+
+            Assert.Equal(3, index);
+        }
+
+        [Fact]
+        public void LastIndexWhere_Returns_MinusOne_When_ElementIsNotFound()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var index = sequence.LastIndexWhere(i => i == 5);
+
+            Assert.Equal(-1, index);
+        }
+
+        [Fact]
+        public void LastIndexWhere_Returns_MinusOne_When_ElementIsAfterEnd()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var index = sequence.LastIndexWhere(i => i == 4, end: 3);
+
+            Assert.Equal(-1, index);
+        }
+
+        [Fact]
+        public void LastIndexWhere_WithCount_Returns_MinusOne_When_ElementIsNotWithinRange()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var index = sequence.LastIndexWhere(i => i == 1, end: 3, count: 2);
+
+            Assert.Equal(-1, index);
+        }
     }
 }
