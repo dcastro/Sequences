@@ -86,6 +86,16 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Gets the element at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to get.</param>
+        /// <returns>The element at the specified index.</returns>
+        public T this[int index]
+        {
+            get { return this.ElementAt(index); }
+        }
+
+        /// <summary>
         /// Initializes a new instance of <see cref="Sequence{T}"/>.
         /// </summary>
         /// <param name="head">The first element of the sequence.</param>

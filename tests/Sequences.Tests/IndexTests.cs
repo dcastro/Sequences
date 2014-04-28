@@ -163,5 +163,14 @@ namespace Sequences.Tests
 
             Assert.Equal(-1, index);
         }
+
+        [Fact]
+        public void Indexer_Returns_ElementAtIndex()
+        {
+            var sequence = Sequence.Range(0, 5);
+            var element = sequence[3];
+
+            Assert.Equal(3, element);
+        }
     }
 }

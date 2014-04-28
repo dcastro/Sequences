@@ -44,6 +44,13 @@ namespace Sequences
         bool IsTailDefined { get; }
 
         /// <summary>
+        /// Gets the element at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to get.</param>
+        /// <returns>The element at the specified index.</returns>
+        T this[int index] { get; }
+
+        /// <summary>
         /// Forces evaluation of the whole sequence and returns it.
         /// If this sequence represents an infinite series, the method will never return!
         /// </summary>
@@ -249,5 +256,6 @@ namespace Sequences
         /// <param name="count">The number of elements in the section to search.</param>
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
         int LastIndexWhere(Func<T, bool> predicate, int end, int count);
+
     }
 }
