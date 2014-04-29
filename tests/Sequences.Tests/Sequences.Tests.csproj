@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AggregationTests.cs" />
+    <Compile Include="CombinationTests.cs" />
     <Compile Include="EmptySequenceTests.cs" />
     <Compile Include="EnumerableTests.cs" />
     <Compile Include="FactoryMethodsTests.cs" />

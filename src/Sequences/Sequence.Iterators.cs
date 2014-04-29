@@ -79,5 +79,40 @@ namespace Sequences
                 return GetEnumerator();
             }
         }
+
+        private class CombinationsIterator : IEnumerable<ISequence<T>>
+        {
+            private readonly ISequence<T> _sequence;
+            private readonly int _size;
+
+            public CombinationsIterator(ISequence<T> sequence, int size)
+            {
+                _sequence = sequence;
+                _size = size;
+            }
+
+            public IEnumerator<ISequence<T>> GetEnumerator()
+            {
+                if (_size == 0)
+                    yield return Sequence.Empty<T>();
+                if (_size == 0 || _sequence.IsEmpty)
+                    yield break;
+
+                ISequence<T> seq = _sequence;
+
+                while (!seq.IsEmpty)
+                {
+                    foreach (var tailCombination in seq.Tail.Combinations(_size - 1))
+                        yield return new Sequence<T>(seq.Head, () => tailCombination);
+
+                    seq = seq.Tail;
+                }
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
     }
 }

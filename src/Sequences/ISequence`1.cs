@@ -257,5 +257,12 @@ namespace Sequences
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
         int LastIndexWhere(Func<T, bool> predicate, int end, int count);
 
+        /// <summary>
+        /// Iterate over combinations of a given size of this sequence's elements.
+        /// </summary>
+        /// <example>"abcd".AsSequence().Combinations(2) = ab, ac, ad, bc, bd, cd</example>
+        /// <param name="size">The size of each combination.</param>
+        /// <returns>An iterator that traverses the possible n-element combinations of this sequence's elements.</returns>
+        IEnumerable<ISequence<T>> Combinations(int size);
     }
 }

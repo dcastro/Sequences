@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -511,6 +512,20 @@ namespace Sequences
                 index++;
             }
             return lastIndex;
+        }
+
+        /// <summary>
+        /// Iterate over combinations of a given size of this sequence's elements.
+        /// </summary>
+        /// <example>"abcd".AsSequence().Combinations(2) = ab, ac, ad, bc, bd, cd</example>
+        /// <param name="size">The size of each combination.</param>
+        /// <returns>An iterator that traverses the possible n-element combinations of this sequence's elements.</returns>
+        public IEnumerable<ISequence<T>> Combinations(int size)
+        {
+            if (size < 0)
+                throw new ArgumentOutOfRangeException("size", "size must be a non-negative integer.");
+
+            return new CombinationsIterator(this, size);
         }
     }
 }
