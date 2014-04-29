@@ -36,6 +36,25 @@ namespace Sequences.Tests
         }
 
         [Fact]
+        public void Combinations_Excludes_Duplicates()
+        {
+            var combs = "abbbc".AsSequence().Combinations(2).ToList();
+
+            var expectedCombs = new[]
+            {
+                new[] {'a', 'b'},
+                new[] {'a', 'c'},
+                new[] {'b', 'b'},
+                new[] {'b', 'c'}
+            };
+
+            Assert.Equal(expectedCombs.Length, combs.Count);
+
+            for (int i = 0; i < combs.Count; i++)
+                Assert.Equal(expectedCombs[i], combs[i]);
+        }
+
+        [Fact]
         public void Combinations_Returns_NoSequences_When_SequenceIsEmpty()
         {
             var sequence = Sequence.Empty<int>();

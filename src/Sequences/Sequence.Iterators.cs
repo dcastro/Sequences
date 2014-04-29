@@ -96,15 +96,34 @@ namespace Sequences
                 if (_size == 0)
                     yield return Sequence.Empty<T>();
                 else
-                    //combine each element with each possible combination of the remaining elements
-                    foreach (var seq in _sequence.NonEmptyTails())
-                        foreach (var tailCombination in seq.Tail.Combinations(_size - 1))
-                            yield return new Sequence<T>(seq.Head, () => tailCombination);
+                    //combine each distinct element (subsequence.Head)
+                    //with each possible combination of the remaining elements (tailCombination)
+                    foreach (var subSequence in _sequence.NonEmptyTails().Distinct(new CompareByHead()))
+                        foreach (var tailCombination in subSequence.Tail.Combinations(_size - 1))
+                            yield return new Sequence<T>(subSequence.Head, () => tailCombination);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
+            }
+
+            /// <summary>
+            /// Compares two sequences by their heads. The implementation assumes input sequences are not empty.
+            /// </summary>
+            private class CompareByHead : IEqualityComparer<ISequence<T>>
+            {
+                private readonly IEqualityComparer<T> _headComparer = EqualityComparer<T>.Default;
+
+                public bool Equals(ISequence<T> x, ISequence<T> y)
+                {
+                    return _headComparer.Equals(x.Head, y.Head);
+                }
+
+                public int GetHashCode(ISequence<T> seq)
+                {
+                    return seq.Head.GetHashCode();
+                }
             }
         }
     }
