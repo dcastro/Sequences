@@ -95,6 +95,13 @@ namespace Sequences
         ISequence<T> Concat(Func<IEnumerable<T>> otherSequence);
 
         /// <summary>
+        /// Returns a copy of this sequence without the first occurrence of the given element, if any is found.
+        /// </summary>
+        /// <param name="elem">The element to remove.</param>
+        /// <returns>A copy of this sequence without the first occurrence of <paramref name="elem"/>.</returns>
+        ISequence<T> Remove(T elem);
+
+        /// <summary>
         /// Folds the elements of this sequence using the specified accumulator function. 
         /// </summary> 
         /// <example><code>int sum = Sequence.For(1,2,3,4).Fold(0, (a, b) => a + b);</code></example>
@@ -274,11 +281,18 @@ namespace Sequences
         int LastIndexWhere(Func<T, bool> predicate, int end, int count);
 
         /// <summary>
-        /// Iterate over combinations of a given size of this sequence's elements.
+        /// Iterate over distinct combinations of a given size of this sequence's elements.
         /// </summary>
         /// <example>"abcd".AsSequence().Combinations(2) = ab, ac, ad, bc, bd, cd</example>
         /// <param name="size">The size of each combination.</param>
         /// <returns>An iterator that traverses the possible n-element combinations of this sequence's elements.</returns>
         IEnumerable<ISequence<T>> Combinations(int size);
+
+        /// <summary>
+        /// Iterates over distinct permutations of this sequence.
+        /// </summary>
+        /// <example>"abb".AsSequence().Permutations() = abb, bab, bba</example>
+        /// <returns>An iterator which traverses the distinct permutations of this sequence.</returns>
+        IEnumerable<ISequence<T>> Permutations();
     }
 }

@@ -222,6 +222,22 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Returns a copy of this sequence without the first occurrence of the given element, if any is found.
+        /// </summary>
+        /// <param name="elem">The element to remove.</param>
+        /// <returns>A copy of this sequence without the first occurrence of <paramref name="elem"/>.</returns>
+        public ISequence<T> Remove(T elem)
+        {
+            IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
+
+            if (IsEmpty)
+                return this;
+            if (comparer.Equals(Head, elem))
+                return Tail;
+            return new Sequence<T>(Head, () => Tail.Remove(elem));
+        }
+
+        /// <summary>
         /// Folds the elements of this sequence using the specified accumulator function. 
         /// </summary> 
         /// <example><code>int sum = Sequence.For(1,2,3,4).Fold(0, (a, b) => a + b);</code></example>
@@ -549,7 +565,7 @@ namespace Sequences
         }
 
         /// <summary>
-        /// Iterate over combinations of a given size of this sequence's elements.
+        /// Iterate over distinct combinations of a given size of this sequence's elements.
         /// </summary>
         /// <example>"abcd".AsSequence().Combinations(2) = ab, ac, ad, bc, bd, cd</example>
         /// <param name="size">The size of each combination.</param>
@@ -560,6 +576,16 @@ namespace Sequences
                 throw new ArgumentOutOfRangeException("size", "size must be a non-negative integer.");
 
             return new CombinationsIterator(this, size);
+        }
+
+        /// <summary>
+        /// Iterates over distinct permutations of this sequence.
+        /// </summary>
+        /// <example>"abb".AsSequence().Permutations() = abb, bab, bba</example>
+        /// <returns>An iterator which traverses the distinct permutations of this sequence.</returns>
+        public IEnumerable<ISequence<T>> Permutations()
+        {
+            return new PermutationsIterator(this);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Sequences.Tests
             var second = Sequence.For(3, 4);
 
             Assert.Equal(new[] {1, 2, 3, 4},
-                         first.Concat(() => second));
+                first.Concat(() => second));
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace Sequences.Tests
             var second = Sequence.For(1, 2, 3, 4);
 
             Assert.Equal(new[] {1, 2, 3, 4},
-                         first.Concat(() => second));
+                first.Concat(() => second));
         }
 
         [Fact]
@@ -36,21 +36,60 @@ namespace Sequences.Tests
             var second = Sequence.Empty<int>();
 
             Assert.Equal(new[] {1, 2, 3, 4},
-                         first.Concat(() => second));
+                first.Concat(() => second));
         }
 
         [Fact]
         public void Append_AppendsElementToSequence()
         {
             Assert.Equal(new[] {1, 2, 3, 4},
-                         Sequence.For(1, 2, 3).Append(4));
+                Sequence.For(1, 2, 3).Append(4));
         }
 
         [Fact]
         public void Prepend_PrependsElementToSequence()
         {
             Assert.Equal(new[] {1, 2, 3, 4},
-                         Sequence.For(2, 3, 4).Prepend(1));
+                Sequence.For(2, 3, 4).Prepend(1));
+        }
+
+        [Fact]
+        public void Remove_RemovesElement()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var result = sequence.Remove(3);
+            var expectedResult = new[] {1, 2, 4, 5};
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Remove_RemovesHead()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var result = sequence.Remove(1);
+            var expectedResult = new[] {2, 3, 4, 5};
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Remove_Returns_EquivalentSequence_When_ElementIsNotFound()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var result = sequence.Remove(10);
+            var expectedResult = new[] {1, 2, 3, 4, 5};
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Remove_Returns_SameSequence_When_SequenceIsEmpty()
+        {
+            var sequence = Sequence.Empty<int>();
+            var result = sequence.Remove(10);
+
+            Assert.Same(sequence, result);
         }
     }
 }

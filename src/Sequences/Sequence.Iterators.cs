@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -124,6 +125,31 @@ namespace Sequences
                 {
                     return seq.Head.GetHashCode();
                 }
+            }
+        }
+
+        private class PermutationsIterator : IEnumerable<ISequence<T>>
+        {
+            private readonly ISequence<T> _sequence;
+
+            public PermutationsIterator(ISequence<T> sequence)
+            {
+                _sequence = sequence;
+            }
+
+            public IEnumerator<ISequence<T>> GetEnumerator()
+            {
+                if (_sequence.IsEmpty)
+                    yield return Sequence.Empty<T>();
+                else
+                    foreach (var elem in _sequence.Distinct())
+                        foreach (var restPermutation in _sequence.Remove(elem).Permutations())
+                            yield return new Sequence<T>(elem, () => restPermutation);
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
             }
         }
     }
