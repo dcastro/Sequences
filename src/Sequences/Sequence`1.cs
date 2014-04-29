@@ -140,6 +140,43 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Iterates over the tails of this sequence. The first value will be this sequence, and the last value will be an empty sequence,
+        /// with the intervening values the results of successive applications of <see cref="ISequence{T}.Tail"/>.
+        /// </summary>
+        /// <example>Sequence.Range(1,4) = (1,2,3), (2,3), (3), Empty</example>
+        /// <returns>An iterator over all the tails of this sequence.</returns>
+        public IEnumerable<ISequence<T>> Tails()
+        {
+            ISequence<T> sequence = this;
+
+            while (!sequence.IsEmpty)
+            {
+                yield return sequence;
+                sequence = sequence.Tail;
+            }
+
+            //return empty sequence
+            yield return sequence;
+        }
+
+        /// <summary>
+        /// Iterates over the tails of this sequence. The first value will be this sequence, and the last value will be a sequence with the last element of this sequence,
+        /// with the intervening values the results of successive applications of <see cref="ISequence{T}.Tail"/>.
+        /// </summary>
+        /// <example>Sequence.Range(1,4) = (1,2,3), (2,3), (3)</example>
+        /// <returns>An iterator over all the tails of this sequence.</returns>
+        public IEnumerable<ISequence<T>> NonEmptyTails()
+        {
+            ISequence<T> sequence = this;
+
+            while (!sequence.IsEmpty)
+            {
+                yield return sequence;
+                sequence = sequence.Tail;
+            }
+        }
+
+        /// <summary>
         /// Forces evaluation of the whole sequence and returns it.
         /// If this sequence represents an infinite series, the method will never return!
         /// </summary>

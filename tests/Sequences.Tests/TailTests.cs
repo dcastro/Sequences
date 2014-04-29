@@ -10,7 +10,6 @@ namespace Sequences.Tests
 {
     public class TailTests
     {
-
         [Fact]
         public void Tail_Is_LazilyEvaluated()
         {
@@ -50,6 +49,43 @@ namespace Sequences.Tests
 
             sequence.Force();
             Assert.True(sequence.HasDefiniteSize);
+        }
+
+        [Fact]
+        public void Tails_IteratesOverTails()
+        {
+            var sequence = Sequence.Range(1, 4);
+            var tails = sequence.Tails().ToList();
+            var expectedTails = new[]
+            {
+                new[] {1, 2, 3},
+                new[] {2, 3},
+                new[] {3},
+                new int[] {}
+            };
+
+            Assert.Equal(expectedTails.Length, tails.Count);
+
+            for (int i = 0; i < tails.Count; i++)
+                Assert.Equal(expectedTails[i], tails[i]);
+        }
+
+        [Fact]
+        public void NonEmptyTails_Excludes_EmptySequence()
+        {
+            var sequence = Sequence.Range(1, 4);
+            var tails = sequence.NonEmptyTails().ToList();
+            var expectedTails = new[]
+            {
+                new[] {1, 2, 3},
+                new[] {2, 3},
+                new[] {3}
+            };
+
+            Assert.Equal(expectedTails.Length, tails.Count);
+
+            for (int i = 0; i < tails.Count; i++)
+                Assert.Equal(expectedTails[i], tails[i]);
         }
     }
 }
