@@ -47,7 +47,7 @@ namespace Sequences.Tests
         [Fact]
         public void Combinations_Returns_OneEmptySequence_When_SizeIsZero()
         {
-            var sequence = Sequence.Range(1,6);
+            var sequence = Sequence.Range(1, 6);
             var combs = sequence.Combinations(0).ToList();
 
             Assert.Equal(1, combs.Count);

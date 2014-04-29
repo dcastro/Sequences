@@ -217,8 +217,8 @@ namespace Sequences
         public ISequence<T> Concat(Func<IEnumerable<T>> otherSequence)
         {
             return IsEmpty
-                       ? otherSequence().AsSequence()
-                       : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
+                ? otherSequence().AsSequence()
+                : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
         }
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace Sequences
                 return Sequence.For(seed);
 
             return new Sequence<T>(seed, () =>
-                                         Tail.Scan(op(seed, Head), op));
+                Tail.Scan(op(seed, Head), op));
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace Sequences
                 scanned.Push(acc);
             }
 
-            return Sequence.For(scanned as IEnumerable<T>);
+            return scanned.AsSequence();
         }
 
         /// <summary>
@@ -373,10 +373,7 @@ namespace Sequences
         /// </summary>
         public IEnumerable<int> Indices
         {
-            get
-            {
-                return this.Select((elem, index) => index);
-            }
+            get { return this.Select((elem, index) => index); }
         }
 
         /// <summary>
@@ -477,7 +474,7 @@ namespace Sequences
         /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
         public int LastIndexOf(T elem)
         {
-            return LastIndexOf(elem, Count -1);
+            return LastIndexOf(elem, Count - 1);
         }
 
         /// <summary>
@@ -511,7 +508,7 @@ namespace Sequences
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
         public int LastIndexWhere(Func<T, bool> predicate)
         {
-            return LastIndexWhere(predicate, Count -1);
+            return LastIndexWhere(predicate, Count - 1);
         }
 
         /// <summary>
@@ -534,7 +531,7 @@ namespace Sequences
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
         public int LastIndexWhere(Func<T, bool> predicate, int end, int count)
         {
-            int index = end - count +1;
+            int index = end - count + 1;
             if (index < 0)
                 index = 0;
 

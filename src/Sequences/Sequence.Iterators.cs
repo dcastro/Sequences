@@ -95,18 +95,11 @@ namespace Sequences
             {
                 if (_size == 0)
                     yield return Sequence.Empty<T>();
-                if (_size == 0 || _sequence.IsEmpty)
-                    yield break;
-
-                ISequence<T> seq = _sequence;
-
-                while (!seq.IsEmpty)
-                {
-                    foreach (var tailCombination in seq.Tail.Combinations(_size - 1))
-                        yield return new Sequence<T>(seq.Head, () => tailCombination);
-
-                    seq = seq.Tail;
-                }
+                else
+                    //combine each element with each possible combination of the remaining elements
+                    foreach (var seq in _sequence.NonEmptyTails())
+                        foreach (var tailCombination in seq.Tail.Combinations(_size - 1))
+                            yield return new Sequence<T>(seq.Head, () => tailCombination);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
