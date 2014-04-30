@@ -44,6 +44,14 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Returns this sequence without its last element.
+        /// </summary>
+        public virtual ISequence<T> Init
+        {
+            get { return Tail.IsEmpty ? Tail : new Sequence<T>(Head, () => Tail.Init); }
+        }
+
+        /// <summary>
         /// Returns the length of this sequence.
         /// If this sequence represents an infinite series, this will never return!
         /// </summary>
@@ -174,6 +182,26 @@ namespace Sequences
                 yield return sequence;
                 sequence = sequence.Tail;
             }
+        }
+
+        /// <summary>
+        /// Iterates over the inits of this sequence. The first value will be this sequence, and the last value will be an empty sequence,
+        /// with the intervening values the results of successive applications of <see cref="ISequence{T}.Init"/>.
+        /// </summary>
+        /// <example>Sequence.Range(1,4) = (1,2,3), (1,2), (1), Empty</example>
+        /// <returns>An iterator over all the inits of this sequence.</returns>
+        public IEnumerable<ISequence<T>> Inits()
+        {
+            ISequence<T> sequence = this;
+
+            while (! sequence.IsEmpty)
+            {
+                yield return sequence;
+                sequence = sequence.Init;
+            }
+
+            //return empty sequence
+            yield return sequence;
         }
 
         /// <summary>

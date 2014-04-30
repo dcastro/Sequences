@@ -33,5 +33,10 @@ namespace Sequences
         {
             get { throw new InvalidOperationException("An empty sequence doesn't have a tail."); }
         }
+
+        public override ISequence<T> Init
+        {
+            get { throw new InvalidOperationException("Cannot call Init on an empty sequence."); }
+        }
     }
 }

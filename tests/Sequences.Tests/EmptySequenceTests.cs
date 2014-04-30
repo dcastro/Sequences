@@ -26,5 +26,11 @@ namespace Sequences.Tests
         {
             Assert.True(Sequence.Empty<int>().IsEmpty);
         }
+
+        [Fact]
+        public void Sequence_HasNoInit()
+        {
+            Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().Init);
+        }
     }
 }

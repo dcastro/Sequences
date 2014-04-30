@@ -28,6 +28,11 @@ namespace Sequences
         ISequence<T> Tail { get; }
 
         /// <summary>
+        /// Returns this sequence without its last element.
+        /// </summary>
+        ISequence<T> Init { get; }
+
+        /// <summary>
         /// Returns the length of this sequence.
         /// If this sequence represents an infinite series, this will never return!
         /// </summary>
@@ -65,6 +70,14 @@ namespace Sequences
         /// <example>Sequence.Range(1,4) = (1,2,3), (2,3), (3)</example>
         /// <returns>An iterator over all the tails of this sequence.</returns>
         IEnumerable<ISequence<T>> NonEmptyTails();
+
+        /// <summary>
+        /// Iterates over the inits of this sequence. The first value will be this sequence, and the last value will be an empty sequence,
+        /// with the intervening values the results of successive applications of <see cref="Init"/>.
+        /// </summary>
+        /// <example>Sequence.Range(1,4) = (1,2,3), (1,2), (1), Empty</example>
+        /// <returns>An iterator over all the inits of this sequence.</returns>
+        IEnumerable<ISequence<T>> Inits();
 
         /// <summary>
         /// Forces evaluation of the whole sequence and returns it.
