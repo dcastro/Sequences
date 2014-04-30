@@ -115,6 +115,12 @@ namespace Sequences
         ISequence<T> Remove(T elem);
 
         /// <summary>
+        /// Apply the given function to each element of this sequence.
+        /// </summary>
+        /// <param name="function">The function to apply to each element.</param>
+        void ForEach(Action<T> function);
+
+        /// <summary>
         /// Folds the elements of this sequence using the specified accumulator function. 
         /// </summary> 
         /// <example><code>int sum = Sequence.For(1,2,3,4).Fold(0, (a, b) => a + b);</code></example>
