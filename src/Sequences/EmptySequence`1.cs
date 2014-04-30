@@ -38,5 +38,10 @@ namespace Sequences
         {
             get { throw new InvalidOperationException("Cannot call Init on an empty sequence."); }
         }
+
+        public override string ToString()
+        {
+            return "Sequence()";
+        }
     }
 }

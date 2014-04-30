@@ -615,5 +615,35 @@ namespace Sequences
         {
             return new PermutationsIterator(this);
         }
+
+        /// <summary>
+        /// Returns a string with all the elements of this sequence.
+        /// </summary>
+        /// <returns>A string with all the elements of this sequence.</returns>
+        public string MkString()
+        {
+            return MkString("");
+        }
+
+        /// <summary>
+        /// Returns a string with all the elements of this sequence, using a seperator string.
+        /// </summary>
+        /// <param name="separator">The separator string.</param>
+        /// <returns>A string with all the elements of this sequence.</returns>
+        public string MkString(string separator)
+        {
+            return string.Join(separator,
+                Enumerable.Select(this,
+                    elem => elem.ToString()));
+        }
+
+        /// <summary>
+        /// Returns a string that represents this sequence.
+        /// </summary>
+        /// <returns>A string that represents this sequence.</returns>
+        public override string ToString()
+        {
+            return string.Format("Sequence({0}, ?)", Head);
+        }
     }
 }

@@ -307,5 +307,18 @@ namespace Sequences
         /// <example>"abb".AsSequence().Permutations() = abb, bab, bba</example>
         /// <returns>An iterator which traverses the distinct permutations of this sequence.</returns>
         IEnumerable<ISequence<T>> Permutations();
+
+        /// <summary>
+        /// Returns a string with all the elements of this sequence.
+        /// </summary>
+        /// <returns>A string with all the elements of this sequence.</returns>
+        string MkString();
+
+        /// <summary>
+        /// Returns a string with all the elements of this sequence, using a seperator string.
+        /// </summary>
+        /// <param name="separator">The separator string.</param>
+        /// <returns>A string with all the elements of this sequence.</returns>
+        string MkString(string separator);
     }
 }

@@ -32,5 +32,11 @@ namespace Sequences.Tests
         {
             Assert.Throws<InvalidOperationException>(() => Sequence.Empty<int>().Init);
         }
+
+        [Fact]
+        public void ToStringTest()
+        {
+            Assert.Equal("Sequence()", Sequence.Empty<int>().ToString());
+        }
     }
 }
