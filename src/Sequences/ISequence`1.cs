@@ -115,6 +115,15 @@ namespace Sequences
         ISequence<T> Remove(T elem);
 
         /// <summary>
+        /// Returns a copy of this sequence with one single replaced element.
+        /// If <paramref name="index"/> is greater than the number of elements in this sequence, nothing will be replaced.
+        /// </summary>
+        /// <param name="index">The position of the replacement.</param>
+        /// <param name="elem">The replacing element.</param>
+        /// <returns>A copy of this sequence with the element at position <paramref name="index"/> replaced by <paramref name="elem"/>.</returns>
+        ISequence<T> Updated(int index, T elem);
+
+        /// <summary>
         /// Apply the given function to each element of this sequence.
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>

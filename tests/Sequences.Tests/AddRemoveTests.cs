@@ -91,5 +91,32 @@ namespace Sequences.Tests
 
             Assert.Same(sequence, result);
         }
+
+        [Fact]
+        public void Updated_UpdatesElement()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var updated = sequence.Updated(2, 10);
+            int[] expectedUpdated = {1, 2, 10, 4, 5};
+
+            Assert.Equal(expectedUpdated, updated);
+        }
+
+        [Fact]
+        public void Updated_DoesNothing_When_IndexGreaterThanCount()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var updated = sequence.Updated(5, 10);
+            int[] expectedUpdated = {1, 2, 3, 4, 5};
+
+            Assert.Equal(expectedUpdated, updated);
+        }
+
+        [Fact]
+        public void Updated_ThrowsException_When_IndexLessThanZero()
+        {
+            var sequence = Sequence.Range(1, 6);
+            Assert.Throws<ArgumentOutOfRangeException>(() => sequence.Updated(-1, 10));
+        }
     }
 }
