@@ -323,6 +323,21 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Returns a copy of this sequence where a slice of its elements is replaced by a <paramref name="patch"/> sequence.
+        /// </summary>
+        /// <param name="from">The index of the first replaced element.</param>
+        /// <param name="patch">The elements with which to replace this sequence's slice.</param>
+        /// <param name="replaced">A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</param>
+        /// <returns></returns>
+        public ISequence<T> Patch(int from, IEnumerable<T> patch, int replaced)
+        {
+            return (IsEmpty || from == 0)
+                ? patch.AsSequence()
+                    .Concat(() => this.Skip(replaced))
+                : new Sequence<T>(Head, () => Tail.Patch(from - 1, patch, replaced));
+        }
+
+        /// <summary>
         /// Apply the given function to each element of this sequence.
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>

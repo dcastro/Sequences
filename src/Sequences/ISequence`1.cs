@@ -147,6 +147,15 @@ namespace Sequences
         Tuple<ISequence<T>, ISequence<T>> Partition(Func<T, bool> predicate);
 
         /// <summary>
+        /// Returns a copy of this sequence where a slice of its elements is replaced by a <paramref name="patch"/> sequence.
+        /// </summary>
+        /// <param name="from">The index of the first replaced element.</param>
+        /// <param name="patch">The elements with which to replace this sequence's slice.</param>
+        /// <param name="replaced">A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</param>
+        /// <returns></returns>
+        ISequence<T> Patch(int from, IEnumerable<T> patch, int replaced);
+
+        /// <summary>
         /// Apply the given function to each element of this sequence.
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>
