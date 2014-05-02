@@ -66,12 +66,14 @@
     <Compile Include="IndexTests.cs" />
     <Compile Include="InitTests.cs" />
     <Compile Include="PadToTests.cs" />
+    <Compile Include="PartitionTests.cs" />
     <Compile Include="PermutationsTests.cs" />
     <Compile Include="SlidingTests.cs" />
     <Compile Include="LengthTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AddRemoveTests.cs" />
     <Compile Include="SlicingTests.cs" />
+    <Compile Include="SplitAtTests.cs" />
     <Compile Include="StringTests.cs" />
     <Compile Include="TailTests.cs" />
   </ItemGroup>

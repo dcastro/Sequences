@@ -302,6 +302,27 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Splits this sequence into two at a given position.
+        /// </summary>
+        /// <param name="n">The position at which to split.</param>
+        /// <returns>A pair of sequences consisting of the first <paramref name="n"/> elements of this sequence, and the other elements.</returns>
+        public Tuple<ISequence<T>, ISequence<T>> SplitAt(int n)
+        {
+            return Tuple.Create(this.Take(n), this.Skip(n));
+        }
+
+        /// <summary>
+        /// Returns a pair of sequences, where the first contains all the elements of this sequence that satisfy the <paramref name="predicate"/> function,
+        /// and the second contains the elements that don't.
+        /// </summary>
+        /// <param name="predicate">The preidcate used to partition the elements.</param>
+        /// <returns>A pair of sequences with the elements that satisfy <paramref name="predicate"/> and the elements that don't.</returns>
+        public Tuple<ISequence<T>, ISequence<T>> Partition(Func<T, bool> predicate)
+        {
+            return Tuple.Create(this.Where(predicate), this.Where(e => ! predicate(e)));
+        }
+
+        /// <summary>
         /// Apply the given function to each element of this sequence.
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>
