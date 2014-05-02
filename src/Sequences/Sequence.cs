@@ -40,7 +40,7 @@ namespace Sequences
         /// <returns>A sequence created by lazily-evaluating <paramref name="items"/>.</returns>
         public static ISequence<T> For<T>(IEnumerable<T> items)
         {
-            return For(items.GetEnumerator());
+            return items as ISequence<T> ?? For(items.GetEnumerator());
         }
 
         private static ISequence<T> For<T>(IEnumerator<T> iterator)
@@ -259,7 +259,7 @@ namespace Sequences
             if(enumerable == null)
                 throw new ArgumentNullException("enumerable");
 
-            return enumerable as ISequence<T> ?? For(enumerable);
+            return For(enumerable);
         }
 
         #region Extension Methods
