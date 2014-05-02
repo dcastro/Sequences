@@ -65,6 +65,7 @@
     <Compile Include="GroupedTests.cs" />
     <Compile Include="IndexTests.cs" />
     <Compile Include="InitTests.cs" />
+    <Compile Include="PadToTests.cs" />
     <Compile Include="PermutationsTests.cs" />
     <Compile Include="SlidingTests.cs" />
     <Compile Include="LengthTests.cs" />

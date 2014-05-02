@@ -286,6 +286,22 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Returns a new sequence in which the end is padded with <paramref name="elem"/>, if this sequence has less elements than <paramref name="length"/>.
+        /// </summary>
+        /// <param name="length">The number of elements to pad into the sequence.</param>
+        /// <param name="elem">The element to use for padding.</param>
+        /// <returns>A new sequence in which the end is padded with <paramref name="elem"/>, if this sequence has less elements than <paramref name="length"/>.</returns>
+        public ISequence<T> PadTo(int length, T elem)
+        {
+            if (IsEmpty)
+                return length > 0
+                    ? Sequence.Fill(elem, length)
+                    : this;
+
+            return new Sequence<T>(Head, () => Tail.PadTo(length - 1, elem));
+        }
+
+        /// <summary>
         /// Apply the given function to each element of this sequence.
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>

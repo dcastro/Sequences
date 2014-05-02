@@ -124,6 +124,14 @@ namespace Sequences
         ISequence<T> Updated(int index, T elem);
 
         /// <summary>
+        /// Returns a new sequence in which the end is padded with <paramref name="elem"/>, if this sequence has less elements than <paramref name="length"/>.
+        /// </summary>
+        /// <param name="length">The number of elements to pad into the sequence.</param>
+        /// <param name="elem">The element to use for padding.</param>
+        /// <returns>A new sequence in which the end is padded with <paramref name="elem"/>, if this sequence has less elements than <paramref name="length"/>.</returns>
+        ISequence<T> PadTo(int length, T elem);
+
+        /// <summary>
         /// Apply the given function to each element of this sequence.
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>
