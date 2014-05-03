@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
@@ -672,6 +673,55 @@ namespace Sequences
                 index++;
             }
             return lastIndex;
+        }
+
+        /// <summary>
+        /// Copies the entire sequence to an array, starting at the beginning of the target array.
+        /// Copying will stop once either the end of this sequence is reached, or the end of the array is reached.
+        /// </summary>
+        /// <param name="destination">The one-dimensional array that is the destination of the elements copied from this sequence.</param>
+        /// <returns>The number of elements copied.</returns>
+        public int CopyTo(T[] destination)
+        {
+            return CopyTo(destination, 0);
+        }
+
+        /// <summary>
+        /// Copies the entire sequence to an array, starting at the position <paramref name="destinationIndex"/> of the target array.
+        /// Copying will stop once either the end of this sequence is reached, or the end of the array is reached.
+        /// </summary>
+        /// <param name="destination">The one-dimensional array that is the destination of the elements copied from this sequence.</param>
+        /// <param name="destinationIndex">The position of the target array at which copying begins.</param>
+        /// <returns>The number of elements copied.</returns>
+        public int CopyTo(T[] destination, int destinationIndex)
+        {
+            int elemsToCopy = destination.Length - destinationIndex;
+            return CopyTo(0, destination, destinationIndex, elemsToCopy);
+        }
+
+        /// <summary>
+        /// Copies a given number of elements from this sequence to an array, starting at the position <paramref name="index"/> of this sequence 
+        /// and at the position <paramref name="destinationIndex"/> of the target array.
+        /// Copying will stop once either the end of this sequence is reached, or the end of the array is reached, or <paramref name="count"/> elements have been copied.
+        /// </summary>
+        /// <param name="index">The position of this sequence at which copying begins.</param>
+        /// <param name="destination">The one-dimensional array that is the destination of the elements copied from this sequence.</param>
+        /// <param name="destinationIndex">The position of the target array at which copying begins.</param>
+        /// <param name="count">The maximum number of elements to copy.</param>
+        /// <returns>The number of elements copied.</returns>
+        public int CopyTo(int index, T[] destination, int destinationIndex, int count)
+        {
+            T[] original = this.Skip(index)
+                .Take(count)
+                .ToArray();
+
+            count = Math.Min(count,
+                Math.Min(original.Length, destination.Length - destinationIndex));
+
+            //delegate further error-checking to Array.Copy
+            Array.Copy(original, 0, destination, destinationIndex, count);
+
+            return count;
         }
 
         /// <summary>

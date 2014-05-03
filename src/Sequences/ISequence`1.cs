@@ -341,6 +341,35 @@ namespace Sequences
         int LastIndexWhere(Func<T, bool> predicate, int end, int count);
 
         /// <summary>
+        /// Copies the entire sequence to an array, starting at the beginning of the target array.
+        /// Copying will stop once either the end of this sequence is reached, or the end of the array is reached.
+        /// </summary>
+        /// <param name="destination">The one-dimensional array that is the destination of the elements copied from this sequence.</param>
+        /// <returns>The number of elements copied.</returns>
+        int CopyTo(T[] destination);
+
+        /// <summary>
+        /// Copies the entire sequence to an array, starting at the position <paramref name="destinationIndex"/> of the target array.
+        /// Copying will stop once either the end of this sequence is reached, or the end of the array is reached.
+        /// </summary>
+        /// <param name="destination">The one-dimensional array that is the destination of the elements copied from this sequence.</param>
+        /// <param name="destinationIndex">The position of the target array at which copying begins.</param>
+        /// <returns>The number of elements copied.</returns>
+        int CopyTo(T[] destination, int destinationIndex);
+
+        /// <summary>
+        /// Copies a given number of elements from this sequence to an array, starting at the position <paramref name="index"/> of this sequence 
+        /// and at the position <paramref name="destinationIndex"/> of the target array.
+        /// Copying will stop once either the end of this sequence is reached, or the end of the array is reached, or <paramref name="count"/> elements have been copied.
+        /// </summary>
+        /// <param name="index">The position of this sequence at which copying begins.</param>
+        /// <param name="destination">The one-dimensional array that is the destination of the elements copied from this sequence.</param>
+        /// <param name="destinationIndex">The position of the target array at which copying begins.</param>
+        /// <param name="count">The maximum number of elements to copy.</param>
+        /// <returns>The number of elements copied.</returns>
+        int CopyTo(int index, T[] destination, int destinationIndex, int count);
+
+        /// <summary>
         /// Iterate over distinct combinations of a given size of this sequence's elements.
         /// </summary>
         /// <example>"abcd".AsSequence().Combinations(2) = ab, ac, ad, bc, bd, cd</example>
