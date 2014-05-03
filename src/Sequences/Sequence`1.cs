@@ -313,6 +313,17 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Splits this sequence into a prefix/suffix pair according to a predicate.
+        /// The first sequence will contain the longest prefix of this sequence whose elements all satisfy <paramref name="predicate"/>.
+        /// </summary>
+        /// <param name="predicate">The predicate used to split this sequence.</param>
+        /// <returns>A pair consisting of the longest prefix of this sequence whose elements all satisfy <paramref name="predicate"/>, and the rest of this sequence.</returns>
+        public Tuple<ISequence<T>, ISequence<T>> Span(Func<T, bool> predicate)
+        {
+            return Tuple.Create(this.TakeWhile(predicate), this.SkipWhile(predicate));
+        }
+
+        /// <summary>
         /// Returns a pair of sequences, where the first contains all the elements of this sequence that satisfy the <paramref name="predicate"/> function,
         /// and the second contains the elements that don't.
         /// </summary>
