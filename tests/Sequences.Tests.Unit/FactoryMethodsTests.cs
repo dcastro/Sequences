@@ -26,6 +26,34 @@ namespace Sequences.Tests
         }
 
         [Fact]
+        public void Iterate_RepeatedlyAppliesFunction()
+        {
+            var sequence = Sequence.Iterate(1, i => i*2);
+            int[] expectedSequence = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
+
+            Assert.Equal(expectedSequence, sequence.Take(10));
+        }
+
+        [Fact]
+        public void Iterate_HasGivenLength()
+        {
+            var sequence = Sequence.Iterate(1, 10, i => i*2);
+            int[] expectedSequence = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
+
+            Assert.Equal(10, sequence.Count);
+            Assert.Equal(expectedSequence, sequence);
+        }
+
+        [Fact]
+        public void Tabulate_AppliesFuncToRangeOfIntegers()
+        {
+            var sequence = Sequence.Tabulate(5, i => i*2);
+            int[] expectedSequence = {0, 2, 4, 6, 8};
+
+            Assert.Equal(expectedSequence, sequence);
+        }
+
+        [Fact]
         public void Fill_RepeatsElement()
         {
             Assert.Equal(new[] {1, 1, 1}, Sequence.Fill(1, 3));

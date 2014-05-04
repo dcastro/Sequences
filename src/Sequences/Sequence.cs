@@ -46,8 +46,54 @@ namespace Sequences
         private static ISequence<T> With<T>(IEnumerator<T> iterator)
         {
             return iterator.MoveNext()
-                       ? new Sequence<T>(iterator.Current, () => With(iterator))
-                       : Empty<T>();
+                ? new Sequence<T>(iterator.Current, () => With(iterator))
+                : Empty<T>();
+        }
+
+        /// <summary>
+        /// Creates an infinite sequence that repeatedly applies a given function to a start value.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <param name="start">The first value of the sequence.</param>
+        /// <param name="func">The function that's repeatedly applied to the last element to produce the next element.</param>
+        /// <returns>An infinite sequence obtained by repeatedly applying <paramref name="func"/> to <paramref name="start"/>.</returns>
+        public static ISequence<T> Iterate<T>(T start, Func<T, T> func)
+        {
+            return new Sequence<T>(start, () => Iterate(func(start), func));
+        }
+
+        /// <summary>
+        /// Creates a finite sequence of a given length that repeatedly applies a given function to a start value.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <param name="start">The first value of the sequence.</param>
+        /// <param name="length">The number of elements in the sequence.</param>
+        /// <param name="func">The function that's repeatedly applied to the last element to produce the next element.</param>
+        /// <returns>A finite sequence of length <paramref name="length"/> obtained by repeatedly applying <paramref name="func"/> to <paramref name="start"/>.</returns>
+        public static ISequence<T> Iterate<T>(T start, int length, Func<T, T> func)
+        {
+            return length <= 0
+                ? Empty<T>()
+                : new Sequence<T>(start, () => Iterate(func(start), length - 1, func));
+        }
+
+        /// <summary>
+        /// Creates a sequence obtained by applying a given function over a range of integer values starting at 0.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <param name="length">The number of elements in the collection.</param>
+        /// <param name="func">The function used to produce the elements.</param>
+        /// <returns>A sequence obtained by applying <paramref name="func"/> over a range of integer values from 0 to <paramref name="length"/> - 1.</returns>
+        public static ISequence<T> Tabulate<T>(int length, Func<int, T> func)
+        {
+            return Tabulate(length, 0, func);
+        }
+
+        private static ISequence<T> Tabulate<T>(int length, int current, Func<int, T> func)
+        {
+            return current >= length
+                ? Empty<T>()
+                : new Sequence<T>(func(current), () => Tabulate(length, current + 1, func));
         }
 
         /// <summary>
@@ -60,8 +106,8 @@ namespace Sequences
         public static ISequence<T> Fill<T>(Func<T> elem, int count)
         {
             return (count > 0)
-                       ? new Sequence<T>(elem(), () => Fill(elem, count - 1))
-                       : Empty<T>();
+                ? new Sequence<T>(elem(), () => Fill(elem, count - 1))
+                : Empty<T>();
         }
 
         /// <summary>
@@ -256,7 +302,7 @@ namespace Sequences
         /// <returns>A sequence created by lazily-evaluating <paramref name="enumerable"/>.</returns>
         public static ISequence<T> AsSequence<T>(this IEnumerable<T> enumerable)
         {
-            if(enumerable == null)
+            if (enumerable == null)
                 throw new ArgumentNullException("enumerable");
 
             return With(enumerable);
@@ -292,7 +338,7 @@ namespace Sequences
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
         public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
-                                                            Func<TSource, bool> predicate)
+            Func<TSource, bool> predicate)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -317,7 +363,7 @@ namespace Sequences
         /// <param name="predicate">A function to test each element for a condition; the second parameter of the function represents the index of the element.</param>
         /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
         public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
-                                                            Func<TSource, int, bool> predicate)
+            Func<TSource, int, bool> predicate)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -343,7 +389,7 @@ namespace Sequences
         /// <param name="selector">A transform function to apply to each element.</param>
         /// <returns>A sequence whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.</returns>
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
-                                                                  Func<TSource, TResult> selector)
+            Func<TSource, TResult> selector)
         {
             return Enumerable.Select(source, selector).AsSequence();
         }
@@ -358,7 +404,7 @@ namespace Sequences
         /// <param name="selector">A transform function to apply to each element and its index.</param>
         /// <returns>A sequence whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.</returns>
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
-                                                                  Func<TSource, int, TResult> selector)
+            Func<TSource, int, TResult> selector)
         {
             return Enumerable.Select(source, selector).AsSequence();
         }
@@ -372,7 +418,7 @@ namespace Sequences
         /// <param name="selector">A transform function to apply to each element.</param>
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.</returns>
         public static ISequence<TResult> SelectMany<TSource, TResult>(this ISequence<TSource> source,
-                                                                      Func<TSource, IEnumerable<TResult>> selector)
+            Func<TSource, IEnumerable<TResult>> selector)
         {
             return Enumerable.SelectMany(source, selector).AsSequence();
         }
@@ -387,7 +433,7 @@ namespace Sequences
         /// <param name="selector">A transform function to apply to each element; the second parameter of the function represents the index of the element.</param>
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.</returns>
         public static ISequence<TResult> SelectMany<TSource, TResult>(this ISequence<TSource> source,
-                                                                      Func<TSource, int, IEnumerable<TResult>> selector)
+            Func<TSource, int, IEnumerable<TResult>> selector)
         {
             return Enumerable.SelectMany(source, selector).AsSequence();
         }
@@ -450,7 +496,7 @@ namespace Sequences
         /// <param name="predicate">A function to test each element and its index for a condition.</param>
         /// <returns>A sequence that contains elements from <paramref name="source"/> that satisfy the condition.</returns>
         public static ISequence<TSource> Where<TSource>(this ISequence<TSource> source,
-                                                        Func<TSource, int, bool> predicate)
+            Func<TSource, int, bool> predicate)
         {
             return Enumerable.Where(source, predicate).AsSequence();
         }
@@ -475,7 +521,7 @@ namespace Sequences
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.</returns>
         public static ISequence<TSource> TakeWhile<TSource>(this ISequence<TSource> source,
-                                                            Func<TSource, bool> predicate)
+            Func<TSource, bool> predicate)
         {
             return Enumerable.TakeWhile(source, predicate).AsSequence();
         }
@@ -489,7 +535,7 @@ namespace Sequences
         /// <param name="predicate">A function to test each element for a condition; the second parameter of the function represents the index of the element.</param>
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.</returns>
         public static ISequence<TSource> TakeWhile<TSource>(this ISequence<TSource> source,
-                                                            Func<TSource, int, bool> predicate)
+            Func<TSource, int, bool> predicate)
         {
             return Enumerable.TakeWhile(source, predicate).AsSequence();
         }
@@ -504,7 +550,7 @@ namespace Sequences
         /// <param name="second">The sequence providing the second half of each result pair.</param>
         /// <returns>A sequence of tuples, where each tuple is formed by associating an element of the first sequence with the element at the same position in the second sequence.</returns>
         public static ISequence<Tuple<TFirst, TSecond>> Zip<TFirst, TSecond>(this ISequence<TFirst> first,
-                                                                             IEnumerable<TSecond> second)
+            IEnumerable<TSecond> second)
         {
             return Zip(first, second, Tuple.Create);
         }
@@ -520,8 +566,8 @@ namespace Sequences
         /// <param name="resultSelector">A function that specifies how to merge the elements from the two sequences.</param>
         /// <returns>A sequence that contains merged elements of two input sequences.</returns>
         public static ISequence<TResult> Zip<TFirst, TSecond, TResult>(this ISequence<TFirst> first,
-                                                                       IEnumerable<TSecond> second,
-                                                                       Func<TFirst, TSecond, TResult> resultSelector)
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector)
         {
             return Enumerable.Zip(first, second, resultSelector).AsSequence();
         }
@@ -545,7 +591,7 @@ namespace Sequences
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to compare elements.</param>
         /// <returns>A sequence that contains distinct elements from the input sequence.</returns>
         public static ISequence<TSource> Distinct<TSource>(this ISequence<TSource> source,
-                                                           IEqualityComparer<TSource> comparer)
+            IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Distinct(source, comparer).AsSequence();
         }
@@ -571,7 +617,7 @@ namespace Sequences
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to compare values.</param>
         /// <returns>A sequence that contains the set difference of the elements of two sequences.</returns>
         public static ISequence<TSource> Except<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
-                                                         IEqualityComparer<TSource> comparer)
+            IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Except(first, second, comparer).AsSequence();
         }
@@ -597,7 +643,7 @@ namespace Sequences
         /// <param name="comparer"></param>
         /// <returns>A sequence that contains the elements that form the set intersection of two sequences.</returns>
         public static ISequence<TSource> Intersect<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
-                                                            IEqualityComparer<TSource> comparer)
+            IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Intersect(first, second, comparer).AsSequence();
         }
@@ -682,7 +728,7 @@ namespace Sequences
         /// <param name="comparer">The <see cref="IEqualityComparer{T}"/> to compare values.</param>
         /// <returns></returns>
         public static ISequence<TSource> Union<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
-                                                        IEqualityComparer<TSource> comparer)
+            IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Union(first, second, comparer).AsSequence();
         }
