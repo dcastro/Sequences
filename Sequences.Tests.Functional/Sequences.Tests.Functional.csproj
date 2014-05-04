@@ -54,10 +54,17 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Fibonacci.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\Sequences\Sequences.csproj">
+      <Project>{6c9f9e66-e026-4966-aeb2-9b29b5f0df85}</Project>
+      <Name>Sequences</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
