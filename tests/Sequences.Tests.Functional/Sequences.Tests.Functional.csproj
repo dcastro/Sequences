@@ -61,7 +61,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Sequences\Sequences.csproj">
+    <ProjectReference Include="..\..\src\Sequences\Sequences.csproj">
       <Project>{6c9f9e66-e026-4966-aeb2-9b29b5f0df85}</Project>
       <Name>Sequences</Name>
     </ProjectReference>
@@ -87,6 +87,9 @@
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Q /Y /E "$(TargetDir)*.*" "$(SolutionDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
