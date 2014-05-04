@@ -12,8 +12,8 @@ namespace Sequences.Tests
         [Fact]
         public void Concat_ConcatenatesTwoSequences()
         {
-            var first = Sequence.For(1, 2);
-            var second = Sequence.For(3, 4);
+            var first = Sequence.With(1, 2);
+            var second = Sequence.With(3, 4);
 
             Assert.Equal(new[] {1, 2, 3, 4},
                 first.Concat(() => second));
@@ -23,7 +23,7 @@ namespace Sequences.Tests
         public void Concat_ConcatenatesEmpty_WithNonEmpty()
         {
             var first = Sequence.Empty<int>();
-            var second = Sequence.For(1, 2, 3, 4);
+            var second = Sequence.With(1, 2, 3, 4);
 
             Assert.Equal(new[] {1, 2, 3, 4},
                 first.Concat(() => second));
@@ -32,7 +32,7 @@ namespace Sequences.Tests
         [Fact]
         public void Concat_ConcatenatesNonEmpty_WithEmpty()
         {
-            var first = Sequence.For(1, 2, 3, 4);
+            var first = Sequence.With(1, 2, 3, 4);
             var second = Sequence.Empty<int>();
 
             Assert.Equal(new[] {1, 2, 3, 4},
@@ -43,14 +43,14 @@ namespace Sequences.Tests
         public void Append_AppendsElementToSequence()
         {
             Assert.Equal(new[] {1, 2, 3, 4},
-                Sequence.For(1, 2, 3).Append(4));
+                Sequence.With(1, 2, 3).Append(4));
         }
 
         [Fact]
         public void Prepend_PrependsElementToSequence()
         {
             Assert.Equal(new[] {1, 2, 3, 4},
-                Sequence.For(2, 3, 4).Prepend(1));
+                Sequence.With(2, 3, 4).Prepend(1));
         }
 
         [Fact]

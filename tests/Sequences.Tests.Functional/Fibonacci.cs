@@ -15,7 +15,7 @@ namespace Sequences.Tests.Functional
         public void Declarative()
         {
             ISequence<int> fibs = null;
-            fibs = Sequence.For(0, 1)                               //start with 0, 1...
+            fibs = Sequence.With(0, 1)                               //start with 0, 1...
                 .Concat(() =>                                       //and then
                     fibs.Zip(fibs.Tail)                             //zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))
                         .Select(pair => pair.Item1 + pair.Item2));  //select the sum of each pair (i.e., 1, 2, 3, 5, 8)

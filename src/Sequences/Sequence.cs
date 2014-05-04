@@ -27,9 +27,9 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="items">The elements for which a sequence will be created.</param>
         /// <returns>A sequence created from the elements in <paramref name="items"/>.</returns>
-        public static ISequence<T> For<T>(params T[] items)
+        public static ISequence<T> With<T>(params T[] items)
         {
-            return For(items.AsEnumerable());
+            return With(items.AsEnumerable());
         }
 
         /// <summary>
@@ -38,15 +38,15 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="items">The enumerable to be evaluated.</param>
         /// <returns>A sequence created by lazily-evaluating <paramref name="items"/>.</returns>
-        public static ISequence<T> For<T>(IEnumerable<T> items)
+        public static ISequence<T> With<T>(IEnumerable<T> items)
         {
-            return items as ISequence<T> ?? For(items.GetEnumerator());
+            return items as ISequence<T> ?? With(items.GetEnumerator());
         }
 
-        private static ISequence<T> For<T>(IEnumerator<T> iterator)
+        private static ISequence<T> With<T>(IEnumerator<T> iterator)
         {
             return iterator.MoveNext()
-                       ? new Sequence<T>(iterator.Current, () => For(iterator))
+                       ? new Sequence<T>(iterator.Current, () => With(iterator))
                        : Empty<T>();
         }
 
@@ -259,7 +259,7 @@ namespace Sequences
             if(enumerable == null)
                 throw new ArgumentNullException("enumerable");
 
-            return For(enumerable);
+            return With(enumerable);
         }
 
         #region Extension Methods

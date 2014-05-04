@@ -12,17 +12,17 @@ namespace Sequences.Tests
     public class FactoryMethodsTests
     {
         [Fact]
-        public void For_WrapsEnumerable()
+        public void With_WrapsEnumerable()
         {
-            IEnumerable<int> enumerable = new[] {1,2,3};
-            Assert.Equal(enumerable, Sequence.For(enumerable));
+            IEnumerable<int> enumerable = new[] {1, 2, 3};
+            Assert.Equal(enumerable, Sequence.With(enumerable));
         }
 
         [Fact]
-        public void For_WrapsArray()
+        public void With_WrapsArray()
         {
-            int[] enumerable = { 1, 2, 3 };
-            Assert.Equal(enumerable, Sequence.For(enumerable));
+            int[] array = {1, 2, 3};
+            Assert.Equal(array, Sequence.With(array));
         }
 
         [Fact]
@@ -53,8 +53,8 @@ namespace Sequences.Tests
             var sequence = Sequence.Continually(1);
 
             Assert.True(sequence
-                            .Take(10)
-                            .All(i => i == 1));
+                .Take(10)
+                .All(i => i == 1));
         }
 
         [Fact]

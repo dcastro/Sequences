@@ -12,7 +12,7 @@ namespace Sequences.Tests
         [Fact]
         public void Count_Returns_SequenceLength()
         {
-            var sequence = Sequence.For(1, 2, 3);
+            var sequence = Sequence.With(1, 2, 3);
             Assert.Equal(3, sequence.Count);
         }
 

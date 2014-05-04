@@ -92,7 +92,7 @@ namespace Sequences.Tests
         public void SkipWhile_ThrowsException_When_PredicateIsNull()
         {
             Assert.Throws<ArgumentNullException>(
-                () => Sequence.For(1)
+                () => Sequence.With(1)
                               .SkipWhile(null as Func<int, bool>));
         }
 
@@ -127,7 +127,7 @@ namespace Sequences.Tests
         public void SkipWhile_WithIndex_ThrowsException_When_PredicateIsNull()
         {
             Assert.Throws<ArgumentNullException>(
-                () => Sequence.For(1)
+                () => Sequence.With(1)
                               .SkipWhile(null as Func<int, int, bool>));
         }
 
@@ -291,20 +291,20 @@ namespace Sequences.Tests
         [Fact]
         public void SumBigInteger()
         {
-            Assert.Equal(10, Sequence.For<BigInteger>(0, 2, 5, 3).Sum());
+            Assert.Equal(10, Sequence.With<BigInteger>(0, 2, 5, 3).Sum());
         }
 
         [Fact]
         public void SumBigInteger_With_Selector()
         {
-            Assert.Equal(10, Sequence.For("", "hello", "world")
+            Assert.Equal(10, Sequence.With("", "hello", "world")
                                      .Sum(str => (BigInteger) str.Length));
         }
 
         [Fact]
         public void SumNullableBigInteger()
         {
-            Assert.Equal(10, Sequence.For<BigInteger?>(null, 0, null, 2, 5, 3, null).Sum());
+            Assert.Equal(10, Sequence.With<BigInteger?>(null, 0, null, 2, 5, 3, null).Sum());
         }
 
         [Fact]
@@ -317,7 +317,7 @@ namespace Sequences.Tests
         [Fact]
         public void SumNullableBigInteger_With_Selector()
         {
-            Assert.Equal(10, Sequence.For(null, "", null, "hello", "world", null)
+            Assert.Equal(10, Sequence.With(null, "", null, "hello", "world", null)
                                      .Sum(str => str == null ? null : (BigInteger?) str.Length));
         }
 

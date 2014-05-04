@@ -13,7 +13,7 @@ namespace Sequences.Tests
         [Fact]
         public void Fold_AccumulatesValues()
         {
-            int sum = Sequence.For(1, 2, 3, 4).Fold(0, (a, b) => a + b);
+            int sum = Sequence.With(1, 2, 3, 4).Fold(0, (a, b) => a + b);
             Assert.Equal(10, sum);
         }
 
@@ -36,7 +36,7 @@ namespace Sequences.Tests
                     Tuple.Create(6, 4)
                 };
 
-            Sequence.For(1, 2, 3, 4).Fold(0, (a, b) =>
+            Sequence.With(1, 2, 3, 4).Fold(0, (a, b) =>
                 {
                     additions.Add(Tuple.Create(a, b));
                     return a + b;
@@ -48,7 +48,7 @@ namespace Sequences.Tests
         [Fact]
         public void FoldRight_AccumulatesValues()
         {
-            int sum = Sequence.For(1, 2, 3, 4).FoldRight(0, (a, b) => a + b);
+            int sum = Sequence.With(1, 2, 3, 4).FoldRight(0, (a, b) => a + b);
             Assert.Equal(10, sum);
         }
 
@@ -72,7 +72,7 @@ namespace Sequences.Tests
                     Tuple.Create(1, 9)
                 };
 
-            Sequence.For(1, 2, 3, 4).FoldRight(0, (a, b) =>
+            Sequence.With(1, 2, 3, 4).FoldRight(0, (a, b) =>
                 {
                     additions.Add(Tuple.Create(a, b));
                     return a + b;
@@ -84,7 +84,7 @@ namespace Sequences.Tests
         [Fact]
         public void Reduce_AccumulatesValues()
         {
-            int sum = Sequence.For(1, 2, 3, 4).Reduce((a, b) => a + b);
+            int sum = Sequence.With(1, 2, 3, 4).Reduce((a, b) => a + b);
             Assert.Equal(10, sum);
         }
 
@@ -97,7 +97,7 @@ namespace Sequences.Tests
         [Fact]
         public void ReduceRight_AccumulatesValues()
         {
-            int sum = Sequence.For(1, 2, 3, 4).ReduceRight((a, b) => a + b);
+            int sum = Sequence.With(1, 2, 3, 4).ReduceRight((a, b) => a + b);
             Assert.Equal(10, sum);
         }
 
@@ -110,7 +110,7 @@ namespace Sequences.Tests
         [Fact]
         public void Scan_Returns_ListOfAccumulations()
         {
-            var sequence = Sequence.For(1, 2, 3, 4);
+            var sequence = Sequence.With(1, 2, 3, 4);
             var scan = sequence.Scan(0, (a, b) => a + b);
             var expected = new[] {0, 1, 3, 6, 10};
 
@@ -130,7 +130,7 @@ namespace Sequences.Tests
         [Fact]
         public void ScanRight_Returns_ListOfAccumulations()
         {
-            var sequence = Sequence.For(1, 2, 3, 4);
+            var sequence = Sequence.With(1, 2, 3, 4);
             var scan = sequence.ScanRight(0, (a, b) => a + b);
             var expected = new[] {10, 9, 7, 4, 0};
 

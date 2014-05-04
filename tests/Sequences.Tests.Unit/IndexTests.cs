@@ -95,7 +95,7 @@ namespace Sequences.Tests
         [Fact]
         public void LastIndexOf_Returns_IndexOfElement()
         {
-            var sequence = Sequence.For(1, 1, 2, 2, 3, 3);
+            var sequence = Sequence.With(1, 1, 2, 2, 3, 3);
             var index = sequence.LastIndexOf(2);
 
             Assert.Equal(3, index);
@@ -131,7 +131,7 @@ namespace Sequences.Tests
         [Fact]
         public void LastIndexWhere_Returns_IndexOfElement()
         {
-            var sequence = Sequence.For(1, 1, 2, 2, 3, 3);
+            var sequence = Sequence.With(1, 1, 2, 2, 3, 3);
             var index = sequence.LastIndexWhere(i => i == 2);
 
             Assert.Equal(3, index);
