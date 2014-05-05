@@ -15,7 +15,7 @@ namespace Sequences.Tests.Functional
         public void Declarative()
         {
             ISequence<int> fibs = null;
-            fibs = Sequence.With(0, 1)                               //start with 0, 1...
+            fibs = Sequence.With(0, 1)                              //start with 0, 1...
                 .Concat(() =>                                       //and then
                     fibs.Zip(fibs.Tail)                             //zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))
                         .Select(pair => pair.Item1 + pair.Item2));  //select the sum of each pair (i.e., 1, 2, 3, 5, 8)
@@ -31,11 +31,11 @@ namespace Sequences.Tests.Functional
             Assert.Equal(_expectedFibs, fibs.Take(10));
         }
 
-        //h and n are any two consecutive fibonacci numbers.
+        //current and next are any two consecutive fibonacci numbers.
         //e.g., 0 and 1, or 5 and 8
-        private ISequence<int> Fibs(int h, int n)
+        private ISequence<int> Fibs(int current, int next)
         {
-            return new Sequence<int>(h, () => Fibs(n, h + n));
+            return new Sequence<int>(current, () => Fibs(next, current + next));
         }
     }
 }
