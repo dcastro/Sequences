@@ -170,6 +170,13 @@ namespace Sequences
         void ForEach(Action<T> function);
 
         /// <summary>
+        /// Compares the length of this sequence with a test value.
+        /// </summary>
+        /// <param name="length">A test value to be compared with this sequence's length.</param>
+        /// <returns>A value x, where x &gt; 0 if this sequence is longer than <paramref name="length"/>, x &lt; 1 if this sequence is shorter than <paramref name="length"/> or x == 0 if this sequence has <paramref name="length"/> elements.</returns>
+        int LengthCompare(int length);
+
+        /// <summary>
         /// Folds the elements of this sequence using the specified accumulator function. 
         /// </summary> 
         /// <example><code>int sum = Sequence.With(1,2,3,4).Fold(0, (a, b) => a + b);</code></example>

@@ -17,7 +17,8 @@ namespace Sequences
     {
         private readonly T _head;
         private readonly Lazy<ISequence<T>> _tail;
-        private int _count = int.MinValue;
+
+        private readonly Lazy<int> _count;
         private bool _hasDefiniteSize = false;
 
         /// <summary>
@@ -58,13 +59,7 @@ namespace Sequences
         /// </summary>
         public int Count
         {
-            get
-            {
-                if (_count < 0)
-                    _count = this.Count();
-
-                return _count;
-            }
+            get { return _count.Value; }
         }
 
         /// <summary>
@@ -124,6 +119,8 @@ namespace Sequences
         {
             _head = head;
             _tail = tail;
+
+            _count = new Lazy<int>(() => this.Count());
         }
 
         /// <summary>
@@ -357,6 +354,35 @@ namespace Sequences
         {
             foreach (var elem in this)
                 function(elem);
+        }
+
+        /// <summary>
+        /// Compares the length of this sequence with a test value.
+        /// </summary>
+        /// <param name="length">A test value to be compared with this sequence's length.</param>
+        /// <returns>A value x, where x &gt; 0 if this sequence is longer than <paramref name="length"/>, x &lt; 1 if this sequence is shorter than <paramref name="length"/> or x == 0 if this sequence has <paramref name="length"/> elements.</returns>
+        public int LengthCompare(int length)
+        {
+            //corner cases
+            if (length < 0)
+                return 1;
+
+            if (length == 0)
+                return IsEmpty ? 0 : 1;
+
+            //shortcut
+            if (_count.IsValueCreated)
+                return Count.CompareTo(length);
+
+            //try to find index (length - 1), check if there's any elements beyond that index, and return
+            var testIndex = length - 1;
+            var iter = Indices.GetEnumerator();
+
+            while (iter.MoveNext() && iter.Current <= testIndex)
+                if (iter.Current == testIndex)
+                    return iter.MoveNext() ? 1 : 0;
+
+            return -1;
         }
 
         /// <summary>

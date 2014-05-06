@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Sequences.Tests
 {
@@ -43,6 +44,40 @@ namespace Sequences.Tests
             bool hasDefiniteSize = sequence.HasDefiniteSize;
 
             Assert.False(sequence.IsTailDefined);
+        }
+
+        [Theory]
+        [InlineData(-1, 1)]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        [InlineData(2, 1)]
+        [InlineData(3, 0)]
+        [InlineData(4, -1)]
+        public void LengthCompare_ReturnsExpectedResult_When_CountEqualsThree(int length, int expectedResult)
+        {
+            var sequence = Sequence.Range(1, 4);
+            Assert.Equal(expectedResult, sequence.LengthCompare(length));
+        }
+
+        [Theory]
+        [InlineData(-1, 1)]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        [InlineData(2, 1)]
+        public void LengthCompare_ReturnsExpectedResult_When_SequenceIsInfinite(int length, int expectedResult)
+        {
+            var sequence = Sequence.From(1);
+            Assert.Equal(expectedResult, sequence.LengthCompare(length));
+        }
+
+        [Theory]
+        [InlineData(-1, 1)]
+        [InlineData(0, 0)]
+        [InlineData(1, -1)]
+        public void LengthCompare_ReturnsExpectedResult_When_SequenceIsEmpty(int length, int expectedResult)
+        {
+            var sequence = Sequence.Empty<int>();
+            Assert.Equal(expectedResult, sequence.LengthCompare(length));
         }
     }
 }
