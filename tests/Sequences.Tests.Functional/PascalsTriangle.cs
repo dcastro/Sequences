@@ -24,21 +24,23 @@ namespace Sequences.Tests.Functional
         [Fact]
         public void V1()
         {
-            var triangle = Sequence.Iterate(
-                Sequence.With(1),                                               //begin with row (1)
+            Func<ISequence<int>, ISequence<int>> func =                         //to build a row..
                 row =>
-                    Sequence.With(1)                                            //and, build the next row starting with 1...
-                            .Concat(() =>                                       //followed by...
+                Sequence.With(1)                                                //start with 1...
+                        .Concat(() =>                                           //followed by...
                                 row.Zip(row.Tail)                               //zipping the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
                                    .Select(pair => pair.Item1 + pair.Item2))    //and select the sum of each pair, i.e., (4, 6, 4)
-                            .Append(1));                                        //and, finally, another 1.
+                        .Append(1);                                             //and, finally, another 1.
+
+            var triangle = Sequence.Iterate(
+                Sequence.With(1), func);
 
             var sixRows = triangle.Take(6);
 
             //Assertions
             Assert.Equal(6, sixRows.Count);
 
-            sixRows.Zip(_expectedTriangle).ForEach(
+            _expectedTriangle.Zip(sixRows).ForEach(
                 rows => Assert.Equal(rows.Item1, rows.Item2));
         }
 
@@ -51,7 +53,7 @@ namespace Sequences.Tests.Functional
             //Assertions
             Assert.Equal(6, sixRows.Count);
 
-            sixRows.Zip(_expectedTriangle).ForEach(
+            _expectedTriangle.Zip(sixRows).ForEach(
                 rows => Assert.Equal(rows.Item1, rows.Item2));
         }
 
@@ -69,12 +71,35 @@ namespace Sequences.Tests.Functional
         private ISequence<ISequence<int>> PascalAux(ISequence<int> previousRow)
         {
             ISequence<int> newRow = previousRow
-                .Sliding(2)
-                .Select(pair => pair.Sum())
+                .Sliding(2)                     //for each 2 consecutive elements...
+                .Select(pair => pair.Sum())     //select their sum
                 .AsSequence()
-                .Append(1)
-                .Prepend(1);
+                .Append(1)                      //append (1)
+                .Prepend(1);                    //prepend (1)
             return new Sequence<ISequence<int>>(newRow, () => PascalAux(newRow));
+        }
+
+        [Fact]
+        public void V3()
+        {
+            //similar to V2, but doesn't define auxiliary methods
+            Func<ISequence<int>, ISequence<int>> func =
+                row => row.LengthCompare(1) == 0
+                           ? Sequence.With(1, 1)
+                           : row.Sliding(2)
+                                .Select(pair => pair.Sum())
+                                .AsSequence()
+                                .Append(1)
+                                .Prepend(1);
+
+            var triangle = Sequence.Iterate(Sequence.With(1), func);
+            var sixRows = triangle.Take(6);
+
+            //Assertions
+            Assert.Equal(6, sixRows.Count);
+
+            _expectedTriangle.Zip(sixRows).ForEach(
+                rows => Assert.Equal(rows.Item1, rows.Item2));
         }
     }
 }
