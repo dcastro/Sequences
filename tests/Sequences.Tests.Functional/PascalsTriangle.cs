@@ -24,6 +24,15 @@ namespace Sequences.Tests.Functional
         [Fact]
         public void V1()
         {
+            Func<ISequence<int>, ISequence<int>> func =             //to build a row..
+                row => row.Zip(row.Tail)                            //zip the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
+                          .Select(pair => pair.Item1 + pair.Item2)  //select the sum of each pair, i.e., (4, 6, 4)
+                          .Append(1)                                //add (1) to each end
+                          .Prepend(1);
+
+            /*
+             * Alternative syntax
+             * 
             Func<ISequence<int>, ISequence<int>> func =                         //to build a row..
                 row =>
                 Sequence.With(1)                                                //start with 1...
@@ -31,6 +40,8 @@ namespace Sequences.Tests.Functional
                                 row.Zip(row.Tail)                               //zipping the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
                                    .Select(pair => pair.Item1 + pair.Item2))    //and select the sum of each pair, i.e., (4, 6, 4)
                         .Append(1);                                             //and, finally, another 1.
+            */
+
 
             var triangle = Sequence.Iterate(
                 Sequence.With(1), func);
@@ -84,15 +95,32 @@ namespace Sequences.Tests.Functional
         {
             //similar to V2, but doesn't define auxiliary methods
             Func<ISequence<int>, ISequence<int>> func =
-                row => row.LengthCompare(1) == 0
-                           ? Sequence.With(1, 1)
-                           : row.Sliding(2)
-                                .Select(pair => pair.Sum())
-                                .AsSequence()
-                                .Append(1)
-                                .Prepend(1);
+                row => row.Sliding(2)
+                          .Where(group => group.LengthCompare(2) == 0)
+                          .Select(pair => pair.Sum())
+                          .AsSequence()
+                          .Append(1)
+                          .Prepend(1);
 
             var triangle = Sequence.Iterate(Sequence.With(1), func);
+            var sixRows = triangle.Take(6);
+
+            //Assertions
+            Assert.Equal(6, sixRows.Count);
+
+            _expectedTriangle.Zip(sixRows).ForEach(
+                rows => Assert.Equal(rows.Item1, rows.Item2));
+        }
+
+        [Fact]
+        public void V4()
+        {
+            var triangle = Sequence.Iterate(
+                Sequence.With(1),                                       //start with row (1), and then...
+                row => row.Append(0)                                    //shift row to the left
+                          .Zip(row.Prepend(0))                          //shift row to the right, and zip both shifted rows
+                          .Select(pair => pair.Item1 + pair.Item2));    //sum the two shifted rows
+
             var sixRows = triangle.Take(6);
 
             //Assertions
