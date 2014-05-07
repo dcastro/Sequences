@@ -318,7 +318,7 @@ namespace Sequences
         /// <returns>A flattened sequence obtained by concatenating all sequences in the <paramref name="source"/> collection.</returns>
         public static ISequence<TSource> Flatten<TSource>(this IEnumerable<ISequence<TSource>> source)
         {
-            return source.AsSequence().Flatten();
+            return source.SelectMany(seq => seq).AsSequence();
         }
 
         /// <summary>
@@ -329,19 +329,7 @@ namespace Sequences
         /// <returns>A flattened sequence obtained by concatenating all collections in the <paramref name="source"/> sequence.</returns>
         public static ISequence<TSource> Flatten<TSource>(this ISequence<IEnumerable<TSource>> source)
         {
-            return source.Select(elem => elem.AsSequence()).Flatten();
-        }
-
-        private static ISequence<TSource> Flatten<TSource>(this ISequence<ISequence<TSource>> source)
-        {
-            if (source.IsEmpty)
-                return Empty<TSource>();
-
-            if (source.Head.IsEmpty)
-                return source.Tail.Flatten();
-
-            return source.Head
-                         .Concat(() => source.Tail.Flatten());
+            return source.SelectMany(seq => seq);
         }
 
         /// <summary>
