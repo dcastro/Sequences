@@ -67,6 +67,7 @@
     <Compile Include="EnumerableTests.cs" />
     <Compile Include="FactoryMethodsTests.cs" />
     <Compile Include="ExtensionMethodsTests.cs" />
+    <Compile Include="FlattenTests.cs" />
     <Compile Include="GroupedTests.cs" />
     <Compile Include="IndexTests.cs" />
     <Compile Include="InitTests.cs" />

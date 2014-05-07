@@ -311,6 +311,40 @@ namespace Sequences
         #region Extension Methods
 
         /// <summary>
+        /// Concatenates all sequences in the <paramref name="source"/> collection into a single flattened sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of the resulting sequence.</typeparam>
+        /// <param name="source">The collection to be flattened.</param>
+        /// <returns>A flattened sequence obtained by concatenating all sequences in the <paramref name="source"/> collection.</returns>
+        public static ISequence<TSource> Flatten<TSource>(this IEnumerable<ISequence<TSource>> source)
+        {
+            return source.AsSequence().Flatten();
+        }
+
+        /// <summary>
+        /// Concatenates all collections in the <paramref name="source"/> sequence into a single flattened sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of the resulting sequence.</typeparam>
+        /// <param name="source">The sequence to be flattened.</param>
+        /// <returns>A flattened sequence obtained by concatenating all collections in the <paramref name="source"/> sequence.</returns>
+        public static ISequence<TSource> Flatten<TSource>(this ISequence<IEnumerable<TSource>> source)
+        {
+            return source.Select(elem => elem.AsSequence()).Flatten();
+        }
+
+        private static ISequence<TSource> Flatten<TSource>(this ISequence<ISequence<TSource>> source)
+        {
+            if (source.IsEmpty)
+                return Empty<TSource>();
+
+            if (source.Head.IsEmpty)
+                return source.Tail.Flatten();
+
+            return source.Head
+                         .Concat(() => source.Tail.Flatten());
+        }
+
+        /// <summary>
         /// Bypasses a specified number of elements in a sequence and then returns the remaining elements.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
