@@ -60,6 +60,7 @@
     <Compile Include="Fibonacci.cs" />
     <Compile Include="LuckyNumbers.cs" />
     <Compile Include="PascalsTriangle.cs" />
+    <Compile Include="PrimeNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TriangularNumbers.cs" />
   </ItemGroup>
