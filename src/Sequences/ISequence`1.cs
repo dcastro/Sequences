@@ -254,6 +254,22 @@ namespace Sequences
         /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if the elements don't divide evenly.</returns>
         IEnumerable<ISequence<T>> Grouped(int size);
 
+
+        /// <summary>
+        /// Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with the element at the same position in the <paramref name="second"/> sequence.
+        /// If one of the two sequences is longer than the other, its remaining elements are ignored.
+        /// </summary>
+        /// <typeparam name="TSecond">The type of the elements of <paramref name="second"/>.</typeparam>
+        /// <param name="second">The sequence providing the second half of each result pair.</param>
+        /// <returns>A sequence of tuples, where each tuple is formed by associating an element of the first sequence with the element at the same position in the second sequence.</returns>
+        ISequence<Tuple<T, TSecond>> Zip<TSecond>(IEnumerable<TSecond> second);
+
+        /// <summary>
+        /// Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.
+        /// </summary>
+        /// <returns>A sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.</returns>
+        ISequence<Tuple<T, int>> ZipWithIndex();
+
         /// <summary>
         /// Produces the range of all indices of this sequence.
         /// </summary>

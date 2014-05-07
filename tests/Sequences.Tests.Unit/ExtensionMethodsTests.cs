@@ -213,13 +213,6 @@ namespace Sequences.Tests
         }
 
         [Fact]
-        public void Zip()
-        {
-            Assert.Equal(_enumerable.Zip(_enumerable.Skip(1), Tuple.Create),
-                         _sequence.Zip(_sequence.Tail));
-        }
-
-        [Fact]
         public void Zip_With_Selector()
         {
             Assert.Equal(_enumerable.Zip(_enumerable.Skip(1), Tuple.Create),

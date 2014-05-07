@@ -541,21 +541,6 @@ namespace Sequences
         }
 
         /// <summary>
-        /// Returns a sequence of tuples, where each tuple is formed by associating an element of the <paramref name="first"/> sequence with the element at the same position in the <paramref name="second"/> sequence.
-        /// If one of the two sequences is longer than the other, its remaining elements are ignored.
-        /// </summary>
-        /// <typeparam name="TFirst">The type of the elements of <paramref name="first"/>.</typeparam>
-        /// <typeparam name="TSecond">The type of the elements of <paramref name="second"/>.</typeparam>
-        /// <param name="first">The sequence providing the first half of each result pair</param>
-        /// <param name="second">The sequence providing the second half of each result pair.</param>
-        /// <returns>A sequence of tuples, where each tuple is formed by associating an element of the first sequence with the element at the same position in the second sequence.</returns>
-        public static ISequence<Tuple<TFirst, TSecond>> Zip<TFirst, TSecond>(this ISequence<TFirst> first,
-            IEnumerable<TSecond> second)
-        {
-            return Zip(first, second, Tuple.Create);
-        }
-
-        /// <summary>
         /// Applies a specified function to the corresponding elements of two sequences, producing a sequence of the results.
         /// </summary>
         /// <typeparam name="TFirst">The type of the elements of <paramref name="first"/>.</typeparam>

@@ -83,6 +83,7 @@
     <Compile Include="SplitAtTests.cs" />
     <Compile Include="StringTests.cs" />
     <Compile Include="TailTests.cs" />
+    <Compile Include="ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

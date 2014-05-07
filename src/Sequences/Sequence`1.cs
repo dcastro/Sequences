@@ -192,7 +192,7 @@ namespace Sequences
         {
             ISequence<T> sequence = this;
 
-            while (! sequence.IsEmpty)
+            while (!sequence.IsEmpty)
             {
                 yield return sequence;
                 sequence = sequence.Init;
@@ -328,7 +328,7 @@ namespace Sequences
         /// <returns>A pair of sequences with the elements that satisfy <paramref name="predicate"/> and the elements that don't.</returns>
         public Tuple<ISequence<T>, ISequence<T>> Partition(Func<T, bool> predicate)
         {
-            return Tuple.Create(this.Where(predicate), this.Where(e => ! predicate(e)));
+            return Tuple.Create(this.Where(predicate), this.Where(e => !predicate(e)));
         }
 
         /// <summary>
@@ -530,6 +530,27 @@ namespace Sequences
                 throw new ArgumentOutOfRangeException("size", "size must be a positive integer.");
 
             return new GroupedIterator(this, size);
+        }
+
+        /// <summary>
+        /// Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with the element at the same position in the <paramref name="second"/> sequence.
+        /// If one of the two sequences is longer than the other, its remaining elements are ignored.
+        /// </summary>
+        /// <typeparam name="TSecond">The type of the elements of <paramref name="second"/>.</typeparam>
+        /// <param name="second">The sequence providing the second half of each result pair.</param>
+        /// <returns>A sequence of tuples, where each tuple is formed by associating an element of the first sequence with the element at the same position in the second sequence.</returns>
+        public ISequence<Tuple<T, TSecond>> Zip<TSecond>(IEnumerable<TSecond> second)
+        {
+            return this.Zip(second, Tuple.Create);
+        }
+
+        /// <summary>
+        /// Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.
+        /// </summary>
+        /// <returns>A sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.</returns>
+        public ISequence<Tuple<T, int>> ZipWithIndex()
+        {
+            return Zip(Indices);
         }
 
         /// <summary>
