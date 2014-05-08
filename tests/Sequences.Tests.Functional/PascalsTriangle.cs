@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sequences.Tests.Functional.Extensions;
 using Xunit;
 
 namespace Sequences.Tests.Functional
@@ -24,22 +25,22 @@ namespace Sequences.Tests.Functional
         [Fact]
         public void V1()
         {
-            Func<ISequence<int>, ISequence<int>> func =             //to build a row..
-                row => row.Zip(row.Tail)                            //zip the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
-                          .Select(pair => pair.Item1 + pair.Item2)  //select the sum of each pair, i.e., (4, 6, 4)
-                          .Append(1)                                //add (1) to each end
+            Func<ISequence<int>, ISequence<int>> func =     //to build a row..
+                row => row.Zip(row.Tail)                    //zip the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
+                          .Select(TupleEx.Sum)              //select the sum of each pair, i.e., (4, 6, 4)
+                          .Append(1)                        //add (1) to each end
                           .Prepend(1);
 
             /*
              * Alternative syntax
              * 
-            Func<ISequence<int>, ISequence<int>> func =                         //to build a row..
+            Func<ISequence<int>, ISequence<int>> func =         //to build a row..
                 row =>
-                Sequence.With(1)                                                //start with 1...
-                        .Concat(() =>                                           //followed by...
-                                row.Zip(row.Tail)                               //zipping the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
-                                   .Select(pair => pair.Item1 + pair.Item2))    //and select the sum of each pair, i.e., (4, 6, 4)
-                        .Append(1);                                             //and, finally, another 1.
+                Sequence.With(1)                                //start with 1...
+                        .Concat(() =>                           //followed by...
+                                row.Zip(row.Tail)               //zipping the previous row with its tail, i.e., (1,3,3,1) becomes ((1,3), (3,3), (3,1))
+                                   .Select(TupleEx.Sum))        //and select the sum of each pair, i.e., (4, 6, 4)
+                        .Append(1);                             //and, finally, another 1.
             */
 
 
@@ -116,10 +117,10 @@ namespace Sequences.Tests.Functional
         public void V4()
         {
             var triangle = Sequence.Iterate(
-                Sequence.With(1),                                       //start with row (1), and then...
-                row => row.Append(0)                                    //shift row to the left
-                          .Zip(row.Prepend(0))                          //shift row to the right, and zip both shifted rows
-                          .Select(pair => pair.Item1 + pair.Item2));    //sum the two shifted rows
+                Sequence.With(1),                   //start with row (1), and then...
+                row => row.Append(0)                //shift row to the left
+                          .Zip(row.Prepend(0))      //shift row to the right, and zip both shifted rows
+                          .Select(TupleEx.Sum));    //sum the two shifted rows
 
             var sixRows = triangle.Take(6);
 

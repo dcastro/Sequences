@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sequences.Tests.Functional.Extensions;
 using Xunit;
 
 namespace Sequences.Tests.Functional
@@ -18,9 +19,9 @@ namespace Sequences.Tests.Functional
             var naturals = Sequence.From(1);
 
             ISequence<int> factorials = null;
-            factorials = new Sequence<int>(1,                                                           //start with (1) at index 0
-                                           () => factorials.Zip(naturals)                               //zip factorials (1, ?) with naturals (1,2,3, ...)
-                                                           .Select(pair => pair.Item1 * pair.Item2));   //select the product of each tuple (1,1) => 1, (1,2) => 2, (2,3) => 6
+            factorials = new Sequence<int>(1,                                           //start with (1) at index 0
+                                           () => factorials.Zip(naturals)               //zip factorials (1, ?) with naturals (1,2,3, ...)
+                                                           .Select(TupleEx.Product));   //select the product of each tuple (1,1) => 1, (1,2) => 2, (2,3) => 6
             /**
              * factorials[0] returns 1, eagerly evaluated.
              * Then, we zip factorials (1, ?) with naturals (1,2,3,...), and select the product of each tuple

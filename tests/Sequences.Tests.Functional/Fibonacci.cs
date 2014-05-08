@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sequences.Tests.Functional.Extensions;
 using Xunit;
 
 namespace Sequences.Tests.Functional
@@ -15,10 +16,10 @@ namespace Sequences.Tests.Functional
         public void Declarative()
         {
             ISequence<int> fibs = null;
-            fibs = Sequence.With(0, 1)                              //start with 0, 1...
-                .Concat(() =>                                       //and then
-                    fibs.Zip(fibs.Tail)                             //zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))
-                        .Select(pair => pair.Item1 + pair.Item2));  //select the sum of each pair (i.e., 1, 2, 3, 5, 8)
+            fibs = Sequence.With(0, 1)              //start with 0, 1...
+                .Concat(() =>                       //and then
+                    fibs.Zip(fibs.Tail)             //zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))
+                        .Select(TupleEx.Sum));      //select the sum of each pair (i.e., 1, 2, 3, 5, 8)
 
             Assert.Equal(_expectedFibs, fibs.Take(10));
         }
