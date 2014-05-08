@@ -262,12 +262,16 @@ namespace Sequences
         public ISequence<T> Remove(T elem)
         {
             IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
+            return Remove(this, elem, comparer);
+        }
 
-            if (IsEmpty)
-                return this;
-            if (comparer.Equals(Head, elem))
-                return Tail;
-            return new Sequence<T>(Head, () => Tail.Remove(elem));
+        private static ISequence<T> Remove(ISequence<T> seq, T elem, IEqualityComparer<T> comparer)
+        {
+            if (seq.IsEmpty)
+                return seq;
+            if (comparer.Equals(seq.Head, elem))
+                return seq.Tail;
+            return new Sequence<T>(seq.Head, () => Remove(seq.Tail, elem, comparer));
         }
 
         /// <summary>
