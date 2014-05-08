@@ -382,6 +382,7 @@ namespace Sequences
 
         /// <summary>
         /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
+        /// If the source sequence represents an infinite set or series and all elements satisfy the given condition, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence to return elements from.</param>
@@ -408,6 +409,7 @@ namespace Sequences
         /// <summary>
         /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
         /// The element's index is used in the logic of the predicate function.
+        /// If the source sequence represents an infinite set or series and all elements satisfy the given condition, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return elements from.</param>
@@ -649,6 +651,7 @@ namespace Sequences
 
         /// <summary>
         /// Produces the set difference of two sequences by using the default equality comparer to compare values.
+        /// If the second sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <param name="first">A sequence whose elements that are not also in <paramref name="second"/> will be returned.</param>
@@ -662,6 +665,7 @@ namespace Sequences
 
         /// <summary>
         /// Produces the set difference of two sequences by using the specified <see cref="IEqualityComparer{T}"/> to compare values.
+        /// If the second sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <param name="first">A sequence whose elements that are not also in <paramref name="second"/> will be returned.</param>
@@ -677,6 +681,7 @@ namespace Sequences
 
         /// <summary>
         /// Produces the set intersection of two sequences by using the default equality comparer to compare values.
+        /// If the second sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <param name="first">A sequence whose distinct elements that also appear in <paramref name="second"/> will be returned.</param>
@@ -690,6 +695,7 @@ namespace Sequences
 
         /// <summary>
         /// Produces the set intersection of two sequences by using the specified <see cref="IEqualityComparer{T}"/> to compare values.
+        /// If the second sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <param name="first">A sequence whose distinct elements that also appear in <paramref name="second"/> will be returned.</param>
@@ -705,6 +711,7 @@ namespace Sequences
 
         /// <summary>
         /// Inverts the order of the elements in a sequence.
+        /// If the source sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values to reverse.</param>
@@ -717,6 +724,7 @@ namespace Sequences
 
         /// <summary>
         /// Computes the sum of the sequence of <see cref="BigInteger"/> values that are obtained by invoking a transform function on each element of the input sequence.
+        /// If the source sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values that are used to calculate a sum.</param>
@@ -730,6 +738,7 @@ namespace Sequences
 
         /// <summary>
         /// Computes the sum of the sequence of <see cref="Nullable{BigInteger}"/> values that are obtained by invoking a transform function on each element of the input sequence.
+        /// If the source sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values that are used to calculate a sum.</param>
@@ -743,6 +752,7 @@ namespace Sequences
 
         /// <summary>
         /// Computes the sum of a sequence of <see cref="BigInteger"/> values.
+        /// If the source sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="source">A sequence of <see cref="BigInteger"/> values to calculate the sum of.</param>
         /// <returns>The sum of the values in the sequence.</returns>
@@ -756,6 +766,7 @@ namespace Sequences
 
         /// <summary>
         /// Computes the sum of a sequence of <see cref="Nullable{BigInteger}"/> values.
+        /// If the source sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="source">A sequence of <see cref="Nullable{BigInteger}"/> values to calculate the sum of.</param>
         /// <returns>The sum of the values in the sequence.</returns>

@@ -19,7 +19,7 @@ namespace Sequences
         private readonly Lazy<ISequence<T>> _tail;
 
         private readonly Lazy<int> _count;
-        private bool _hasDefiniteSize = false;
+        private bool _hasDefiniteSize;
 
         /// <summary>
         /// Tests whether the sequence is empty.
@@ -55,7 +55,7 @@ namespace Sequences
 
         /// <summary>
         /// Returns the length of this sequence.
-        /// If this sequence represents an infinite series, this will never return!
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         public int Count
         {
@@ -207,9 +207,9 @@ namespace Sequences
 
         /// <summary>
         /// Forces evaluation of the whole sequence and returns it.
-        /// If this sequence represents an infinite series, the method will never return!
+        /// If this sequence represents an infinite set or series, the method will never return!
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The fully realized sequence.</returns>
         public ISequence<T> Force()
         {
             foreach (var elem in this)
@@ -339,7 +339,7 @@ namespace Sequences
         /// Returns a pair of sequences, where the first contains all the elements of this sequence that satisfy the <paramref name="predicate"/> function,
         /// and the second contains the elements that don't.
         /// </summary>
-        /// <param name="predicate">The preidcate used to partition the elements.</param>
+        /// <param name="predicate">The predicate used to partition the elements.</param>
         /// <returns>A pair of sequences with the elements that satisfy <paramref name="predicate"/> and the elements that don't.</returns>
         [Pure]
         public Tuple<ISequence<T>, ISequence<T>> Partition(Func<T, bool> predicate)
@@ -365,6 +365,7 @@ namespace Sequences
 
         /// <summary>
         /// Apply the given function to each element of this sequence.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="function">The function to apply to each element.</param>
         public void ForEach(Action<T> function)
@@ -375,6 +376,7 @@ namespace Sequences
 
         /// <summary>
         /// Compares the length of this sequence with a test value.
+        /// This method does not call <see cref="ISequence{T}.Count"/> directly - its running time is O(count min length) instead of O(count).
         /// </summary>
         /// <param name="length">A test value to be compared with this sequence's length.</param>
         /// <returns>A value x, where x &gt; 0 if this sequence is longer than <paramref name="length"/>, x &lt; 1 if this sequence is shorter than <paramref name="length"/> or x == 0 if this sequence has <paramref name="length"/> elements.</returns>
@@ -405,6 +407,7 @@ namespace Sequences
 
         /// <summary>
         /// Folds the elements of this sequence using the specified accumulator function. 
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary> 
         /// <example><code>int sum = Sequence.With(1,2,3,4).Fold(0, (a, b) => a + b);</code></example>
         /// <param name="seed">The initial accumulator value. A neutral value for the fold operation (e.g., empty list, or 0 for adding the elements of this sequence, or 1 for multiplication).</param>
@@ -418,6 +421,7 @@ namespace Sequences
 
         /// <summary>
         /// Folds the elements of this sequence using the specified accumulator function, going right to left. 
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary> 
         /// <example><code>int sum = Sequence.With(1,2,3,4).FoldRight(0, (a, b) => a + b);</code></example>
         /// <param name="seed">The initial accumulator value. A neutral value for the fold operation (e.g., empty list, or 0 for adding the elements of this sequence, or 1 for multiplication).</param>
@@ -433,6 +437,7 @@ namespace Sequences
 
         /// <summary>
         /// Reduces the elements of this sequence using the specified function.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="op">The operation to perform on successive elements of the sequence.</param>
         /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
@@ -447,6 +452,7 @@ namespace Sequences
 
         /// <summary>
         /// Reduces the elements of this sequence using the specified function, going right to left. 
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="op">The operation to perform on successive elements of the sequence.</param>
         /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
@@ -479,6 +485,7 @@ namespace Sequences
 
         /// <summary>
         /// Crates a new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements right to left.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="seed">The initial value for the scan.</param>
         /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
@@ -593,6 +600,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the first occurrence of some value in this sequence.
+        /// If this sequence represents an infinite set or series and doesn't contain <paramref name="elem"/>, this will never return!
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
@@ -604,6 +612,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the first occurrence of some value in this sequence, after or at some start index.
+        /// If this sequence represents an infinite set or series and doesn't contain <paramref name="elem"/>, this will never return!
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <param name="from">The start index.</param>
@@ -631,6 +640,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the first element satisfying some predicate.
+        /// If this sequence represents an infinite set or series and no element satisfies the predicate, this will never return!
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
@@ -642,6 +652,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the first element satisfying some predicate after or at some start index.
+        /// If this sequence represents an infinite set or series and no element satisfies the predicate, this will never return!
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <param name="from">The start index.</param>
@@ -690,6 +701,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the last occurrence of some value in this sequence.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
@@ -701,6 +713,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the last occurrence of some value in this sequence, before or at some end index.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <param name="end">The end index.</param>
@@ -713,6 +726,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the last occurrence of some value in this sequence, before or at some end index and within the range specified by <paramref name="count"/>.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <param name="end">The end index.</param>
@@ -727,6 +741,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the last element satisfying some predicate.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
@@ -738,6 +753,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the last element satisfying some predicate before or at some end index.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <param name="end">The end index.</param>
@@ -750,6 +766,7 @@ namespace Sequences
 
         /// <summary>
         /// Finds the index of the last element satisfying some predicate before or at some end index and within the range specified by <paramref name="count"/>.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <param name="end">The end index.</param>
@@ -841,6 +858,7 @@ namespace Sequences
 
         /// <summary>
         /// Iterates over distinct permutations of this sequence.
+        /// If this sequence represents an infinite set or series, calling <see cref="IEnumerable{T}.GetEnumerator"/> on the result value will not return!
         /// </summary>
         /// <example>"abb".AsSequence().Permutations() = abb, bab, bba</example>
         /// <returns>An iterator which traverses the distinct permutations of this sequence.</returns>
@@ -852,6 +870,7 @@ namespace Sequences
 
         /// <summary>
         /// Returns a string with all the elements of this sequence.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <returns>A string with all the elements of this sequence.</returns>
         [Pure]
@@ -862,6 +881,7 @@ namespace Sequences
 
         /// <summary>
         /// Returns a string with all the elements of this sequence, using a seperator string.
+        /// If this sequence represents an infinite set or series, this will never return!
         /// </summary>
         /// <param name="separator">The separator string.</param>
         /// <returns>A string with all the elements of this sequence.</returns>
