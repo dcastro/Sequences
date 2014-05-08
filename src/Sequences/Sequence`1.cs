@@ -151,6 +151,7 @@ namespace Sequences
         /// </summary>
         /// <example>Sequence.Range(1,4) = (1,2,3), (2,3), (3), Empty</example>
         /// <returns>An iterator over all the tails of this sequence.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Tails()
         {
             ISequence<T> sequence = this;
@@ -171,6 +172,7 @@ namespace Sequences
         /// </summary>
         /// <example>Sequence.Range(1,4) = (1,2,3), (2,3), (3)</example>
         /// <returns>An iterator over all the tails of this sequence.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> NonEmptyTails()
         {
             ISequence<T> sequence = this;
@@ -188,6 +190,7 @@ namespace Sequences
         /// </summary>
         /// <example>Sequence.Range(1,4) = (1,2,3), (1,2), (1), Empty</example>
         /// <returns>An iterator over all the inits of this sequence.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Inits()
         {
             ISequence<T> sequence = this;
@@ -220,6 +223,7 @@ namespace Sequences
         /// </summary>
         /// <param name="elem">The element to append to this sequence.</param>
         /// <returns>A copy of this sequence with the given element appended.</returns>
+        [Pure]
         public ISequence<T> Append(T elem)
         {
             return Concat(() => new Sequence<T>(elem, Sequence.Empty<T>));
@@ -230,6 +234,7 @@ namespace Sequences
         /// </summary>
         /// <param name="elem">The element to prepend.</param>
         /// <returns>A copy of this sequence with the given element prepended.</returns>
+        [Pure]
         public ISequence<T> Prepend(T elem)
         {
             return new Sequence<T>(elem, () => this);
@@ -240,6 +245,7 @@ namespace Sequences
         /// </summary>
         /// <param name="otherSequence">The sequence with which to concatenate this sequence; will be lazily evaluated.</param>
         /// <returns>A copy of this sequence concatenated with <paramref name="otherSequence"/>.</returns>
+        [Pure]
         public ISequence<T> Concat(Func<IEnumerable<T>> otherSequence)
         {
             return IsEmpty
@@ -252,6 +258,7 @@ namespace Sequences
         /// </summary>
         /// <param name="elem">The element to remove.</param>
         /// <returns>A copy of this sequence without the first occurrence of <paramref name="elem"/>.</returns>
+        [Pure]
         public ISequence<T> Remove(T elem)
         {
             IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
@@ -270,6 +277,7 @@ namespace Sequences
         /// <param name="index">The position of the replacement.</param>
         /// <param name="elem">The replacing element.</param>
         /// <returns>A copy of this sequence with the element at position <paramref name="index"/> replaced by <paramref name="elem"/>.</returns>
+        [Pure]
         public ISequence<T> Updated(int index, T elem)
         {
             if (index < 0)
@@ -289,6 +297,7 @@ namespace Sequences
         /// <param name="length">The number of elements to pad into the sequence.</param>
         /// <param name="elem">The element to use for padding.</param>
         /// <returns>A new sequence in which the end is padded with <paramref name="elem"/>, if this sequence has less elements than <paramref name="length"/>.</returns>
+        [Pure]
         public ISequence<T> PadTo(int length, T elem)
         {
             if (IsEmpty)
@@ -304,6 +313,7 @@ namespace Sequences
         /// </summary>
         /// <param name="n">The position at which to split.</param>
         /// <returns>A pair of sequences consisting of the first <paramref name="n"/> elements of this sequence, and the other elements.</returns>
+        [Pure]
         public Tuple<ISequence<T>, ISequence<T>> SplitAt(int n)
         {
             return Tuple.Create(this.Take(n), this.Skip(n));
@@ -315,6 +325,7 @@ namespace Sequences
         /// </summary>
         /// <param name="predicate">The predicate used to split this sequence.</param>
         /// <returns>A pair consisting of the longest prefix of this sequence whose elements all satisfy <paramref name="predicate"/>, and the rest of this sequence.</returns>
+        [Pure]
         public Tuple<ISequence<T>, ISequence<T>> Span(Func<T, bool> predicate)
         {
             return Tuple.Create(this.TakeWhile(predicate), this.SkipWhile(predicate));
@@ -326,6 +337,7 @@ namespace Sequences
         /// </summary>
         /// <param name="predicate">The preidcate used to partition the elements.</param>
         /// <returns>A pair of sequences with the elements that satisfy <paramref name="predicate"/> and the elements that don't.</returns>
+        [Pure]
         public Tuple<ISequence<T>, ISequence<T>> Partition(Func<T, bool> predicate)
         {
             return Tuple.Create(this.Where(predicate), this.Where(e => !predicate(e)));
@@ -338,6 +350,7 @@ namespace Sequences
         /// <param name="patch">The elements with which to replace this sequence's slice.</param>
         /// <param name="replaced">A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</param>
         /// <returns></returns>
+        [Pure]
         public ISequence<T> Patch(int from, IEnumerable<T> patch, int replaced)
         {
             return (IsEmpty || from == 0)
@@ -361,6 +374,7 @@ namespace Sequences
         /// </summary>
         /// <param name="length">A test value to be compared with this sequence's length.</param>
         /// <returns>A value x, where x &gt; 0 if this sequence is longer than <paramref name="length"/>, x &lt; 1 if this sequence is shorter than <paramref name="length"/> or x == 0 if this sequence has <paramref name="length"/> elements.</returns>
+        [Pure]
         public int LengthCompare(int length)
         {
             //corner cases
@@ -392,6 +406,7 @@ namespace Sequences
         /// <param name="seed">The initial accumulator value. A neutral value for the fold operation (e.g., empty list, or 0 for adding the elements of this sequence, or 1 for multiplication).</param>
         /// <param name="op">A function that takes the accumulator and an element of this sequence, and computes the new accumulator.</param>
         /// <returns>The result of applying <paramref name="op"/> between all the elements and <paramref name="seed"/>.</returns>
+        [Pure]
         public T Fold(T seed, Func<T, T, T> op)
         {
             return this.Aggregate(seed, op);
@@ -404,6 +419,7 @@ namespace Sequences
         /// <param name="seed">The initial accumulator value. A neutral value for the fold operation (e.g., empty list, or 0 for adding the elements of this sequence, or 1 for multiplication).</param>
         /// <param name="op">A function that takes an element of this sequence and the accumulator, and computes the new accumulator.</param>
         /// <returns>The result of applying <paramref name="op"/> between all the elements and <paramref name="seed"/>.</returns>
+        [Pure]
         public T FoldRight(T seed, Func<T, T, T> op)
         {
             if (IsEmpty)
@@ -416,6 +432,7 @@ namespace Sequences
         /// </summary>
         /// <param name="op">The operation to perform on successive elements of the sequence.</param>
         /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
+        [Pure]
         public T Reduce(Func<T, T, T> op)
         {
             if (IsEmpty)
@@ -429,6 +446,7 @@ namespace Sequences
         /// </summary>
         /// <param name="op">The operation to perform on successive elements of the sequence.</param>
         /// <returns>The accumulated value from successive applications of <paramref name="op"/>.</returns>
+        [Pure]
         public T ReduceRight(Func<T, T, T> op)
         {
             if (IsEmpty)
@@ -445,6 +463,7 @@ namespace Sequences
         /// <param name="seed">The initial value for the scan.</param>
         /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
         /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
+        [Pure]
         public ISequence<T> Scan(T seed, Func<T, T, T> op)
         {
             if (IsEmpty)
@@ -460,6 +479,7 @@ namespace Sequences
         /// <param name="seed">The initial value for the scan.</param>
         /// <param name="op">A function that will apply operations to successive values in the sequence against previous accumulated results.</param>
         /// <returns>A new sequence which contains all intermediate results of successive applications of a function <paramref name="op"/> to subsequent elements left to right.</returns>
+        [Pure]
         public ISequence<T> ScanRight(T seed, Func<T, T, T> op)
         {
             var scanned = new Stack<T>();
@@ -481,6 +501,7 @@ namespace Sequences
         /// </summary>
         /// <param name="size">The number of elements per group.</param>
         /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than <paramref name="size"/>.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Sliding(int size)
         {
             return Sliding(size, 1);
@@ -492,6 +513,7 @@ namespace Sequences
         /// <param name="size">The number of elements per group.</param>
         /// <param name="step">The number of elements to skip per iteration.</param>
         /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if there are fewer elements than <paramref name="size"/>.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Sliding(int size, int step)
         {
             if (size <= 0)
@@ -509,6 +531,7 @@ namespace Sequences
         /// <param name="from">The lowest index to include from this sequence.</param>
         /// <param name="until">The highest index to exclude from this sequence.</param>
         /// <returns>A subsequence starting at index <paramref name="from"/> and extending up to (but not including) index <paramref name="until"/>.</returns>
+        [Pure]
         public ISequence<T> Slice(int from, int until)
         {
             from = Math.Max(from, 0);
@@ -524,6 +547,7 @@ namespace Sequences
         /// </summary>
         /// <param name="size">The number of elements per group.</param>
         /// <returns>An iterator producing sequences of size <paramref name="size"/>. The last sequence will be truncated if the elements don't divide evenly.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Grouped(int size)
         {
             if (size <= 0)
@@ -539,6 +563,7 @@ namespace Sequences
         /// <typeparam name="TSecond">The type of the elements of <paramref name="second"/>.</typeparam>
         /// <param name="second">The sequence providing the second half of each result pair.</param>
         /// <returns>A sequence of tuples, where each tuple is formed by associating an element of the first sequence with the element at the same position in the second sequence.</returns>
+        [Pure]
         public ISequence<Tuple<T, TSecond>> Zip<TSecond>(IEnumerable<TSecond> second)
         {
             return this.Zip(second, Tuple.Create);
@@ -548,6 +573,7 @@ namespace Sequences
         /// Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.
         /// </summary>
         /// <returns>A sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.</returns>
+        [Pure]
         public ISequence<Tuple<T, int>> ZipWithIndex()
         {
             return Zip(Indices);
@@ -566,6 +592,7 @@ namespace Sequences
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        [Pure]
         public int IndexOf(T elem)
         {
             return IndexOf(elem, 0);
@@ -577,6 +604,7 @@ namespace Sequences
         /// <param name="elem">The value to search for.</param>
         /// <param name="from">The start index.</param>
         /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        [Pure]
         public int IndexOf(T elem, int from)
         {
             IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
@@ -590,6 +618,7 @@ namespace Sequences
         /// <param name="from">The start index.</param>
         /// <param name="count">The number of elements in the section to search.</param>
         /// <returns>The index of the first occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        [Pure]
         public int IndexOf(T elem, int from, int count)
         {
             IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
@@ -601,6 +630,7 @@ namespace Sequences
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        [Pure]
         public int IndexWhere(Func<T, bool> predicate)
         {
             return IndexWhere(predicate, 0);
@@ -612,6 +642,7 @@ namespace Sequences
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <param name="from">The start index.</param>
         /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        [Pure]
         public int IndexWhere(Func<T, bool> predicate, int from)
         {
             if (from < 0)
@@ -634,6 +665,7 @@ namespace Sequences
         /// <param name="from">The start index.</param>
         /// <param name="count">The number of elements in the section to search.</param>
         /// <returns>The index of the first element that satisfies the predicate, or -1 if none exists.</returns>
+        [Pure]
         public int IndexWhere(Func<T, bool> predicate, int from, int count)
         {
             if (from < 0)
@@ -657,6 +689,7 @@ namespace Sequences
         /// </summary>
         /// <param name="elem">The value to search for.</param>
         /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        [Pure]
         public int LastIndexOf(T elem)
         {
             return LastIndexOf(elem, Count - 1);
@@ -668,6 +701,7 @@ namespace Sequences
         /// <param name="elem">The value to search for.</param>
         /// <param name="end">The end index.</param>
         /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        [Pure]
         public int LastIndexOf(T elem, int end)
         {
             return LastIndexOf(elem, end, Count);
@@ -680,6 +714,7 @@ namespace Sequences
         /// <param name="end">The end index.</param>
         /// <param name="count">The number of elements in the section to search.</param>
         /// <returns>The index of the last occurrence of <paramref name="elem"/> if any is found; otherwise, -1.</returns>
+        [Pure]
         public int LastIndexOf(T elem, int end, int count)
         {
             IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
@@ -691,6 +726,7 @@ namespace Sequences
         /// </summary>
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        [Pure]
         public int LastIndexWhere(Func<T, bool> predicate)
         {
             return LastIndexWhere(predicate, Count - 1);
@@ -702,6 +738,7 @@ namespace Sequences
         /// <param name="predicate">The predicate used to test elements.</param>
         /// <param name="end">The end index.</param>
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        [Pure]
         public int LastIndexWhere(Func<T, bool> predicate, int end)
         {
             return LastIndexWhere(predicate, end, Count);
@@ -714,6 +751,7 @@ namespace Sequences
         /// <param name="end">The end index.</param>
         /// <param name="count">The number of elements in the section to search.</param>
         /// <returns>The index of the last element that satisfies the predicate, or -1 if none exists.</returns>
+        [Pure]
         public int LastIndexWhere(Func<T, bool> predicate, int end, int count)
         {
             int index = end - count + 1;
@@ -788,6 +826,7 @@ namespace Sequences
         /// <example>"abcd".AsSequence().Combinations(2) = ab, ac, ad, bc, bd, cd</example>
         /// <param name="size">The size of each combination.</param>
         /// <returns>An iterator that traverses the possible n-element combinations of this sequence's elements.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Combinations(int size)
         {
             if (size < 0)
@@ -801,6 +840,7 @@ namespace Sequences
         /// </summary>
         /// <example>"abb".AsSequence().Permutations() = abb, bab, bba</example>
         /// <returns>An iterator which traverses the distinct permutations of this sequence.</returns>
+        [Pure]
         public IEnumerable<ISequence<T>> Permutations()
         {
             return new PermutationsIterator(this);
@@ -810,6 +850,7 @@ namespace Sequences
         /// Returns a string with all the elements of this sequence.
         /// </summary>
         /// <returns>A string with all the elements of this sequence.</returns>
+        [Pure]
         public string MkString()
         {
             return MkString("");
@@ -820,6 +861,7 @@ namespace Sequences
         /// </summary>
         /// <param name="separator">The separator string.</param>
         /// <returns>A string with all the elements of this sequence.</returns>
+        [Pure]
         public string MkString(string separator)
         {
             return string.Join(separator,
@@ -831,6 +873,7 @@ namespace Sequences
         /// Returns a string that represents this sequence.
         /// </summary>
         /// <returns>A string that represents this sequence.</returns>
+        [Pure]
         public override string ToString()
         {
             return string.Format("Sequence({0}, ?)", Head);

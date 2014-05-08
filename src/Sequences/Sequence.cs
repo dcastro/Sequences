@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Sequences
     /// <summary>
     /// Provides a set of static methods for creating instances of <see cref="Sequence{T}"/>.
     /// </summary>
+    [Pure]
     public static class Sequence
     {
         /// <summary>
@@ -16,6 +18,7 @@ namespace Sequences
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [Pure]
         public static ISequence<T> Empty<T>()
         {
             return EmptySequence<T>.Instance;
@@ -27,6 +30,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="items">The elements for which a sequence will be created.</param>
         /// <returns>A sequence created from the elements in <paramref name="items"/>.</returns>
+        [Pure]
         public static ISequence<T> With<T>(params T[] items)
         {
             return With(items.AsEnumerable());
@@ -38,6 +42,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="items">The enumerable to be evaluated.</param>
         /// <returns>A sequence created by lazily-evaluating <paramref name="items"/>.</returns>
+        [Pure]
         public static ISequence<T> With<T>(IEnumerable<T> items)
         {
             return items as ISequence<T> ?? With(items.GetEnumerator());
@@ -57,6 +62,7 @@ namespace Sequences
         /// <param name="start">The first value of the sequence.</param>
         /// <param name="func">The function that's repeatedly applied to the last element to produce the next element.</param>
         /// <returns>An infinite sequence obtained by repeatedly applying <paramref name="func"/> to <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<T> Iterate<T>(T start, Func<T, T> func)
         {
             return new Sequence<T>(start, () => Iterate(func(start), func));
@@ -70,6 +76,7 @@ namespace Sequences
         /// <param name="length">The number of elements in the sequence.</param>
         /// <param name="func">The function that's repeatedly applied to the last element to produce the next element.</param>
         /// <returns>A finite sequence of length <paramref name="length"/> obtained by repeatedly applying <paramref name="func"/> to <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<T> Iterate<T>(T start, int length, Func<T, T> func)
         {
             return length <= 0
@@ -84,6 +91,7 @@ namespace Sequences
         /// <param name="length">The number of elements in the collection.</param>
         /// <param name="func">The function used to produce the elements.</param>
         /// <returns>A sequence obtained by applying <paramref name="func"/> over a range of integer values from 0 to <paramref name="length"/> - 1.</returns>
+        [Pure]
         public static ISequence<T> Tabulate<T>(int length, Func<int, T> func)
         {
             return Tabulate(length, 0, func);
@@ -103,6 +111,7 @@ namespace Sequences
         /// <param name="elem">The delegate to be repeatedly evaluated.</param>
         /// <param name="count">The number of times to repeat <paramref name="elem"/>.</param>
         /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
+        [Pure]
         public static ISequence<T> Fill<T>(Func<T> elem, int count)
         {
             return (count > 0)
@@ -117,6 +126,7 @@ namespace Sequences
         /// <param name="elem">The element to be repeated.</param>
         /// <param name="count">The number of times to repeat <paramref name="elem"/>.</param>
         /// <returns>A sequence containg <paramref name="count"/> number of <paramref name="elem"/>.</returns>
+        [Pure]
         public static ISequence<T> Fill<T>(T elem, int count)
         {
             return Fill(() => elem, count);
@@ -128,6 +138,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="elem">A delegate that will be continuously evaluated.</param>
         /// <returns>A sequence containing an infinite number of elements returned by the <paramref name="elem"/> delegate.</returns>
+        [Pure]
         public static ISequence<T> Continually<T>(Func<T> elem)
         {
             return new Sequence<T>(elem(), () => Continually(elem));
@@ -139,6 +150,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="elem">The element to be continuously repeated.</param>
         /// <returns>A sequence containing an infinite number of <paramref name="elem"/></returns>
+        [Pure]
         public static ISequence<T> Continually<T>(T elem)
         {
             return Continually(() => elem);
@@ -150,6 +162,7 @@ namespace Sequences
         /// <param name="start">The start value of the sequence.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<int> From(int start, int step)
         {
             return new Sequence<int>(start, () => From(start + step, step));
@@ -160,6 +173,7 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<int> From(int start)
         {
             return From(start, 1);
@@ -171,6 +185,7 @@ namespace Sequences
         /// <param name="start">The start value of the sequence.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<long> From(long start, long step)
         {
             return new Sequence<long>(start, () => From(start + step, step));
@@ -181,6 +196,7 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<long> From(long start)
         {
             return From(start, 1);
@@ -192,6 +208,7 @@ namespace Sequences
         /// <param name="start">The start value of the sequence.</param>
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<BigInteger> From(BigInteger start, BigInteger step)
         {
             return new Sequence<BigInteger>(start, () => From(start + step, step));
@@ -202,6 +219,7 @@ namespace Sequences
         /// </summary>
         /// <param name="start">The start value of the sequence.</param>
         /// <returns>A sequence starting at value <paramref name="start"/>.</returns>
+        [Pure]
         public static ISequence<BigInteger> From(BigInteger start)
         {
             return From(start, 1);
@@ -215,6 +233,7 @@ namespace Sequences
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
+        [Pure]
         public static ISequence<int> Range(int start, int end, int step)
         {
             if ((step > 0 && start >= end) ||
@@ -231,6 +250,7 @@ namespace Sequences
         /// <param name="end">The exclusive upper bound.</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + 1, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
+        [Pure]
         public static ISequence<int> Range(int start, int end)
         {
             return Range(start, end, 1);
@@ -244,6 +264,7 @@ namespace Sequences
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
+        [Pure]
         public static ISequence<long> Range(long start, long end, long step)
         {
             if ((step > 0 && start >= end) ||
@@ -260,6 +281,7 @@ namespace Sequences
         /// <param name="end">The exclusive upper bound.</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + 1, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
+        [Pure]
         public static ISequence<long> Range(long start, long end)
         {
             return Range(start, end, 1);
@@ -273,6 +295,7 @@ namespace Sequences
         /// <param name="step">The value to increment in each step (positive or negative).</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + <paramref name="step"/>, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
+        [Pure]
         public static ISequence<BigInteger> Range(BigInteger start, BigInteger end, BigInteger step)
         {
             if ((step > 0 && start >= end) ||
@@ -289,6 +312,7 @@ namespace Sequences
         /// <param name="end">The exclusive upper bound.</param>
         /// <returns>A collection with values <paramref name="start"/>, <paramref name="start"/> + 1, ...
         /// up to, but excluding <paramref name="end"/>.</returns>
+        [Pure]
         public static ISequence<BigInteger> Range(BigInteger start, BigInteger end)
         {
             return Range(start, end, 1);
@@ -300,6 +324,7 @@ namespace Sequences
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="enumerable">The enumerable to be evaluated.</param>
         /// <returns>A sequence created by lazily-evaluating <paramref name="enumerable"/>.</returns>
+        [Pure]
         public static ISequence<T> AsSequence<T>(this IEnumerable<T> enumerable)
         {
             if (enumerable == null)
@@ -316,6 +341,7 @@ namespace Sequences
         /// <typeparam name="TSource">The type of the elements of the resulting sequence.</typeparam>
         /// <param name="source">The collection to be flattened.</param>
         /// <returns>A flattened sequence obtained by concatenating all sequences in the <paramref name="source"/> collection.</returns>
+        [Pure]
         public static ISequence<TSource> Flatten<TSource>(this IEnumerable<ISequence<TSource>> source)
         {
             return source.SelectMany(seq => seq).AsSequence();
@@ -327,6 +353,7 @@ namespace Sequences
         /// <typeparam name="TSource">The type of the elements of the resulting sequence.</typeparam>
         /// <param name="source">The sequence to be flattened.</param>
         /// <returns>A flattened sequence obtained by concatenating all collections in the <paramref name="source"/> sequence.</returns>
+        [Pure]
         public static ISequence<TSource> Flatten<TSource>(this ISequence<IEnumerable<TSource>> source)
         {
             return source.SelectMany(seq => seq);
@@ -339,6 +366,7 @@ namespace Sequences
         /// <param name="source">A sequence to return elements from.</param>
         /// <param name="count">The number of elements to skip before returning the remaining elements.</param>
         /// <returns>A sequence that contains the elements that occur after the specified index in the input sequence.</returns>
+        [Pure]
         public static ISequence<TSource> Skip<TSource>(this ISequence<TSource> source, int count)
         {
             if (source == null)
@@ -359,6 +387,7 @@ namespace Sequences
         /// <param name="source">A sequence to return elements from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
+        [Pure]
         public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
             Func<TSource, bool> predicate)
         {
@@ -384,6 +413,7 @@ namespace Sequences
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">A function to test each element for a condition; the second parameter of the function represents the index of the element.</param>
         /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
+        [Pure]
         public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
             Func<TSource, int, bool> predicate)
         {
@@ -410,6 +440,7 @@ namespace Sequences
         /// <param name="source">A sequence of values to invoke a transform function on.</param>
         /// <param name="selector">A transform function to apply to each element.</param>
         /// <returns>A sequence whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.</returns>
+        [Pure]
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
             Func<TSource, TResult> selector)
         {
@@ -425,6 +456,7 @@ namespace Sequences
         /// <param name="source">A sequence of values to invoke a transform function on.</param>
         /// <param name="selector">A transform function to apply to each element and its index.</param>
         /// <returns>A sequence whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.</returns>
+        [Pure]
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
             Func<TSource, int, TResult> selector)
         {
@@ -439,6 +471,7 @@ namespace Sequences
         /// <param name="source">A sequence of values to project.</param>
         /// <param name="selector">A transform function to apply to each element.</param>
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.</returns>
+        [Pure]
         public static ISequence<TResult> SelectMany<TSource, TResult>(this ISequence<TSource> source,
             Func<TSource, IEnumerable<TResult>> selector)
         {
@@ -454,6 +487,7 @@ namespace Sequences
         /// <param name="source">A sequence of values to project.</param>
         /// <param name="selector">A transform function to apply to each element; the second parameter of the function represents the index of the element.</param>
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.</returns>
+        [Pure]
         public static ISequence<TResult> SelectMany<TSource, TResult>(this ISequence<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector)
         {
@@ -470,6 +504,7 @@ namespace Sequences
         /// <param name="collectionSelector">A transform function to apply to each element of the input sequence.</param>
         /// <param name="resultSelector">A transform function to apply to each element of the intermediate sequence.</param>
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function <paramref name="collectionSelector"/> on each element of <paramref name="source"/> and then mapping each of those sequence elements and their corresponding source element to a result element.</returns>
+        [Pure]
         public static ISequence<TResult> SelectMany<TSource, TCollection, TResult>(
             this ISequence<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
@@ -489,6 +524,7 @@ namespace Sequences
         /// <param name="collectionSelector">A transform function to apply to each <paramref name="source"/> element; the second parameter of the function represents the index of the <paramref name="source"/> element.</param>
         /// <param name="resultSelector">A transform function to apply to each element of the intermediate sequence.</param>
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function <paramref name="collectionSelector"/> on each element of <paramref name="source"/> and then mapping each of those sequence elements and their corresponding source element to a result element.</returns>
+        [Pure]
         public static ISequence<TResult> SelectMany<TSource, TCollection, TResult>(
             this ISequence<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
@@ -504,6 +540,7 @@ namespace Sequences
         /// <param name="source">A sequence to filter.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>A sequence that contains elements from <paramref name="source"/> that satisfy the condition.</returns>
+        [Pure]
         public static ISequence<TSource> Where<TSource>(this ISequence<TSource> source, Func<TSource, bool> predicate)
         {
             return Enumerable.Where(source, predicate).AsSequence();
@@ -517,6 +554,7 @@ namespace Sequences
         /// <param name="source">A sequence to filter.</param>
         /// <param name="predicate">A function to test each element and its index for a condition.</param>
         /// <returns>A sequence that contains elements from <paramref name="source"/> that satisfy the condition.</returns>
+        [Pure]
         public static ISequence<TSource> Where<TSource>(this ISequence<TSource> source,
             Func<TSource, int, bool> predicate)
         {
@@ -530,6 +568,7 @@ namespace Sequences
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="count">The number of elements to return.</param>
         /// <returns>A sequence that contains the specified number of elements from the start of the input sequence.</returns>
+        [Pure]
         public static ISequence<TSource> Take<TSource>(this ISequence<TSource> source, int count)
         {
             return Enumerable.Take(source, count).AsSequence();
@@ -542,6 +581,7 @@ namespace Sequences
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.</returns>
+        [Pure]
         public static ISequence<TSource> TakeWhile<TSource>(this ISequence<TSource> source,
             Func<TSource, bool> predicate)
         {
@@ -556,6 +596,7 @@ namespace Sequences
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">A function to test each element for a condition; the second parameter of the function represents the index of the element.</param>
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.</returns>
+        [Pure]
         public static ISequence<TSource> TakeWhile<TSource>(this ISequence<TSource> source,
             Func<TSource, int, bool> predicate)
         {
@@ -572,6 +613,7 @@ namespace Sequences
         /// <param name="second">The second sequence to merge.</param>
         /// <param name="resultSelector">A function that specifies how to merge the elements from the two sequences.</param>
         /// <returns>A sequence that contains merged elements of two input sequences.</returns>
+        [Pure]
         public static ISequence<TResult> Zip<TFirst, TSecond, TResult>(this ISequence<TFirst> first,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
@@ -585,6 +627,7 @@ namespace Sequences
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to remove duplicate elements from.</param>
         /// <returns>A sequence that contains distinct elements from the input sequence.</returns>
+        [Pure]
         public static ISequence<TSource> Distinct<TSource>(this ISequence<TSource> source)
         {
             return Enumerable.Distinct(source).AsSequence();
@@ -597,6 +640,7 @@ namespace Sequences
         /// <param name="source">The sequence to remove duplicate elements from.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to compare elements.</param>
         /// <returns>A sequence that contains distinct elements from the input sequence.</returns>
+        [Pure]
         public static ISequence<TSource> Distinct<TSource>(this ISequence<TSource> source,
             IEqualityComparer<TSource> comparer)
         {
@@ -610,6 +654,7 @@ namespace Sequences
         /// <param name="first">A sequence whose elements that are not also in <paramref name="second"/> will be returned.</param>
         /// <param name="second">A sequence whose elements that also occur in this sequence will cause those elements to be removed from the returned sequence.</param>
         /// <returns>A sequence that contains the set difference of the elements of two sequences.</returns>
+        [Pure]
         public static ISequence<TSource> Except<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second)
         {
             return Enumerable.Except(first, second).AsSequence();
@@ -623,6 +668,7 @@ namespace Sequences
         /// <param name="second">A sequence whose elements that also occur in this sequence will cause those elements to be removed from the returned sequence.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to compare values.</param>
         /// <returns>A sequence that contains the set difference of the elements of two sequences.</returns>
+        [Pure]
         public static ISequence<TSource> Except<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
@@ -636,6 +682,7 @@ namespace Sequences
         /// <param name="first">A sequence whose distinct elements that also appear in <paramref name="second"/> will be returned.</param>
         /// <param name="second">A sequence whose distinct elements that also appear in the first sequence will be returned.</param>
         /// <returns>A sequence that contains the elements that form the set intersection of two sequences.</returns>
+        [Pure]
         public static ISequence<TSource> Intersect<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second)
         {
             return Enumerable.Intersect(first, second).AsSequence();
@@ -649,6 +696,7 @@ namespace Sequences
         /// <param name="second">A sequence whose distinct elements that also appear in the first sequence will be returned.</param>
         /// <param name="comparer"></param>
         /// <returns>A sequence that contains the elements that form the set intersection of two sequences.</returns>
+        [Pure]
         public static ISequence<TSource> Intersect<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
@@ -661,6 +709,7 @@ namespace Sequences
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values to reverse.</param>
         /// <returns>A sequence whose elements correspond to those of the input sequence in reverse order.</returns>
+        [Pure]
         public static ISequence<TSource> Reverse<TSource>(this ISequence<TSource> source)
         {
             return Enumerable.Reverse(source).AsSequence();
@@ -673,6 +722,7 @@ namespace Sequences
         /// <param name="source">A sequence of values that are used to calculate a sum.</param>
         /// <param name="selector"></param>
         /// <returns>A transform function to apply to each element.</returns>
+        [Pure]
         public static BigInteger Sum<TSource>(this ISequence<TSource> source, Func<TSource, BigInteger> selector)
         {
             return source.Select(selector).Sum();
@@ -685,6 +735,7 @@ namespace Sequences
         /// <param name="source">A sequence of values that are used to calculate a sum.</param>
         /// <param name="selector"></param>
         /// <returns>A transform function to apply to each element.</returns>
+        [Pure]
         public static BigInteger? Sum<TSource>(this ISequence<TSource> source, Func<TSource, BigInteger?> selector)
         {
             return source.Select(selector).Sum();
@@ -695,6 +746,7 @@ namespace Sequences
         /// </summary>
         /// <param name="source">A sequence of <see cref="BigInteger"/> values to calculate the sum of.</param>
         /// <returns>The sum of the values in the sequence.</returns>
+        [Pure]
         public static BigInteger Sum(this ISequence<BigInteger> source)
         {
             return source.Aggregate<BigInteger, BigInteger>(
@@ -707,6 +759,7 @@ namespace Sequences
         /// </summary>
         /// <param name="source">A sequence of <see cref="Nullable{BigInteger}"/> values to calculate the sum of.</param>
         /// <returns>The sum of the values in the sequence.</returns>
+        [Pure]
         public static BigInteger? Sum(this ISequence<BigInteger?> source)
         {
             return source.Aggregate<BigInteger?, BigInteger?>(
@@ -721,11 +774,12 @@ namespace Sequences
         /// <param name="first">A sequence whose distinct elements form the first set for the union.</param>
         /// <param name="second">A sequence whose distinct elements form the second set for the union.</param>
         /// <returns></returns>
+        [Pure]
         public static ISequence<TSource> Union<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second)
         {
             return Enumerable.Union(first, second).AsSequence();
         }
-
+        
         /// <summary>
         /// Produces the set union of two sequences by using a specified <see cref="IEqualityComparer{T}"/>.
         /// </summary>
@@ -734,6 +788,7 @@ namespace Sequences
         /// <param name="second">A sequence whose distinct elements form the second set for the union.</param>
         /// <param name="comparer">The <see cref="IEqualityComparer{T}"/> to compare values.</param>
         /// <returns></returns>
+        [Pure]
         public static ISequence<TSource> Union<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
