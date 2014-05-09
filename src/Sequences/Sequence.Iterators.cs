@@ -11,7 +11,7 @@ namespace Sequences
     {
         /// <summary>
         /// An "iterator block" lets the compiler generate an <see cref="IEnumerator{T}"/> for us.
-        /// However, that enumerator holds onto the original sequence, and doesn't let the GC collect it.
+        /// However, that enumerator holds onto the sequence that created it, and doesn't let the GC collect it.
         /// 
         /// This specialized iterator doesn't do that.
         /// Instead, when it moves to a sequence's tail, it replaces the reference to the sequence with a reference to its tail,
@@ -24,7 +24,7 @@ namespace Sequences
         private class Iterator : IEnumerator<T>
         {
             private ISequence<T> _seq;
-            private bool _isFirstCall = true;
+            private bool _hasMoved;
             private bool _hasFinished;
 
             public Iterator(ISequence<T> seq)
@@ -39,10 +39,10 @@ namespace Sequences
                     return false;
 
                 //move to the sequence's tail on every call but the first
-                if (!_isFirstCall)
+                if (_hasMoved)
                     _seq = _seq.Tail;
                 else
-                    _isFirstCall = false;
+                    _hasMoved = true;
 
                 //check if the iterator has reached the end of the sequence
                 if (_seq.IsEmpty)

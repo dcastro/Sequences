@@ -242,6 +242,8 @@ namespace Sequences
         [Pure]
         public ISequence<T> Concat(Func<IEnumerable<T>> otherSequence)
         {
+            if (otherSequence == null) throw new ArgumentNullException("otherSequence");
+
             return IsEmpty
                 ? otherSequence().AsSequence()
                 : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
@@ -346,11 +348,13 @@ namespace Sequences
         /// </summary>
         /// <param name="from">The index of the first replaced element.</param>
         /// <param name="patch">The elements with which to replace this sequence's slice.</param>
-        /// <param name="replaced">A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</param>
-        /// <returns></returns>
+        /// <param name="replaced">The number of elements to delete from this sequence.</param>
+        /// <returns>A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</returns>
         [Pure]
         public ISequence<T> Patch(int from, IEnumerable<T> patch, int replaced)
         {
+            if (patch == null) throw new ArgumentNullException("patch");
+
             return (IsEmpty || from == 0)
                 ? patch.AsSequence()
                     .Concat(() => this.Skip(replaced))
@@ -364,6 +368,8 @@ namespace Sequences
         /// <param name="function">The function to apply to each element.</param>
         public void ForEach(Action<T> function)
         {
+            if (function == null) throw new ArgumentNullException("function");
+
             foreach (var elem in this)
                 function(elem);
         }
@@ -424,6 +430,8 @@ namespace Sequences
         [Pure]
         public T FoldRight(T seed, Func<T, T, T> op)
         {
+            if (op == null) throw new ArgumentNullException("op");
+
             if (IsEmpty)
                 return seed;
             return op(Head, Tail.FoldRight(seed, op));
@@ -453,6 +461,8 @@ namespace Sequences
         [Pure]
         public T ReduceRight(Func<T, T, T> op)
         {
+            if (op == null) throw new ArgumentNullException("op");
+
             if (IsEmpty)
                 throw new InvalidOperationException("Cannot reduce empty sequence.");
             if (Tail.IsEmpty)
@@ -470,6 +480,8 @@ namespace Sequences
         [Pure]
         public ISequence<T> Scan(T seed, Func<T, T, T> op)
         {
+            if (op == null) throw new ArgumentNullException("op");
+
             if (IsEmpty)
                 return Sequence.With(seed);
 
@@ -487,6 +499,8 @@ namespace Sequences
         [Pure]
         public ISequence<T> ScanRight(T seed, Func<T, T, T> op)
         {
+            if (op == null) throw new ArgumentNullException("op");
+
             var scanned = new Stack<T>();
             scanned.Push(seed);
 
@@ -525,8 +539,7 @@ namespace Sequences
                 throw new ArgumentOutOfRangeException("size", "size must be a positive integer.");
             if (step <= 0)
                 throw new ArgumentOutOfRangeException("step", "step must be a positive integer.");
-
-
+            
             return new SlidingIterator(this, size, step);
         }
 
@@ -571,6 +584,8 @@ namespace Sequences
         [Pure]
         public ISequence<Tuple<T, TSecond>> Zip<TSecond>(IEnumerable<TSecond> second)
         {
+            if (second == null) throw new ArgumentNullException("second");
+
             return Zip(this, second.GetEnumerator());
         }
 
@@ -586,6 +601,8 @@ namespace Sequences
         [Pure]
         public ISequence<Tuple<T, TSecond>> ZipAll<TSecond>(IEnumerable<TSecond> second, T elem1, TSecond elem2)
         {
+            if (second == null) throw new ArgumentNullException("second");
+
             return ZipAll(this, second.GetEnumerator(), elem1, elem2);
         }
 
@@ -694,6 +711,8 @@ namespace Sequences
         [Pure]
         public int IndexWhere(Func<T, bool> predicate, int from)
         {
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
             if (from < 0)
                 from = 0;
 
@@ -717,6 +736,8 @@ namespace Sequences
         [Pure]
         public int IndexWhere(Func<T, bool> predicate, int from, int count)
         {
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
             if (from < 0)
                 from = 0;
 
@@ -809,6 +830,8 @@ namespace Sequences
         [Pure]
         public int LastIndexWhere(Func<T, bool> predicate, int end, int count)
         {
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
             int index = end - count + 1;
             if (index < 0)
                 index = 0;
@@ -862,6 +885,9 @@ namespace Sequences
         /// <returns>The number of elements copied.</returns>
         public int CopyTo(int index, T[] destination, int destinationIndex, int count)
         {
+            if (destination == null) throw new ArgumentNullException("destination");
+            if (index < 0) throw new ArgumentOutOfRangeException("index", "index must be a non-negative integer.");
+
             T[] original = this.Skip(index)
                 .Take(count)
                 .ToArray();

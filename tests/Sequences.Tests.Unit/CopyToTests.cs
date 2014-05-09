@@ -86,5 +86,32 @@ namespace Sequences.Tests
             Assert.Equal(3, copied);
             Assert.Equal(expectedCopy, copy);
         }
+
+        [Fact]
+        public void CopyTo_ThrowsException_When_DestinationOffsetIsNegative()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var copy = new int[5];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => sequence.CopyTo(copy, -1));
+        }
+
+        [Fact]
+        public void CopyTo_ThrowsException_When_OriginOffsetIsNegative()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var copy = new int[5];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => sequence.CopyTo(-1, copy, 0, 1));
+        }
+
+        [Fact]
+        public void CopyTo_ThrowsException_When_CountIsNegative()
+        {
+            var sequence = Sequence.Range(1, 6);
+            var copy = new int[5];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => sequence.CopyTo(0, copy, 0, -1));
+        }
     }
 }

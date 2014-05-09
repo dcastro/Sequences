@@ -172,8 +172,8 @@ namespace Sequences
         /// </summary>
         /// <param name="from">The index of the first replaced element.</param>
         /// <param name="patch">The elements with which to replace this sequence's slice.</param>
-        /// <param name="replaced">A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</param>
-        /// <returns></returns>
+        /// <param name="replaced">The number of elements to delete from this sequence.</param>
+        /// <returns>A new sequence consisting of all elements of this sequence except that <paramref name="replaced"/> elements starting from <paramref name="from"/> are replaced by <paramref name="patch"/>.</returns>
         [Pure]
         ISequence<T> Patch(int from, IEnumerable<T> patch, int replaced);
 

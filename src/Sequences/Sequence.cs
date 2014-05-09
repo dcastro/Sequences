@@ -45,6 +45,7 @@ namespace Sequences
         [Pure]
         public static ISequence<T> With<T>(IEnumerable<T> items)
         {
+            if (items == null) throw new ArgumentNullException("items");
             return items as ISequence<T> ?? With(items.GetEnumerator());
         }
 
@@ -65,6 +66,7 @@ namespace Sequences
         [Pure]
         public static ISequence<T> Iterate<T>(T start, Func<T, T> func)
         {
+            if (func == null) throw new ArgumentNullException("func");
             return new Sequence<T>(start, () => Iterate(func(start), func));
         }
 
@@ -79,6 +81,8 @@ namespace Sequences
         [Pure]
         public static ISequence<T> Iterate<T>(T start, int length, Func<T, T> func)
         {
+            if (func == null) throw new ArgumentNullException("func");
+
             return length <= 0
                 ? Empty<T>()
                 : new Sequence<T>(start, () => Iterate(func(start), length - 1, func));
@@ -94,6 +98,7 @@ namespace Sequences
         [Pure]
         public static ISequence<T> Tabulate<T>(int length, Func<int, T> func)
         {
+            if (func == null) throw new ArgumentNullException("func");
             return Tabulate(length, 0, func);
         }
 
@@ -114,6 +119,7 @@ namespace Sequences
         [Pure]
         public static ISequence<T> Fill<T>(Func<T> elem, int count)
         {
+            if (elem == null) throw new ArgumentNullException("elem");
             return (count > 0)
                 ? new Sequence<T>(elem(), () => Fill(elem, count - 1))
                 : Empty<T>();
@@ -141,6 +147,7 @@ namespace Sequences
         [Pure]
         public static ISequence<T> Continually<T>(Func<T> elem)
         {
+            if (elem == null) throw new ArgumentNullException("elem");
             return new Sequence<T>(elem(), () => Continually(elem));
         }
 
