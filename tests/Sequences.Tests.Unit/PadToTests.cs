@@ -38,5 +38,14 @@ namespace Sequences.Tests
 
             Assert.Equal(expectedPadded, padded);
         }
+
+        [Fact]
+        public void PadTo_Returns_SameSequence_When_LengthIsNegative()
+        {
+            var sequence = Sequence.Range(1, 4);
+            var padded = sequence.PadTo(-1, 0);
+
+            Assert.Same(sequence, padded);
+        }
     }
 }

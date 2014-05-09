@@ -300,10 +300,11 @@ namespace Sequences
         [Pure]
         public ISequence<T> PadTo(int length, T elem)
         {
+            if (length <= 0)
+                return this;
+
             if (IsEmpty)
-                return length > 0
-                    ? Sequence.Fill(elem, length)
-                    : this;
+                return Sequence.Fill(elem, length);
 
             return new Sequence<T>(Head, () => Tail.PadTo(length - 1, elem));
         }
