@@ -48,5 +48,15 @@ namespace Sequences.Tests
 
             Assert.Equal(expectedPatched, patched);
         }
+
+        [Fact]
+        public void Patch_PrependsPatch_When_FromIsNegative()
+        {
+            var sequence = Sequence.Range(0, 4);
+            var patched = sequence.Patch(-1, new[] {9, 9}, 2);
+            int[] expectedPatched = {9, 9, 2, 3};
+
+            Assert.Equal(expectedPatched, patched);
+        }
     }
 }

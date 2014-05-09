@@ -355,7 +355,7 @@ namespace Sequences
         {
             if (patch == null) throw new ArgumentNullException("patch");
 
-            return (IsEmpty || from == 0)
+            return (IsEmpty || from <= 0)
                 ? patch.AsSequence()
                     .Concat(() => this.Skip(replaced))
                 : new Sequence<T>(Head, () => Tail.Patch(from - 1, patch, replaced));
