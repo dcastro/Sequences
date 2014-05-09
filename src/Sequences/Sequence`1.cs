@@ -577,7 +577,47 @@ namespace Sequences
         [Pure]
         public ISequence<Tuple<T, TSecond>> Zip<TSecond>(IEnumerable<TSecond> second)
         {
-            return this.Zip(second, Tuple.Create);
+            return Zip(this, second.GetEnumerator());
+        }
+
+        /// <summary>
+        /// Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with the element at the same position in the <paramref name="second"/> sequence.
+        /// If one of the two sequences is shorter than the other, placeholder elements are used to extend the shorter collection to the length of the other.
+        /// </summary>
+        /// <typeparam name="TSecond">The type of the elements of <paramref name="second"/>.</typeparam>
+        /// <param name="second">The sequence providing the second half of each result pair.</param>
+        /// <param name="elem1">The element to be used to fill up the result if this sequence is shorter than <paramref name="second"/>.</param>
+        /// <param name="elem2">The element to be used to fill up the result if <paramref name="second"/> is shorter than this sequence.</param>
+        /// <returns>A sequence of tuples, where each tuple is formed by associating an element of the first sequence with the element at the same position in the second sequence. The length of the returned sequence is Max(this.Count, second.Count).</returns>
+        [Pure]
+        public ISequence<Tuple<T, TSecond>> ZipAll<TSecond>(IEnumerable<TSecond> second, T elem1, TSecond elem2)
+        {
+            return ZipAll(this, second.GetEnumerator(), elem1, elem2);
+        }
+
+        //Zips a sequence with an IEnumerator<T> and extends the one which is shorter.
+        private static ISequence<Tuple<T, TSecond>> ZipAll<TSecond>(ISequence<T> first, IEnumerator<TSecond> second,
+                                                                    T elem1, TSecond elem2)
+        {
+            //if either sequence is empty, replace it with an infinite sequence and perform a normal, truncated zip.
+            if (first.IsEmpty)
+                return Zip(Sequence.Continually(elem1), second);
+            if (!second.MoveNext())
+                return Zip(first, Sequence.Continually(elem2).GetEnumerator());
+
+            return new Sequence<Tuple<T, TSecond>>(Tuple.Create(first.Head, second.Current),
+                                                   () => ZipAll(first.Tail, second, elem1, elem2));
+        }
+
+        //Zips a sequence with an IEnumerator<T> and truncates the one which is longer.
+        private static ISequence<Tuple<T, TSecond>> Zip<TSecond>(ISequence<T> first, IEnumerator<TSecond> second)
+        {
+            //if either sequence is empty, return an empty sequence.
+            if (first.IsEmpty || !second.MoveNext())
+                return Sequence.Empty<Tuple<T, TSecond>>();
+
+            return new Sequence<Tuple<T, TSecond>>(Tuple.Create(first.Head, second.Current),
+                                                   () => Zip(first.Tail, second));
         }
 
         /// <summary>

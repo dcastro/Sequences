@@ -23,14 +23,11 @@ namespace Sequences.Tests
                     Tuple.Create(4, 5),
                 };
 
-            Assert.Equal(expectedZipped.Length, zipped.Count);
-
-            for (int i = 0; i < zipped.Count; i++)
-                Assert.Equal(expectedZipped[i], zipped[i]);
+            Assert.Equal(expectedZipped, zipped);
         }
 
         [Fact]
-        public void Zip_TruncatesLongerSequence()
+        public void Zip_TruncatesSecondSequence_If_LongerThanFirst()
         {
             var zipped = Sequence.Range(1, 4).Zip(
                 Sequence.Range(10, 21));
@@ -42,10 +39,60 @@ namespace Sequences.Tests
                     Tuple.Create(3, 12)
                 };
 
-            Assert.Equal(expectedZipped.Length, zipped.Count);
+            Assert.Equal(expectedZipped, zipped);
+        }
 
-            for (int i = 0; i < zipped.Count; i++)
-                Assert.Equal(expectedZipped[i], zipped[i]);
+
+        [Fact]
+        public void Zip_TruncatesFirstSequence_If_LongerThanSecond()
+        {
+            var zipped = Sequence.Range(10, 21).Zip(
+                Sequence.Range(1, 4));
+
+            Tuple<int, int>[] expectedZipped =
+                {
+                    Tuple.Create(10, 1),
+                    Tuple.Create(11, 2),
+                    Tuple.Create(12, 3)
+                };
+
+            Assert.Equal(expectedZipped, zipped);
+        }
+
+        [Fact]
+        public void ZipAll_ExtendsFirstSequence_If_ShorterThanSecond()
+        {
+            var zipped = Sequence.Range(1, 4).ZipAll(
+                Sequence.Range(1, 6), 0, 9);
+
+            Tuple<int, int>[] expectedZipped =
+                {
+                    Tuple.Create(1, 1),
+                    Tuple.Create(2, 2),
+                    Tuple.Create(3, 3),
+                    Tuple.Create(0, 4),
+                    Tuple.Create(0, 5),
+                };
+
+            Assert.Equal(expectedZipped, zipped);
+        }
+
+        [Fact]
+        public void ZipAll_ExtendsSecondSequence_If_ShorterThanFirst()
+        {
+            var zipped = Sequence.Range(1, 6).ZipAll(
+                Sequence.Range(1, 4), 0, 9);
+
+            Tuple<int, int>[] expectedZipped =
+                {
+                    Tuple.Create(1, 1),
+                    Tuple.Create(2, 2),
+                    Tuple.Create(3, 3),
+                    Tuple.Create(4, 9),
+                    Tuple.Create(5, 9),
+                };
+
+            Assert.Equal(expectedZipped, zipped);
         }
 
         [Fact]
@@ -64,10 +111,7 @@ namespace Sequences.Tests
                     Tuple.Create(15, 5),
                 };
 
-            Assert.Equal(expectedZipped.Length, zipped.Count);
-
-            for (int i = 0; i < zipped.Count; i++)
-                Assert.Equal(expectedZipped[i], zipped[i]);
+            Assert.Equal(expectedZipped, zipped);
         }
     }
 }
