@@ -9,6 +9,70 @@ namespace Sequences
 {
     public partial class Sequence<T>
     {
+        /// <summary>
+        /// An "iterator block" lets the compiler generate an <see cref="IEnumerator{T}"/> for us.
+        /// However, that enumerator holds onto the original sequence, and doesn't let the GC collect it.
+        /// 
+        /// This specialized iterator doesn't do that.
+        /// Instead, when it moves to a sequence's tail, it replaces the reference to the sequence with a reference to its tail,
+        /// letting GC collect the original sequence.
+        /// 
+        /// This lets us, for example, iterate through an infinite sequence for as long as we want, e.g., foreach(var e in Sequence.From(1L)) { }.
+        /// A compiler-generated iterator would keep a reference to the first sequence - Sequence(1, ?) - and, therefore, to all its tails.
+        /// Using this iterator, the GC will be able to collect all intermediate sequences as the loop progresses.
+        /// </summary>
+        private class Iterator : IEnumerator<T>
+        {
+            private ISequence<T> _seq;
+            private bool _isFirstCall = true;
+            private bool _hasFinished;
+
+            public Iterator(ISequence<T> seq)
+            {
+                _seq = seq;
+            }
+
+            public bool MoveNext()
+            {
+                //check if the iterator has reached the end of the sequence 
+                if (_hasFinished)
+                    return false;
+
+                //move to the sequence's tail on every call but the first
+                if (!_isFirstCall)
+                    _seq = _seq.Tail;
+                else
+                    _isFirstCall = false;
+
+                //check if the iterator has reached the end of the sequence
+                if (_seq.IsEmpty)
+                {
+                    _hasFinished = true;
+                    return false;
+                }
+
+                //update Current
+                Current = _seq.Head;
+                return true;
+            }
+
+            void IEnumerator.Reset()
+            {
+                throw new NotSupportedException();
+            }
+
+            public T Current { get; private set; }
+
+            object IEnumerator.Current
+            {
+                get { return Current; }
+            }
+
+            public void Dispose()
+            {
+            }
+        }
+
         private class SlidingIterator : IEnumerable<ISequence<T>>
         {
             private readonly ISequence<T> _sequence;

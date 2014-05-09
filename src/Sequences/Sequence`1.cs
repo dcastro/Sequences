@@ -129,15 +129,9 @@ namespace Sequences
         /// <returns>An <see cref="IEnumerator{T}"/> for the sequence.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            //we use an iterative proccess, instead of recursively calling Tail.GetEnumerator
-            //to avoid a stack overflow exception
-            ISequence<T> sequence = this;
-
-            while (!sequence.IsEmpty)
-            {
-                yield return sequence.Head;
-                sequence = sequence.Tail;
-            }
+            //instead of using an "iterator block" (using yield) and letting the compiler generate an IEnumerator<T> for us,
+            //we return our own specialized IEnumerator<T> that lets sequences be garbage collected along the way.
+            return new Iterator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
