@@ -92,5 +92,33 @@ namespace Sequences
             _parts.Clear();
             return this;
         }
+
+        /// <summary>
+        /// Appends a single element to the builder.
+        /// </summary>
+        /// <param name="builder">The builder to which <paramref name="elem"/> will be added.</param>
+        /// <param name="elem">The element to be added to the builder.</param>
+        /// <returns>The given builder.</returns>
+        public static SequenceBuilder<T> operator +(SequenceBuilder<T> builder, T elem)
+        {
+            if (builder == null)
+                builder = new SequenceBuilder<T>();
+
+            return builder.Append(elem);
+        }
+
+        /// <summary>
+        /// Appends a collection to the builder.
+        /// </summary>
+        /// <param name="builder">The builder to which <paramref name="enumerable"/> will be added.</param>
+        /// <param name="enumerable">The collection to be added to the builder.</param>
+        /// <returns>The given builder.</returns>
+        public static SequenceBuilder<T> operator +(SequenceBuilder<T> builder, IEnumerable<T> enumerable)
+        {
+            if (builder == null)
+                builder = new SequenceBuilder<T>();
+
+            return builder.Append(enumerable);
+        }
     }
 }

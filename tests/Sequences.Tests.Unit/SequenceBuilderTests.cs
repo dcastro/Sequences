@@ -168,5 +168,25 @@ namespace Sequences.Tests
         {
             Assert.Throws<ArgumentNullException>(() => Sequence.NewBuilder<int>().Append(null as IEnumerable<int>));
         }
+
+        [Fact]
+        public void OperatorAdd_AppendsElement()
+        {
+            var builder = Sequence.NewBuilder<int>() + 1 + 2 + 3;
+
+            Assert.Equal(new[] {1, 2, 3}, builder.ToSequence());
+        }
+
+        [Fact]
+        public void OperatorAdd_AppendsCollection()
+        {
+            var builder = Sequence.NewBuilder<int>() +
+                          Sequence.With(1) +
+                          Sequence.With(2) +
+                          Sequence.With(3);
+
+
+            Assert.Equal(new[] {1, 2, 3}, builder.ToSequence());
+        }
     }
 }
