@@ -30,6 +30,14 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Tests whether the sequence is not empty.
+        /// </summary>
+        public bool NonEmpty
+        {
+            get { return !IsEmpty; }
+        }
+
+        /// <summary>
         /// Returns the first element of this sequence.
         /// </summary>
         public virtual T Head
@@ -72,7 +80,7 @@ namespace Sequences
                 if (!_hasDefiniteSize)
                 {
                     ISequence<T> left = this;
-                    while (!left.IsEmpty && left.IsTailDefined)
+                    while (left.NonEmpty && left.IsTailDefined)
                         left = left.Tail;
 
                     _hasDefiniteSize = left.IsEmpty;
@@ -150,7 +158,7 @@ namespace Sequences
         {
             ISequence<T> sequence = this;
 
-            while (!sequence.IsEmpty)
+            while (sequence.NonEmpty)
             {
                 yield return sequence;
                 sequence = sequence.Tail;
@@ -171,7 +179,7 @@ namespace Sequences
         {
             ISequence<T> sequence = this;
 
-            while (!sequence.IsEmpty)
+            while (sequence.NonEmpty)
             {
                 yield return sequence;
                 sequence = sequence.Tail;
@@ -189,7 +197,7 @@ namespace Sequences
         {
             ISequence<T> sequence = this;
 
-            while (!sequence.IsEmpty)
+            while (sequence.NonEmpty)
             {
                 yield return sequence;
                 sequence = sequence.Init;

@@ -114,7 +114,7 @@ namespace Sequences
                     _step = step;
 
                     _buffer = new List<T>(_size);
-                    _hasMoreElems = !_seq.IsEmpty;
+                    _hasMoreElems = _seq.NonEmpty;
                 }
 
                 public bool MoveNext()
@@ -126,8 +126,8 @@ namespace Sequences
                         _hasMoved = true;
 
                     //in addition to checking if the previous iterator had more elements,
-                    //we also need to check if the sequence is still empty after advancing "_step" elements
-                    _hasMoreElems &= !_seq.IsEmpty;
+                    //we also need to check if the sequence is still not empty after advancing "_step" elements
+                    _hasMoreElems &= _seq.NonEmpty;
 
                     if (!_hasMoreElems)
                         return false;

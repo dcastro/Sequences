@@ -19,6 +19,11 @@ namespace Sequences
         bool IsEmpty { get; }
 
         /// <summary>
+        /// Tests whether the sequence is not empty.
+        /// </summary>
+        bool NonEmpty { get; }
+
+        /// <summary>
         /// Returns the first element of this sequence.
         /// </summary>
         T Head { get; }

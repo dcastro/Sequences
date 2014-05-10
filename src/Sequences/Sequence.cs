@@ -381,7 +381,7 @@ namespace Sequences
 
             ISequence<TSource> seq = source;
 
-            while (!seq.IsEmpty && count-- > 0)
+            while (seq.NonEmpty && count-- > 0)
                 seq = seq.Tail;
 
             return seq;
@@ -407,7 +407,7 @@ namespace Sequences
 
             ISequence<TSource> seq = source;
 
-            while (!seq.IsEmpty && predicate(seq.Head))
+            while (seq.NonEmpty && predicate(seq.Head))
                 seq = seq.Tail;
 
             return seq;
@@ -435,7 +435,7 @@ namespace Sequences
             ISequence<TSource> seq = source;
             int index = 0;
 
-            while (!seq.IsEmpty && predicate(seq.Head, index++))
+            while (seq.NonEmpty && predicate(seq.Head, index++))
                 seq = seq.Tail;
 
             return seq;
