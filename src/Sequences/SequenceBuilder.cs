@@ -11,20 +11,7 @@ namespace Sequences
     /// <typeparam name="T">The type of the elements in the resulting sequences.</typeparam>
     public class SequenceBuilder<T>
     {
-        private readonly List<IEnumerable<T>> _parts = new List<IEnumerable<T>>();
-
-        /// <summary>
-        /// Appends a collection to this builder.
-        /// </summary>
-        /// <param name="enumerable">The collection to be added to this builder.</param>
-        /// <returns>This builder.</returns>
-        public SequenceBuilder<T> Append(IEnumerable<T> enumerable)
-        {
-            if (enumerable == null) throw new ArgumentNullException("enumerable");
-
-            _parts.Add(enumerable);
-            return this;
-        }
+        private readonly List<Func<IEnumerable<T>>> _parts = new List<Func<IEnumerable<T>>>();
 
         /// <summary>
         /// Appends one or more elements to this builder.
@@ -37,13 +24,48 @@ namespace Sequences
         }
 
         /// <summary>
+        /// Appends a collection to this builder.
+        /// </summary>
+        /// <param name="enumerable">The collection to be added to this builder.</param>
+        /// <returns>This builder.</returns>
+        public SequenceBuilder<T> Append(IEnumerable<T> enumerable)
+        {
+            if (enumerable == null) throw new ArgumentNullException("enumerable");
+
+            return Append(() => enumerable);
+        }
+
+        /// <summary>
+        /// Appends a lazily-evaluated collection to this builder.
+        /// </summary>
+        /// <param name="enumerable">The collection to be added to this builder.</param>
+        /// <returns>This builder.</returns>
+        public SequenceBuilder<T> Append(Func<IEnumerable<T>> enumerable)
+        {
+            if (enumerable == null) throw new ArgumentNullException("enumerable");
+
+            _parts.Add(enumerable);
+            return this;
+        }
+
+        /// <summary>
         /// Appends a single element to this builder.
         /// </summary>
         /// <param name="elem">The element to be added to this builder.</param>
         /// <returns>This builder.</returns>
         public SequenceBuilder<T> Append(T elem)
         {
-            _parts.Add(Sequence.With(elem));
+            return Append(() => elem);
+        }
+
+        /// <summary>
+        /// Appends a single lazily-evaluated element to this builder.
+        /// </summary>
+        /// <param name="elem">The element to be added to this builder.</param>
+        /// <returns>This builder.</returns>
+        public SequenceBuilder<T> Append(Func<T> elem)
+        {
+            _parts.Add(() => Sequence.With(elem()));
             return this;
         }
 
@@ -57,7 +79,7 @@ namespace Sequences
             return _parts
                 .Take(_parts.Count)
                 .ToList()
-                .SelectMany(seq => seq)
+                .SelectMany(enumerable => enumerable())
                 .AsSequence();
         }
 
