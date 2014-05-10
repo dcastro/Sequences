@@ -47,6 +47,23 @@ namespace Sequences.Tests
         }
 
         [Fact]
+        public void Sliding_Stops_When_LastElementIsSkipped()
+        {
+            var sequence = Sequence.Range(0, 8);
+            var windows = sequence.Sliding(2, 4).ToList();
+            var expectedWindows = new List<List<int>>
+                {
+                    new List<int> {0, 1},
+                    new List<int> {4, 5}
+                };
+
+            Assert.Equal(expectedWindows.Count, windows.Count);
+
+            for (int i = 0; i < windows.Count; i++)
+                Assert.Equal(expectedWindows[i], windows[i]);
+        }
+
+        [Fact]
         public void Sliding_Returns_WholeSequence_When_SizeIsHigherThanCount()
         {
             var sequence = Sequence.Range(0, 4);

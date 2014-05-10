@@ -73,13 +73,13 @@ namespace Sequences
             }
         }
 
-        private class SlidingIterator : IEnumerable<ISequence<T>>
+        private class SlidingEnumerator : IEnumerable<ISequence<T>>
         {
             private readonly ISequence<T> _sequence;
             private readonly int _size;
             private readonly int _step;
 
-            public SlidingIterator(ISequence<T> sequence, int size, int step)
+            public SlidingEnumerator(ISequence<T> sequence, int size, int step)
             {
                 _sequence = sequence;
                 _size = size;
@@ -88,32 +88,81 @@ namespace Sequences
 
             public IEnumerator<ISequence<T>> GetEnumerator()
             {
-                ISequence<T> seq = _sequence;
-                var buffer = new List<T>(_size);
-
-                bool hasMoreElems = !seq.IsEmpty;
-
-                while (hasMoreElems)
-                {
-                    //group elements into a buffer
-                    IEnumerator<T> iterator = seq.GetEnumerator();
-
-                    for (int i = 0; i < _size && iterator.MoveNext(); i++)
-                        buffer.Add(iterator.Current);
-
-                    //force the evaluation of the buffer's contents, before we clear the buffer.
-                    yield return buffer.AsSequence().Force();
-
-                    //keep going if there's at least one more element
-                    hasMoreElems = iterator.MoveNext();
-                    buffer.Clear();
-                    seq = seq.Skip(_step);
-                }
+                return new SlidingIterator(_sequence, _size, _step);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
+            }
+
+            private class SlidingIterator : IEnumerator<ISequence<T>>
+            {
+                private ISequence<T> _seq;
+                private readonly int _size;
+                private readonly int _step;
+
+                private bool _hasMoved;
+                private bool _hasMoreElems;
+
+                private readonly List<T> _buffer;
+
+                public SlidingIterator(ISequence<T> seq, int size, int step)
+                {
+                    _seq = seq;
+                    _size = size;
+                    _step = step;
+
+                    _buffer = new List<T>(_size);
+                    _hasMoreElems = !_seq.IsEmpty;
+                }
+
+                public bool MoveNext()
+                {
+                    //move "_step" elements on every call but the first
+                    if (_hasMoved)
+                        _seq = _seq.Skip(_step);
+                    else
+                        _hasMoved = true;
+
+                    //in addition to checking if the previous iterator had more elements,
+                    //we also need to check if the sequence is still empty after advancing "_step" elements
+                    _hasMoreElems &= !_seq.IsEmpty;
+
+                    if (!_hasMoreElems)
+                        return false;
+
+                    //group elements into a buffer
+                    var iterator = _seq.GetEnumerator();
+
+                    for (int i = 0; i < _size && iterator.MoveNext(); i++)
+                        _buffer.Add(iterator.Current);
+
+                    //force the evaluation of the buffer's contents, before we clear the buffer.
+                    Current = _buffer.AsSequence().Force();
+                    _buffer.Clear();
+
+                    //check if there are any more elements
+                    _hasMoreElems = iterator.MoveNext();
+
+                    return true;
+                }
+
+                void IEnumerator.Reset()
+                {
+                    throw new NotSupportedException();
+                }
+
+                public ISequence<T> Current { get; private set; }
+
+                object IEnumerator.Current
+                {
+                    get { return Current; }
+                }
+
+                public void Dispose()
+                {
+                }
             }
         }
 

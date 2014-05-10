@@ -541,7 +541,7 @@ namespace Sequences
             if (step <= 0)
                 throw new ArgumentOutOfRangeException("step", "step must be a positive integer.");
             
-            return new SlidingIterator(this, size, step);
+            return new SlidingEnumerator(this, size, step);
         }
 
         /// <summary>
