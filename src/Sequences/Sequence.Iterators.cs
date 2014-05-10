@@ -166,12 +166,12 @@ namespace Sequences
             }
         }
 
-        private class GroupedIterator : IEnumerable<ISequence<T>>
+        private class GroupedEnumerator : IEnumerable<ISequence<T>>
         {
             private readonly ISequence<T> _sequence;
             private readonly int _size;
 
-            public GroupedIterator(ISequence<T> sequence, int size)
+            public GroupedEnumerator(ISequence<T> sequence, int size)
             {
                 _sequence = sequence;
                 _size = size;
@@ -179,19 +179,57 @@ namespace Sequences
 
             public IEnumerator<ISequence<T>> GetEnumerator()
             {
-                ISequence<T> seq = _sequence;
-
-                while (!seq.IsEmpty)
-                {
-                    yield return seq.Take(_size);
-                    seq = seq.Skip(_size);
-                }
+                return new GroupedIterator(_sequence, _size);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
             }
+
+            private class GroupedIterator : IEnumerator<ISequence<T>>
+            {
+                private ISequence<T> _seq;
+                private readonly int _size;
+
+                private bool _hasMoved;
+
+                public GroupedIterator(ISequence<T> seq, int size)
+                {
+                    _seq = seq;
+                    _size = size;
+                }
+
+                public bool MoveNext()
+                {
+                    if (_hasMoved)
+                        _seq = _seq.Skip(_size);
+                    else
+                        _hasMoved = true;
+
+                    if (_seq.IsEmpty)
+                        return false;
+
+                    Current = _seq.Take(_size);
+                    return true;
+                }
+
+                void IEnumerator.Reset()
+                {
+                    throw new NotSupportedException();
+                }
+
+                public ISequence<T> Current { get; private set; }
+
+                object IEnumerator.Current
+                {
+                    get { return Current; }
+                }
+
+                public void Dispose()
+                {
+                }
+            } 
         }
 
         private class CombinationsIterator : IEnumerable<ISequence<T>>

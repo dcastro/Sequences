@@ -572,7 +572,7 @@ namespace Sequences
             if (size <= 0)
                 throw new ArgumentOutOfRangeException("size", "size must be a positive integer.");
 
-            return new GroupedIterator(this, size);
+            return new GroupedEnumerator(this, size);
         }
 
         /// <summary>
