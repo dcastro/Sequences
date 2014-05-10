@@ -16,12 +16,23 @@ namespace Sequences
         /// <summary>
         /// Returns an empty sequence.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">The type parameter of the returned sequence.</typeparam>
+        /// <returns>An empty sequence.</returns>
         [Pure]
         public static ISequence<T> Empty<T>()
         {
             return EmptySequence<T>.Instance;
+        }
+
+        /// <summary>
+        /// Creates a new sequence builder.
+        /// </summary>
+        /// <typeparam name="T">The type of the element in the sequence.</typeparam>
+        /// <returns>A new sequence builder.</returns>
+        [Pure]
+        public static SequenceBuilder<T> NewBuilder<T>()
+        {
+            return new SequenceBuilder<T>();
         }
 
         /// <summary>

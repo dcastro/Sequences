@@ -75,6 +75,7 @@
     <Compile Include="PartitionTests.cs" />
     <Compile Include="PatchTests.cs" />
     <Compile Include="PermutationsTests.cs" />
+    <Compile Include="SequenceBuilderTests.cs" />
     <Compile Include="SlidingTests.cs" />
     <Compile Include="LengthTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
