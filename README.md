@@ -173,7 +173,7 @@ var triangle = Sequence.Iterate(
                             func: rowFactory);
 ```
 
-You start with row (1). From then on, every row is computed by shifting the row to the right, shift the row to the left, zipping both shifted rows together and producing the sum of each tuple. For example, given the row (1, 4, 6, 4, 1):
+You start with row (1). From then on, every row is computed by shifting the row to the right, shift the row to the left, zipping both shifted rows together and producing the sum of each tuple. For example, given the row (1, 3, 3, 1):
 
 ```
 0 1 3 3 1       //shift right
