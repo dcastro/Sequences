@@ -405,7 +405,7 @@ namespace Sequences
 
             //try to find index (length - 1), check if there's any elements beyond that index, and return
             var testIndex = length - 1;
-            var iter = Indices.GetEnumerator();
+            var iter = Indices().GetEnumerator();
 
             while (iter.MoveNext() && iter.Current <= testIndex)
                 if (iter.Current == testIndex)
@@ -647,15 +647,16 @@ namespace Sequences
         [Pure]
         public ISequence<Tuple<T, int>> ZipWithIndex()
         {
-            return Zip(Indices);
+            return Zip(Indices());
         }
 
         /// <summary>
         /// Produces the range of all indices of this sequence.
         /// </summary>
-        public IEnumerable<int> Indices
+        /// <returns>The range of all indices of this sequence.</returns>
+        public IEnumerable<int> Indices()
         {
-            get { return this.Select((elem, index) => index); }
+            return this.Select((elem, index) => index);
         }
 
         /// <summary>

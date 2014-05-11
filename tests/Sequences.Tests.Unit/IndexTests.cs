@@ -14,7 +14,7 @@ namespace Sequences.Tests
         public void Indices_Returns_RangeOfIndices()
         {
             var sequence = Sequence.Fill(0, 5);
-            var indices = sequence.Indices;
+            var indices = sequence.Indices();
             int[] expectedIndices = {0, 1, 2, 3, 4};
 
             Assert.Equal(expectedIndices, indices);

@@ -323,7 +323,8 @@ namespace Sequences
         /// <summary>
         /// Produces the range of all indices of this sequence.
         /// </summary>
-        IEnumerable<int> Indices { get; }
+        /// <returns>The range of all indices of this sequence.</returns>
+        IEnumerable<int> Indices();
 
         /// <summary>
         /// Finds the index of the first occurrence of some value in this sequence.
