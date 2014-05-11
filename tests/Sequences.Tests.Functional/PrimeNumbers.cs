@@ -46,7 +46,7 @@ namespace Sequences.Tests.Functional
              */
 
             const int max = 72;
-            var primes = PrimesWithin(Sequence.Range(2, max), 0);
+            var primes = PrimesWithin(Sequence.Range(2, max));
 
             Assert.Equal(_expectedPrimes, primes);
         }
@@ -73,19 +73,19 @@ namespace Sequences.Tests.Functional
             return new Sequence<int>(n, () => PrimesOptimized(filtered));
         }
 
-        private ISequence<int> PrimesWithin(ISequence<int> seq, int index)
+        private ISequence<int> PrimesWithin(ISequence<int> range)
         {
-            if (seq.IsEmpty)
-                return seq;
+            if (range.IsEmpty)
+                return range;
 
             //take the next prime number
-            var n = seq.Head;
+            var p = range.Head;
 
-            //skip n, and remove further multiples of n
+            //skip p, and remove further multiples of p
             //force the evaluation of the filtered sequence, to avoid stacking filters
-            var filtered = seq.Tail.Where(e => e % n != 0).Force();
+            var filtered = range.Tail.Where(e => e % p != 0).Force();
 
-            return new Sequence<int>(n, () => PrimesWithin(filtered, index + 1));
+            return new Sequence<int>(p, () => PrimesWithin(filtered));
         }
     }
 }
