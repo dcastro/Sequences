@@ -1,0 +1,585 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>ISequence(T) Interface</title><meta name="Language" content="en-us" /><meta name="System.Keywords" content="ISequence%3CT%3E interface" /><meta name="System.Keywords" content="Sequences.ISequence%3CT%3E interface" /><meta name="System.Keywords" content="ISequence%3CT%3E interface, about ISequence%3CT%3E interface" /><meta name="System.Keywords" content="ISequence(Of T) interface" /><meta name="System.Keywords" content="Sequences.ISequence(Of T) interface" /><meta name="System.Keywords" content="ISequence(Of T) interface, about ISequence(Of T) interface" /><meta name="Microsoft.Help.F1" content="Sequences.ISequence`1" /><meta name="Microsoft.Help.Id" content="T:Sequences.ISequence`1" /><meta name="Description" content="Represents an immutable lazy sequence of elements. Elements are only evaluated when they're needed, and employs memoization to store the computed values and avoid re-evaluation." /><meta name="Microsoft.Help.ContentType" content="Reference" /><meta name="BrandingAware" content="'true'" /><meta name="container" content="Sequences" /><meta name="file" content="3b6a3c7e-a6e5-eec8-e046-c3f2320ef836" /><meta name="guid" content="3b6a3c7e-a6e5-eec8-e046-c3f2320ef836" /><meta name="SelfBranded" content="true" /></head><body onload="onLoad()"><div class="VS2013_outerDiv"><div class="VS2013_outerContent"><table class="TitleTable"><tr><td class="VS2013_tdLogoColumn"><img src="../icons/Help.png" /></td><td class="VS2013_tdTitleColumn">ISequence<span id="ID0EDBABABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDBABABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script><span class="typeparameter">T</span><span id="ID0EBBABABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBBABABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script> Interface</td><td class="VS2013_tdRunningTitleColumn">A Sandcastle Documented Class Library</td></tr></table><div id="mainSection"><div id="mainBody"><span class="introStyle"></span><div class="summary">
+            Represents an immutable lazy sequence of elements.
+            Elements are only evaluated when they're needed, and <span class="selflink">ISequence<span id="ID0ECBOAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBOAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABOAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABOAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></span> employs memoization to store the computed values and avoid re-evaluation.
+            </div><p></p><strong>Namespace:</strong> <a href="11006482-8791-6205-9f63-bdbb13db6834.htm">Sequences</a><br /><strong>Assembly:</strong> Sequences (in Sequences.dll) Version: 1.0.0.0 (1.0.0.0)<div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID1RB')" onkeypress="ExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Syntax</span></div><div id="ID1RBSection" class="VS2013_CollapsibleSection"><div id="snippetGroup_Syntax" class="code"><div id="ID0EDBAGAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0EDBAGAAABAA_tabs"><div id="ID0EDBAGAAABAA_tab1" class="codeSnippetContainerTabActive" EnableCopyCode="true"><a href="#" onclick="javascript:ChangeTab('ID0EDBAGAAABAA','C#','1','4');return false;">C#</a></div><div id="ID0EDBAGAAABAA_tab2" class="codeSnippetContainerTab" EnableCopyCode="true"><a href="#" onclick="javascript:ChangeTab('ID0EDBAGAAABAA','Visual Basic','2','4');return false;">VB</a></div><div id="ID0EDBAGAAABAA_tab3" class="codeSnippetContainerTab" EnableCopyCode="true"><a href="#" onclick="javascript:ChangeTab('ID0EDBAGAAABAA','Visual C++','3','4');return false;">C++</a></div><div id="ID0EDBAGAAABAA_tab4" class="codeSnippetContainerTab" EnableCopyCode="true"><a href="#" onclick="javascript:ChangeTab('ID0EDBAGAAABAA','F#','4','4');return false;">F#</a></div></div><div id="ID0EDBAGAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EDBAGAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0EDBAGAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0EDBAGAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0EDBAGAAABAA','4')" title="Print">Print</a></div></div><div id="ID0EDBAGAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre><span class="keyword">public</span> <span class="keyword">interface</span> <span class="identifier">ISequence</span>&lt;T&gt; : <span class="identifier">IEnumerable</span>&lt;T&gt;, 
+	<span class="identifier">IEnumerable</span> 
+</pre></div><div id="ID0EDBAGAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>public interface ISequence&lt;T&gt; : IEnumerable&lt;T&gt;, 
+	IEnumerable 
+</pre></div><div id="ID0EDBAGAAABAA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre><span class="keyword">Public</span> <span class="keyword">Interface</span> <span class="identifier">ISequence</span>(<span class="keyword">Of</span> T)
+	<span class="keyword">Inherits</span> <span class="identifier">IEnumerable</span>(<span class="keyword">Of</span> T), <span class="identifier">IEnumerable</span></pre></div><div id="ID0EDBAGAAABAA_code_Plain_Div2" class="codeSnippetContainerCode" style="display: none"><pre>Public Interface ISequence(Of T)
+	Inherits IEnumerable(Of T), IEnumerable</pre></div><div id="ID0EDBAGAAABAA_code_Div3" class="codeSnippetContainerCode" style="display: none"><pre><span class="keyword">generic</span>&lt;<span class="keyword">typename</span> T&gt;
+<span class="keyword">public</span> <span class="keyword">interface class</span> <span class="identifier">ISequence</span> : <span class="identifier">IEnumerable</span>&lt;T&gt;, 
+	<span class="identifier">IEnumerable</span></pre></div><div id="ID0EDBAGAAABAA_code_Plain_Div3" class="codeSnippetContainerCode" style="display: none"><pre>generic&lt;typename T&gt;
+public interface class ISequence : IEnumerable&lt;T&gt;, 
+	IEnumerable</pre></div><div id="ID0EDBAGAAABAA_code_Div4" class="codeSnippetContainerCode" style="display: none"><pre><span class="keyword">type</span> <span class="identifier">ISequence</span>&lt;'T&gt; =  
+    <span class="keyword">interface</span> 
+        <span class="keyword">interface</span> <span class="identifier">IEnumerable</span>&lt;'T&gt;
+        <span class="keyword">interface</span> <span class="identifier">IEnumerable</span> 
+    <span class="keyword">end</span></pre></div><div id="ID0EDBAGAAABAA_code_Plain_Div4" class="codeSnippetContainerCode" style="display: none"><pre>type ISequence&lt;'T&gt; =  
+    interface 
+        interface IEnumerable&lt;'T&gt;
+        interface IEnumerable 
+    end</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0EDBAGAAABAA');</script></div><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID0RB')" onkeypress="ExpandCollapse_CheckKey('ID0RB', event)" tabindex="0"><img id="ID0RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Type Parameters</span></div><div id="ID0RBSection" class="VS2013_CollapsibleSection"><dl><dt><span class="parameter">T</span></dt><dd>The type of elements in the sequence.</dd></dl></div></div><p>The <span class="selflink">ISequence<span id="ID0ECBFAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBFAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABFAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABFAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></span> type exposes the following members.</p><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID2RB')" onkeypress="ExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Methods</span></div><div id="ID2RBSection" class="VS2013_CollapsibleSection"><table id="memberList" class="members"><tr><th class="ps_iconColumn">
+								 
+							</th><th class="ps_nameColumn">Name</th><th class="ps_descriptionColumn">Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="da58ecba-a441-940b-0f1c-2f91bdb40b74.htm">Append</a></td><td><div class="summary">
+            Returns a copy of this sequence with the given element appended.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="cc99b64f-87a8-7d6f-72ee-8a763b05856c.htm">Combinations</a></td><td><div class="summary">
+            Iterate over distinct combinations of a given size of this sequence's elements.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="30fb007d-a36e-9426-5abc-0f0e38577f6d.htm">Concat</a></td><td><div class="summary">
+            Returns a copy of this sequence concatenated with <span class="parameter">otherSequence</span>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="ba6b9e8a-0395-6811-76de-f25ff0c49402.htm">CopyTo(<span id="ID0EDAB0OB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB0OB0BAEAAABAA?vb=|cpp=array&lt;|cs=|fs=|nu=");
+				</script>T<span id="ID0EBAB0OB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB0OB0BAEAAABAA?vb=()|cpp=&gt;|cs=[]|fs=[]|nu=[]");
+				</script>)</a></td><td><div class="summary">
+            Copies the entire sequence to an array, starting at the beginning of the target array.
+            Copying will stop once either the end of this sequence is reached, or the end of the array is reached.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="659cbbbf-813a-e581-5b77-d8ac91381fab.htm">CopyTo(<span id="ID0EDAB0NB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB0NB0BAEAAABAA?vb=|cpp=array&lt;|cs=|fs=|nu=");
+				</script>T<span id="ID0EBAB0NB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB0NB0BAEAAABAA?vb=()|cpp=&gt;|cs=[]|fs=[]|nu=[]");
+				</script>, Int32)</a></td><td><div class="summary">
+            Copies the entire sequence to an array, starting at the position <span class="parameter">destinationIndex</span> of the target array.
+            Copying will stop once either the end of this sequence is reached, or the end of the array is reached.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="f322242d-0c20-6184-7235-b5d01fddeb8b.htm">CopyTo(Int32, <span id="ID0EDAB0MB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB0MB0BAEAAABAA?vb=|cpp=array&lt;|cs=|fs=|nu=");
+				</script>T<span id="ID0EBAB0MB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB0MB0BAEAAABAA?vb=()|cpp=&gt;|cs=[]|fs=[]|nu=[]");
+				</script>, Int32, Int32)</a></td><td><div class="summary">
+            Copies a given number of elements from this sequence to an array, starting at the position <span class="parameter">index</span> of this sequence 
+            and at the position <span class="parameter">destinationIndex</span> of the target array.
+            Copying will stop once either the end of this sequence is reached, or the end of the array is reached, or <span class="parameter">count</span> elements have been copied.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="5816d5d4-1394-7ad2-da87-3b5d10685e37.htm">Fold</a></td><td><div class="summary">
+            Folds the elements of this sequence using the specified accumulator function. 
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="a162c16f-2764-1b89-4b92-374a33b8cc67.htm">FoldRight</a></td><td><div class="summary">
+            Folds the elements of this sequence using the specified accumulator function, going right to left. 
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="235be8fc-e345-5aad-49c4-7d11f97dfe23.htm">Force</a></td><td><div class="summary">
+            Forces evaluation of the whole sequence and returns it.
+            If this sequence represents an infinite set or series, the method will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="cee38703-e066-c5bc-5040-d9bc7e6a4b14.htm">ForEach</a></td><td><div class="summary">
+            Apply the given function to each element of this sequence.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="http://msdn2.microsoft.com/en-us/library/s793z9y2" target="_blank">GetEnumerator<span id="ID0EAAB0HB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAAB0HB0BAEAAABAA?vb=|cpp=()|cs=()|fs=()|nu=()");
+				</script></a></td><td><div class="summary">Returns an enumerator that iterates through the collection.</div> (Inherited from <a href="http://msdn2.microsoft.com/en-us/library/9eekhta0" target="_blank">IEnumerable</a><span id="ID0EDA0HB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDA0HB0BAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script><span class="selflink"><span class="typeparameter">T</span></span><span id="ID0EBA0HB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBA0HB0BAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="http://msdn2.microsoft.com/en-us/library/5zae5365" target="_blank">GetEnumerator<span id="ID0EAAB0GB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAAB0GB0BAEAAABAA?vb=|cpp=()|cs=()|fs=()|nu=()");
+				</script></a></td><td><div class="summary">Returns an enumerator that iterates through a collection.</div> (Inherited from <a href="http://msdn2.microsoft.com/en-us/library/h1x9x1b1" target="_blank">IEnumerable</a>.)</td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="31555d0c-fc0d-cb6e-9847-5693c587fb62.htm">Grouped</a></td><td><div class="summary">
+            Partitions elements in fixed size sequences.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="a5ac7d69-6a08-ca20-6f5b-5ce13f8e10a0.htm">IndexOf(T)</a></td><td><div class="summary">
+            Finds the index of the first occurrence of some value in this sequence.
+            If this sequence represents an infinite set or series and doesn't contain <span class="parameter">elem</span>, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="91f22463-ec93-c80d-cd78-bfbe2992e7a7.htm">IndexOf(T, Int32)</a></td><td><div class="summary">
+            Finds the index of the first occurrence of some value in this sequence, after or at some start index.
+            If this sequence represents an infinite set or series and doesn't contain <span class="parameter">elem</span>, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="77f84bdc-2657-b985-909f-0889b2ee0db2.htm">IndexOf(T, Int32, Int32)</a></td><td><div class="summary">
+            Finds the index of the first occurrence of some value in this sequence, after or at some start index and within the range specified by <span class="parameter">count</span>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="436cff8b-4228-a974-9256-49bfaa85ca5c.htm">IndexWhere(Func<span id="ID0EDAB0BB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB0BB0BAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T, Boolean<span id="ID0EBAB0BB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB0BB0BAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td><div class="summary">
+            Finds the index of the first element satisfying some predicate.
+            If this sequence represents an infinite set or series and no element satisfies the predicate, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="c2795850-40d3-1d1d-ccd8-a576bd669ffa.htm">IndexWhere(Func<span id="ID0EDAB0AB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB0AB0BAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T, Boolean<span id="ID0EBAB0AB0BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB0AB0BAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, Int32)</a></td><td><div class="summary">
+            Finds the index of the first element satisfying some predicate after or at some start index.
+            If this sequence represents an infinite set or series and no element satisfies the predicate, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="9017ae04-2615-f922-eb67-1e7144421628.htm">IndexWhere(Func<span id="ID0EDAB6BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB6BAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T, Boolean<span id="ID0EBAB6BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB6BAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, Int32, Int32)</a></td><td><div class="summary">
+            Finds the index of the first element satisfying some predicate after or at some start index and within the range specified by <span class="parameter">count</span>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="79628eea-381b-a869-82f0-7a8d5cac1aec.htm">Inits</a></td><td><div class="summary">
+            Iterates over the inits of this sequence. The first value will be this sequence, and the last value will be an empty sequence,
+            with the intervening values the results of successive applications of <a href="f74f855a-de71-4343-8ed4-984edb907e2c.htm">Init</a>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="86e12f81-8f16-4938-3513-347b5f095c2c.htm">LastIndexOf(T)</a></td><td><div class="summary">
+            Finds the index of the last occurrence of some value in this sequence.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="6ed55ab1-64b6-9209-fc12-9c91909c3bf8.htm">LastIndexOf(T, Int32)</a></td><td><div class="summary">
+            Finds the index of the last occurrence of some value in this sequence, before or at some end index.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="05644b96-9a7d-049b-541b-d4ad3cbc1fe9.htm">LastIndexOf(T, Int32, Int32)</a></td><td><div class="summary">
+            Finds the index of the last occurrence of some value in this sequence, before or at some end index and within the range specified by <span class="parameter">count</span>.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="5d66d2c0-5371-a3be-1ace-dd118cc8e47b.htm">LastIndexWhere(Func<span id="ID0EDAB1BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDAB1BAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T, Boolean<span id="ID0EBAB1BAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBAB1BAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td><div class="summary">
+            Finds the index of the last element satisfying some predicate.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="05c92549-d639-1254-e1f3-c0171df60218.htm">LastIndexWhere(Func<span id="ID0EDABZBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABZBAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T, Boolean<span id="ID0EBABZBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABZBAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, Int32)</a></td><td><div class="summary">
+            Finds the index of the last element satisfying some predicate before or at some end index.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="68b38ebd-5c80-2c5a-9692-7517d0324c0d.htm">LastIndexWhere(Func<span id="ID0EDABYBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABYBAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T, Boolean<span id="ID0EBABYBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABYBAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, Int32, Int32)</a></td><td><div class="summary">
+            Finds the index of the last element satisfying some predicate before or at some end index and within the range specified by <span class="parameter">count</span>.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="da54ce1c-f86f-00bd-e65f-38a3a2d5a47e.htm">LengthCompare</a></td><td><div class="summary">
+            Compares the length of this sequence with a test value.
+            This method does not call <a href="5e47f00f-3f25-de96-affb-c4078c461922.htm">Count</a> directly - its running time is O(count min length) instead of O(count).
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="a33156f4-7409-1b85-ceee-24b63d8ab01b.htm">MkString<span id="ID0EAABWBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABWBAEAAABAA?vb=|cpp=()|cs=()|fs=()|nu=()");
+				</script></a></td><td><div class="summary">
+            Returns a string with all the elements of this sequence.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="c204cd77-a340-4436-dea6-ff2445cb9a59.htm">MkString(String)</a></td><td><div class="summary">
+            Returns a string with all the elements of this sequence, using a seperator string.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="57a19b85-306d-1bf4-0905-b15c8f216ea9.htm">NonEmptyTails</a></td><td><div class="summary">
+            Iterates over the tails of this sequence. The first value will be this sequence, and the last value will be a sequence with the last element of this sequence,
+            with the intervening values the results of successive applications of <a href="c33ca4a6-b869-cf5c-aec4-6d323c879daa.htm">Tail</a>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="ac48ee9b-7e78-49ab-5cac-a0f6de78b951.htm">PadTo</a></td><td><div class="summary">
+            Returns a new sequence in which the end is padded with <span class="parameter">elem</span>, if this sequence has less elements than <span class="parameter">length</span>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="90f7fc13-a313-4d36-62b8-6efe7cf36318.htm">Partition</a></td><td><div class="summary">
+            Returns a pair of sequences, where the first contains all the elements of this sequence that satisfy the <span class="parameter">predicate</span> function,
+            and the second contains the elements that don't.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="87e55429-f2c0-fe4c-a496-16f6c8a0a224.htm">Patch</a></td><td><div class="summary">
+            Returns a copy of this sequence where a slice of its elements is replaced by a <span class="parameter">patch</span> sequence.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="b9734e5f-cc21-ad5f-7bbd-82c26258b8df.htm">Permutations</a></td><td><div class="summary">
+            Iterates over distinct permutations of this sequence.
+            If this sequence represents an infinite set or series, calling <a href="http://msdn2.microsoft.com/en-us/library/s793z9y2" target="_blank">GetEnumerator<span id="ID0EABAAQBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABAAQBAEAAABAA?vb=|cpp=()|cs=()|fs=()|nu=()");
+				</script></a> on the result value will not return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="403ed91f-7c42-32f5-52ec-c9942198afb7.htm">Prepend</a></td><td><div class="summary">
+            Returns a copy of this sequence with the given element prepended.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="6c2e2ebe-8777-4889-71b4-6d3a1e8c72c3.htm">Reduce</a></td><td><div class="summary">
+            Reduces the elements of this sequence using the specified function.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="83ec3485-1f1d-81f3-e656-cdfd3dc1a597.htm">ReduceRight</a></td><td><div class="summary">
+            Reduces the elements of this sequence using the specified function, going right to left. 
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="4dd5ff5d-7548-6f6c-ece5-3eb1d87fc4a1.htm">Remove</a></td><td><div class="summary">
+            Returns a copy of this sequence without the first occurrence of the given element, if any is found.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="b6ab7896-4e21-a406-05a7-6738edff1242.htm">Scan</a></td><td><div class="summary">
+            Crates a new sequence which contains all intermediate results of successive applications of a function <span class="parameter">op</span> to subsequent elements left to right.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="4b66e94b-9710-216c-44df-dc726f41f1fd.htm">ScanRight</a></td><td><div class="summary">
+            Crates a new sequence which contains all intermediate results of successive applications of a function <span class="parameter">op</span> to subsequent elements right to left.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="d40f6385-d88c-fb9c-e468-d26b762044a0.htm">Slice</a></td><td><div class="summary">
+            Returns a subsequence starting at index <span class="parameter">from</span> and extending up to (but not including) index <span class="parameter">until</span>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="fd66bbad-29f4-fcff-cb5d-c9d02db8b800.htm">Sliding(Int32)</a></td><td><div class="summary">
+            Groups elements in fixed size blocks by passing a "sliding window" over them.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="51260b8a-1562-10dd-1f97-b19b1251f02a.htm">Sliding(Int32, Int32)</a></td><td><div class="summary">
+            Groups elements in fixed size blocks by passing a "sliding window" over them.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="2b004177-ca71-2d48-ff0c-22a7fb32282a.htm">Span</a></td><td><div class="summary">
+            Splits this sequence into a prefix/suffix pair according to a predicate.
+            The first sequence will contain the longest prefix of this sequence whose elements all satisfy <span class="parameter">predicate</span>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="2847d7fe-cc08-f019-8c57-72803ccdafe0.htm">SplitAt</a></td><td><div class="summary">
+            Splits this sequence into two at a given position.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="a757c1b0-92ec-fc15-03bb-aaf618dc2fa7.htm">Tails</a></td><td><div class="summary">
+            Iterates over the tails of this sequence. The first value will be this sequence, and the last value will be an empty sequence,
+            with the intervening values the results of successive applications of <a href="c33ca4a6-b869-cf5c-aec4-6d323c879daa.htm">Tail</a>.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="a2addcd3-f261-40fe-0899-67ff9fa8c25f.htm">Updated</a></td><td><div class="summary">
+            Returns a copy of this sequence with one single replaced element.
+            If <span class="parameter">index</span> is greater than the number of elements in this sequence, nothing will be replaced.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="05ba74ab-eebb-ea30-58ca-2b9c679d84b5.htm">Zip<span id="ID0ECABCBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABCBAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSecond<span id="ID0EAABCBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABCBAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with the element at the same position in the <span class="parameter">second</span> sequence.
+            If one of the two sequences is longer than the other, its remaining elements are ignored.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="598df1e1-f1d4-7e9d-4aff-983cecaffa8e.htm">ZipAll<span id="ID0ECABBBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABBBAEAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSecond<span id="ID0EAABBBAEAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABBBAEAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with the element at the same position in the <span class="parameter">second</span> sequence.
+            If one of the two sequences is shorter than the other, placeholder elements are used to extend the shorter collection to the length of the other.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="71b7a74a-57f5-2494-69b2-1bf5e53fcd51.htm">ZipWithIndex</a></td><td><div class="summary">
+            Returns a sequence of tuples, where each tuple is formed by associating an element of this sequence with its index.
+            </div></td></tr></table><a href="#mainBody">Top</a></div><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID3RB')" onkeypress="ExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Extension Methods</span></div><div id="ID3RBSection" class="VS2013_CollapsibleSection"><table id="memberList" class="members"><tr><th class="ps_iconColumn">
+								 
+							</th><th class="ps_nameColumn">Name</th><th class="ps_descriptionColumn">Description</th></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="9cf8aaf5-db79-9eee-68c7-12d210740370.htm">AsSequence<span id="ID0ECAB1BADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECAB1BADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EAAB1BADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAAB1BADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Creates a sequence from a given enumerable.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="8eb76c03-b8bd-2478-2e36-b113395a50b8.htm">Distinct<span id="ID0EDABZBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABZBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABZBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABZBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script><span id="ID0EAABZBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABZBADAAABAA?vb=|cpp=()|cs=()|fs=()|nu=()");
+				</script></a></td><td>Overloaded.  <div class="summary">
+            Returns distinct elements from a sequence by using the default equality comparer to compare values.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="a982e69a-86d4-47ad-6ef3-d7e2b02a87e2.htm">Distinct<span id="ID0EHABYBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABYBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABYBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABYBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEqualityComparer<span id="ID0EDABYBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABYBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABYBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABYBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Returns distinct elements from a sequence by using a specified <a href="http://msdn2.microsoft.com/en-us/library/ms132151" target="_blank">IEqualityComparer<span id="ID0ECBDAYBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAYBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAYBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAYBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a> to compare values.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="78e099eb-ee6e-bfa2-cda9-24cf7f6b5ca7.htm">Except<span id="ID0EHABXBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABXBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABXBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABXBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEnumerable<span id="ID0EDABXBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABXBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABXBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABXBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Produces the set difference of two sequences by using the default equality comparer to compare values.
+            If the second sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="bd506f20-7225-bafa-fb2f-f235b9a90d99.htm">Except<span id="ID0ELABWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ELABWBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EJABWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EJABWBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEnumerable<span id="ID0EHABWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABWBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABWBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, IEqualityComparer<span id="ID0EDABWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABWBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABWBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Produces the set difference of two sequences by using the specified <a href="http://msdn2.microsoft.com/en-us/library/ms132151" target="_blank">IEqualityComparer<span id="ID0ECBDAWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAWBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAWBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAWBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a> to compare values.
+            If the second sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="c82d75c5-3144-c242-7584-d6c3829e62da.htm">Intersect<span id="ID0EHABVBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABVBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABVBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABVBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEnumerable<span id="ID0EDABVBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABVBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABVBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABVBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Produces the set intersection of two sequences by using the default equality comparer to compare values.
+            If the second sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="20453763-14d1-77a2-e5a6-bde6fab0b464.htm">Intersect<span id="ID0ELABUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ELABUBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EJABUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EJABUBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEnumerable<span id="ID0EHABUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABUBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABUBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, IEqualityComparer<span id="ID0EDABUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABUBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABUBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Produces the set intersection of two sequences by using the specified <a href="http://msdn2.microsoft.com/en-us/library/ms132151" target="_blank">IEqualityComparer<span id="ID0ECBDAUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAUBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAUBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAUBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a> to compare values.
+            If the second sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="fe417c5a-6919-fab5-a4b5-23da6bb49a7d.htm">Reverse<span id="ID0ECABTBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABTBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EAABTBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABTBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Inverts the order of the elements in a sequence.
+            If the source sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="7ae54909-a907-a848-e2ba-b8d9d62d472a.htm">Select<span id="ID0EHABSBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABSBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TResult<span id="ID0EFABSBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABSBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABSBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABSBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TResult<span id="ID0EBABSBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABSBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Projects each element of a sequence into a new sequence.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="60f6911e-11aa-0d5b-fd3d-93f335a77d6a.htm">Select<span id="ID0EHABRBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABRBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TResult<span id="ID0EFABRBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABRBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABRBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABRBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Int32, TResult<span id="ID0EBABRBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABRBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Projects each element of a sequence into a new sequence.
+            Each element's index is used in the logic of the selector function.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="227af0b7-8e81-62f3-913c-8a084571dee1.htm">SelectMany<span id="ID0EKABQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EKABQBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TResult<span id="ID0EIABQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EIABQBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EGABQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EGABQBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, IEnumerable<span id="ID0EEABQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EEABQBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TResult<span id="ID0ECABQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABQBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script><span id="ID0EBABQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABQBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Projects each element of a sequence to an <a href="http://msdn2.microsoft.com/en-us/library/9eekhta0" target="_blank">IEnumerable<span id="ID0ECBDAQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAQBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAQBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAQBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a> and flattens the resulting enumerables into one sequence.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="7aeca0da-ab76-8af4-0118-d8042dc15f9b.htm">SelectMany<span id="ID0EKABPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EKABPBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TResult<span id="ID0EIABPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EIABPBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EGABPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EGABPBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Int32, IEnumerable<span id="ID0EEABPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EEABPBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TResult<span id="ID0ECABPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABPBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script><span id="ID0EBABPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABPBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Projects each element of a sequence to an <a href="http://msdn2.microsoft.com/en-us/library/9eekhta0" target="_blank">IEnumerable<span id="ID0ECBDAPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAPBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAPBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAPBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a> and flattens the resulting enumerables into one sequence.
+            The index of each source element is used in the projected form of that element.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="2d8c24d5-fbb5-2c23-da73-9ed8400c48f0.htm">SelectMany<span id="ID0EOABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EOABOBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TCollection, TResult<span id="ID0EMABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EMABOBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EKABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EKABOBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, IEnumerable<span id="ID0EIABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EIABOBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TCollection<span id="ID0EGABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EGABOBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script><span id="ID0EFABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABOBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, Func<span id="ID0EDABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABOBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TCollection, TResult<span id="ID0EBABOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABOBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Projects each element of a sequence to an <a href="http://msdn2.microsoft.com/en-us/library/9eekhta0" target="_blank">IEnumerable<span id="ID0ECBDAOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAOBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAOBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAOBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a>, flattens the resulting enumerables into one sequence, and invokes a result selector function on each element therein.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="f2e80077-1e6b-02cb-94ea-d14223d5bd99.htm">SelectMany<span id="ID0EOABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EOABNBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TCollection, TResult<span id="ID0EMABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EMABNBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EKABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EKABNBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Int32, IEnumerable<span id="ID0EIABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EIABNBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TCollection<span id="ID0EGABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EGABNBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script><span id="ID0EFABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABNBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, Func<span id="ID0EDABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABNBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, TCollection, TResult<span id="ID0EBABNBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABNBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Projects each element of a sequence to an <a href="http://msdn2.microsoft.com/en-us/library/9eekhta0" target="_blank">IEnumerable<span id="ID0ECBDANBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDANBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDANBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDANBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a>, flattens the resulting enumerables into one sequence, and invokes a result selector function on each element therein.
+            The index of each source element is used in the intermediate projected form of that element.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="bf689b8e-9b0f-af9f-aa41-d54d230d6338.htm">Skip<span id="ID0ECABMBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABMBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EAABMBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABMBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Bypasses a specified number of elements in a sequence and then returns the remaining elements.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="a45ba6bc-f8f0-127f-bfb3-e308b8a6596c.htm">SkipWhile<span id="ID0EHABLBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABLBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABLBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABLBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABLBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABLBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Boolean<span id="ID0EBABLBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABLBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
+            If the source sequence represents an infinite set or series and all elements satisfy the given condition, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="16d620e6-2578-26da-2492-1773207c199b.htm">SkipWhile<span id="ID0EHABKBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABKBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABKBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABKBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABKBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABKBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Int32, Boolean<span id="ID0EBABKBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABKBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements.
+            The element's index is used in the logic of the predicate function.
+            If the source sequence represents an infinite set or series and all elements satisfy the given condition, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="a8d20d9e-04cf-23af-5938-2b1028721085.htm">Sum<span id="ID0EHABJBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABJBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABJBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABJBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABJBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABJBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, BigInteger<span id="ID0EBABJBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABJBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Computes the sum of the sequence of <a href="http://msdn2.microsoft.com/en-us/library/dd268287" target="_blank">BigInteger</a> values that are obtained by invoking a transform function on each element of the input sequence.
+            If the source sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="c6651d34-5802-93a4-7192-28c16bb1ca2f.htm">Sum<span id="ID0EKABIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EKABIBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EIABIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EIABIBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EGABIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EGABIBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Nullable<span id="ID0EEABIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EEABIBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>BigInteger<span id="ID0ECABIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABIBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script><span id="ID0EBABIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABIBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Computes the sum of the sequence of <a href="http://msdn2.microsoft.com/en-us/library/b3h38hb0" target="_blank">Nullable<span id="ID0ECBDAIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDAIBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDAIBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDAIBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a> values that are obtained by invoking a transform function on each element of the input sequence.
+            If the source sequence represents an infinite set or series, this will never return!
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="684cd61b-ab89-8a08-4dca-6bdb144c3e2b.htm">Take<span id="ID0ECABHBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABHBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EAABHBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABHBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Returns a specified number of contiguous elements from the start of a sequence.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="2203c04e-9237-c539-3c4a-18af4c2539c5.htm">TakeWhile<span id="ID0EHABGBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABGBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABGBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABGBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABGBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABGBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Boolean<span id="ID0EBABGBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABGBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Returns elements from a sequence as long as a specified condition is true.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="fa3e637e-3b99-cfa3-2c48-ca38c1cba3aa.htm">TakeWhile<span id="ID0EHABFBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABFBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABFBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABFBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABFBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABFBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Int32, Boolean<span id="ID0EBABFBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABFBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Returns elements from a sequence as long as a specified condition is true.
+            The element's index is used in the logic of the predicate function.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="22212a62-0bf9-5a33-6cc5-d355817e5a48.htm">Union<span id="ID0EHABEBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABEBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABEBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABEBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEnumerable<span id="ID0EDABEBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABEBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABEBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABEBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Produces the set union of two sequences by using the default equality comparer.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="de19ec8b-f877-094b-0219-aad05dcdd820.htm">Union<span id="ID0ELABDBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ELABDBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EJABDBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EJABDBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(IEnumerable<span id="ID0EHABDBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABDBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABDBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABDBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>, IEqualityComparer<span id="ID0EDABDBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABDBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EBABDBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABDBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Produces the set union of two sequences by using a specified <a href="http://msdn2.microsoft.com/en-us/library/ms132151" target="_blank">IEqualityComparer<span id="ID0ECBDADBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECBDADBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EABDADBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EABDADBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a>.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="d8e38f30-5298-de27-319b-a874997ce5e9.htm">Where<span id="ID0EHABCBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABCBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABCBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABCBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABCBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABCBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Boolean<span id="ID0EBABCBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABCBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Filters a sequence of values based on a predicate.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="1e529d78-ddce-1999-0215-2da68c6ba61b.htm">Where<span id="ID0EHABBBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EHABBBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource<span id="ID0EFABBBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EFABBBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>(Func<span id="ID0EDABBBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EDABBBADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TSource, Int32, Boolean<span id="ID0EBABBBADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EBABBBADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script>)</a></td><td>Overloaded.  <div class="summary">
+            Filters a sequence of values based on a predicate.
+            Each element's index is used in the logic of the predicate function.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr><tr data="public;inherited;notNetfw;"><td><img src="../icons/pubextension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="997cfa0f-a011-e1f7-f803-298dc4b90137.htm">Zip<span id="ID0ECABABADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABABADAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>TFirst, TSecond, TResult<span id="ID0EAABABADAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABABADAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></td><td><div class="summary">
+            Applies a specified function to the corresponding elements of two sequences, producing a sequence of the results.
+            </div> (Defined by <a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a>.)</td></tr></table><a href="#mainBody">Top</a></div><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID4RB')" onkeypress="ExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Properties</span></div><div id="ID4RBSection" class="VS2013_CollapsibleSection"><table id="memberList" class="members"><tr><th class="ps_iconColumn">
+								 
+							</th><th class="ps_nameColumn">Name</th><th class="ps_descriptionColumn">Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="5e47f00f-3f25-de96-affb-c4078c461922.htm">Count</a></td><td><div class="summary">
+            Returns the length of this sequence.
+            If this sequence represents an infinite set or series, this will never return!
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="e54ca251-0a2f-9715-91ee-9acfba566e49.htm">HasDefiniteSize</a></td><td><div class="summary">
+            Tests whether this sequence is known to have a finite size.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="7e41aaab-7655-656f-d937-b760ac00f4f2.htm">Head</a></td><td><div class="summary">
+            Returns the first element of this sequence.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="6fb6a2fb-3c7e-d449-91bf-d1d42ff30c5b.htm">Indices</a></td><td><div class="summary">
+            Produces the range of all indices of this sequence.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="f74f855a-de71-4343-8ed4-984edb907e2c.htm">Init</a></td><td><div class="summary">
+            Returns this sequence without its last element.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="1b9b1a22-1a38-a952-dfcf-defd8dd1c4a3.htm">IsEmpty</a></td><td><div class="summary">
+            Tests whether the sequence is empty.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="7573a890-d7c4-8e43-8169-2262c0ed23af.htm">IsTailDefined</a></td><td><div class="summary">
+            Checks whether this sequence's tail has been evaluated.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="b259d584-d4aa-b625-c52e-5d70a374999c.htm">Item</a></td><td><div class="summary">
+            Gets the element at the specified index.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="24fcabe9-a309-aa8f-7655-839dda62e040.htm">NonEmpty</a></td><td><div class="summary">
+            Tests whether the sequence is not empty.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="c33ca4a6-b869-cf5c-aec4-6d323c879daa.htm">Tail</a></td><td><div class="summary">
+            Returns a sequence of all elements except the first.
+            </div></td></tr></table><a href="#mainBody">Top</a></div><a name="seeAlsoSection"></a><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID5RB')" onkeypress="ExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />See Also</span></div><div id="ID5RBSection" class="VS2013_CollapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="11006482-8791-6205-9f63-bdbb13db6834.htm">Sequences Namespace</a></div></div></div></div></div></div><div id="VS2013_footer" class="VS2013_footer"></div></body></html>
