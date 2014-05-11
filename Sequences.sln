@@ -19,22 +19,31 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Docs|Any CPU = Docs|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{97B797FB-B2D8-414B-9459-71EB27113D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97B797FB-B2D8-414B-9459-71EB27113D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B797FB-B2D8-414B-9459-71EB27113D60}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
+		{97B797FB-B2D8-414B-9459-71EB27113D60}.Docs|Any CPU.Build.0 = Docs|Any CPU
 		{97B797FB-B2D8-414B-9459-71EB27113D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97B797FB-B2D8-414B-9459-71EB27113D60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
+		{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}.Docs|Any CPU.Build.0 = Docs|Any CPU
 		{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
+		{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}.Docs|Any CPU.Build.0 = Docs|Any CPU
 		{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7807882D-4578-40A2-9E24-970E1E992EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7807882D-4578-40A2-9E24-970E1E992EC5}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
+		{7807882D-4578-40A2-9E24-970E1E992EC5}.Docs|Any CPU.Build.0 = Docs|Any CPU
 		{7807882D-4578-40A2-9E24-970E1E992EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

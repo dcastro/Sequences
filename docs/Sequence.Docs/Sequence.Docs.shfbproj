@@ -66,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Docs' ">
+    <OutputPath>bin\Docs\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Folder Include="Content" />
     <Folder Include="Content\VersionHistory" />
