@@ -150,7 +150,37 @@ public ISequence<int> PrimesWithin(ISequence<int> range)
 }
 ```
 
+#### Pascal's Triangle
 
+Everyone knows the famous [Pascal's Triangle][6].
+
+![Pascal's Triangle][pascal]
+
+The triangle starts with a 1 at the top. In every other row, each number is the sum of the two directly above it.
+
+There are all sorts of ways of representing Pascal's triangle using sequences, but here's an interesting one:
+
+```cs
+Func<Tuple<int, int>, int> sum = pair => pair.Item1 + pair.Item2;
+
+Func<ISequence<int>, ISequence<int>> rowFactory =
+    row => row.Append(0)                //shift row to the left
+              .Zip(row.Prepend(0))      //shift row to the right, and zip both shifted rows
+              .Select(sum);             //sum the two shifted rows
+
+var triangle = Sequence.Iterate(
+                            start: Sequence.With(1),
+                            func: rowFactory);
+```
+
+You start with row (1). From then on, every row is computed by shifting the row to the right, shift the row to the left, zipping both shifted rows together and producing the sum of each tuple. For example, given the row (1, 4, 6, 4, 1):
+
+```
+0 1 3 3 1       //shift right
+1 3 3 1 0       //shift left
+↓ ↓ ↓ ↓ ↓
+1 4 6 4 1
+```
 
 For more examples, refer to the [functional tests project][1].
 
@@ -177,4 +207,5 @@ The constraint `B >: A` (read *A derives from B*) cannot be expressed in C# (eve
 [3]: http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Stream
 [4]: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 [5]: http://msdn.microsoft.com/en-gb/library/d5x73970.aspx
-
+[6]: http://en.wikipedia.org/wiki/Pascal's_triangle
+[pascal]: https://lh5.googleusercontent.com/-PSz_Hc91byA/U2-3Ov8NAaI/AAAAAAAABpg/6gxF4YaPt0E/w200-h195-no/pascals-triangle.png
