@@ -115,14 +115,14 @@ fibs.Take(10).ForEach(Console.WriteLine);
 #### Prime numbers
 
 One way to find every prime number in a given range is to use the [Sieve of Eratosthenes][4].
-To find the prime numbers up to 100, the sieve goes like this:
+To find the prime numbers up to 100, a slight variation of the sieve goes like this:
 
 1. Start with a list representing the range [2, 100].
-2. Let *p* equal 2, the first prime number.
-3. Remove every multiple of *p* from the list, except *p* itself.
-4. Find the number greater than *p* that hasn't been removed from the list.
-  a) If there is no such number, stop;
-  b) Otherwise, let *p* now be this number, and repeat from step 3.
+2. Let *p* be the head of the list.
+3. Take *p* as the next prime number, and remove every multiple of *p* from the list.
+4. If the list is empty:
+  * stop;
+  * otherwise, repeat from step 2.
 
 Here's a non-optimized way of implementing the sieve as a sequence.
 
