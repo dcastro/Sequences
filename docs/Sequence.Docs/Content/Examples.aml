@@ -15,20 +15,75 @@
            titles.  Specify a numeric value as the inner text to limit it to
            a specific number of sub-topics when creating the outline.  Specify
            zero (0) to limit it to top-level sections only.  -->
-      <!-- <autoOutline /> -->
+      <autoOutline />
 
-      <para>Required introduction</para>
+      <para>
+        In <link xlink:href="3a04061c-5bf3-4ebd-a084-cf60e7f7a13a"/>, we saw how to represent sequences of natural and odd numbers.
+        In this section, we take a look at a few more complex examples.
+      </para>
+
+      <para>
+        For more examples, refer to the <externalLink>
+            <linkText>functional tests project</linkText>
+            <linkUri>https://github.com/dcastro/Sequences/tree/master/tests/Sequences.Tests.Functional</linkUri>
+          </externalLink>.
+      </para>
     </introduction>
-
-    <!-- Add one or more top-level section elements.  These are collapsible.
-         If using <autoOutline />, add an address attribute to identify it
-         and specify a title so that it can be jumped to with a hyperlink. -->
-    <section address="Section1">
-      <title>Optional section title</title>
+    
+    <section address="fibonacci">
+      <title>Fibonacci sequence</title>
       <content>
-        <!-- Uncomment this to create a sub-section outline
-        <autoOutline /> -->
-        <para>Add one or more sections with content</para>
+        <para>
+          The Fibonacci sequence is a famous series in mathematics,
+          where each fibonacci number is defined as the sum of the two previous fibonacci numbers,
+          i.e. <codeInline>F(n) = F(n-1) + F(n-2)</codeInline>, with seed values <codeInline>F(0) = 0</codeInline> and <codeInline>F(1) = 1</codeInline>.
+        </para>
+
+        <para>
+          In scala, the fibonacci sequence is commonly expressed as follows:
+        </para>
+        
+        <code language="cs" title="Fibonacci sequence in Scala">
+          <![CDATA[
+            val fibs: Stream[Int] = 0 #:: 1 #:: fibs.zip(fibs.tail).map { n => n._1 + n._2 }]]>
+        </code>
+
+        <para>
+          In C#, the syntax is a little more verbose, but still readable:
+        </para>
+        
+        <code language="cs" title="Fibonacci sequence in C#">
+          <![CDATA[
+            Func<Tuple<int, int>, int> sum = pair => pair.Item1 + pair.Item2;
+
+            ISequence<int> fibs = null;
+
+            fibs = Sequence.With(0, 1)               //start with (0, 1, ?)
+                           .Concat(() =>             //and then
+                               fibs.Zip(fibs.Tail)   //zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))
+                                   .Select(sum));    //select the sum of each pair (i.e., 1, 2, 3, 5, 8)]]>
+        </code>
+        
+        <para>
+          The code above creates more objects than needed. The following implementation shows a more efficient way of representing the fibonacci sequence:
+        </para>
+        
+        <code language="cs" title="Efficient Fibonacci sequence">
+          <![CDATA[
+            using System.Numerics;
+
+            //current and next are any two consecutive fibonacci numbers.
+            ISequence<BigInteger> Fibs(BigInteger current, BigInteger next)
+            {
+                return new Sequence<BigInteger>(current, () => Fibs(next, current + next));
+            }
+
+            var fibs = Fibs(0, 1);
+
+            //prints 0 1 1 2 3 5 8 13 21 34
+            fibs.Take(10).ForEach(Console.WriteLine);]]>
+        </code>
+        
       </content>
       <!-- If a section contains a sections element, its content creates
            sub-sections.  These are not collapsible.
@@ -48,42 +103,126 @@
       </sections> -->
     </section>
 
+    <section address="primes">
+      <title>Prime numbers</title>
+      <content>
+        <para>
+          One way to find every prime number in a given range is to use the <externalLink>
+            <linkText>Sieve of Eratosthenes</linkText>
+            <linkUri>http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</linkUri>
+          </externalLink>.
+          To find the prime numbers up to 100, a slight variation of the sieve goes like this:
+        </para>
+    
+        <list class="ordered">
+          <listItem>
+            <para>Start with a list representing the range <codeInline>[2, 100]</codeInline>.</para>
+          </listItem>
+          <listItem>
+            <para>Let <legacyItalic>p</legacyItalic> be the head of the list.</para>
+          </listItem>
+          <listItem>
+            <para>Take <legacyItalic>p</legacyItalic> as the next prime number, and remove every multiple of <legacyItalic>p</legacyItalic> from the list.</para>
+          </listItem>
+          <listItem>
+            <para>If the list is empty:</para>
+            <list class="bullet">
+              <listItem>
+                <para>stop;</para>
+              </listItem>
+              <listItem>
+                <para>otherwise, repeat from step 2.</para>
+              </listItem>
+            </list>        
+          </listItem>
+        </list>
+
+        <para>
+          Here's a way of implementing the sieve as a sequence.
+        </para>
+        
+        <code language="cs" title="Sieve of Eratosthenes">
+          <![CDATA[
+            var range = Sequence.Range(2, 101);
+            var primes = PrimesWithin(range);
+
+            //prints: 2 3 5 7 11
+            Console.WriteLine(primes.Take(5).MkString(" "));            
+
+            public ISequence<int> PrimesWithin(ISequence<int> range)
+            {
+                if (range.IsEmpty)
+                    return Sequence.Empty<int>();
+
+                //take the next prime number
+                var p = range.Head;
+
+                //skip p, and remove further multiples of p
+                var filtered = range.Tail.Where(num => num % p != 0).Force();
+
+                return new Sequence<int>(p, () => PrimesWithin(filtered));
+            }]]>
+        </code>
+    
+      </content>
+    </section>
+
+    <section address="pascal">
+      <title>Pascal's Triangle</title>
+      <content>
+        <para>
+          Everyone knows the famous <externalLink>
+            <linkText>Pascal's Triangle</linkText>
+            <linkUri>http://en.wikipedia.org/wiki/Pascal's_triangle</linkUri>
+          </externalLink>.
+        </para>
+      
+        <mediaLink>
+          <image xlink:href="pascals-triangle"/>
+        </mediaLink>
+
+        <para>
+          The triangle starts with a 1 at the top. In every other row, each number is the sum of the two directly above it.
+        </para>
+
+        <para>
+          There are all sorts of ways of representing Pascal's triangle using sequences, but here's an interesting one:
+        </para>
+      
+        <code language="cs" title="Pascal's Triangle">
+          <![CDATA[
+            Func<Tuple<int, int>, int> sum = pair => pair.Item1 + pair.Item2;
+
+            Func<ISequence<int>, ISequence<int>> rowFactory =
+                row => row.Append(0)                //shift row to the left
+                          .Zip(row.Prepend(0))      //shift row to the right, and zip both shifted rows
+                          .Select(sum);             //sum the two shifted rows
+
+            var triangle = Sequence.Iterate(
+                                        start: Sequence.With(1),
+                                        func: rowFactory);]]>
+        </code>
+
+        <para>
+          You start with row (1).
+          From then on, every row is computed by shifting the row to the right, shifting the row to the left, zipping both shifted rows together and producing the sum of each tuple.
+          For example, given the row (1, 3, 3, 1):
+        </para>
+        
+        <code language="none" title="Sieve of Eratosthenes">
+          <![CDATA[
+            0 1 3 3 1       //shift right
+            1 3 3 1 0       //shift left
+            ↓ ↓ ↓ ↓ ↓
+            1 4 6 4 1]]>
+        </code>
+    
+      </content>
+    </section>
+
     <relatedTopics>
-      <!-- One or more of the following:
-           - A local link
-           - An external link
-           - A code entity reference
-
-      <link xlink:href="Other Topic's ID"/>
-      <link xlink:href="Other Topic's ID">Link inner text</link>
-
-      <externalLink>
-          <linkText>Link text</linkText>
-          <linkAlternateText>Optional alternate link text</linkAlternateText>
-          <linkUri>URI</linkUri>
-      </externalLink>
-
-      <codeEntityReference>API member ID</codeEntityReference>
-
-      Examples:
-
-      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-      <externalLink>
-          <linkText>SHFB on CodePlex</linkText>
-          <linkAlternateText>Go to CodePlex</linkAlternateText>
-          <linkUri>http://shfb.codeplex.com</linkUri>
-      </externalLink>
-
-      <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-      <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-      -->
+      <codeEntityReference>T:Sequences.ISequence`1</codeEntityReference>
+      <codeEntityReference>T:Sequences.Sequence</codeEntityReference>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

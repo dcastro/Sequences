@@ -94,7 +94,7 @@ fibs = Sequence.With(0, 1)               //start with (0, 1, ?)
                        .Select(sum));    //select the sum of each pair (i.e., 1, 2, 3, 5, 8)
 ```
 
-The following implementation shows a more efficient way of representing the fibonacci sequence:
+The code above creates more objects than needed. The following implementation shows a more efficient way of representing the fibonacci sequence:
 
 ```cs
 using System.Numerics;
@@ -107,9 +107,8 @@ ISequence<BigInteger> Fibs(BigInteger current, BigInteger next)
 
 var fibs = Fibs(0, 1);
 
-fibs.Take(10).ForEach(Console.WriteLine);
-
 //prints 0 1 1 2 3 5 8 13 21 34
+fibs.Take(10).ForEach(Console.WriteLine);
 ```
 
 #### Prime numbers
@@ -124,16 +123,15 @@ To find the prime numbers up to 100, a slight variation of the sieve goes like t
   * stop;
   * otherwise, repeat from step 2.
 
-Here's a non-optimized way of implementing the sieve as a sequence.
+Here's a way of implementing the sieve as a sequence.
 
 ```cs
 
 var range = Sequence.Range(2, 101);
 var primes = PrimesWithin(range);
 
-Console.WriteLine(primes.Take(5).MkString(" "));
-
 //prints: 2 3 5 7 11
+Console.WriteLine(primes.Take(5).MkString(" "));
 
 public ISequence<int> PrimesWithin(ISequence<int> range)
 {
@@ -144,7 +142,7 @@ public ISequence<int> PrimesWithin(ISequence<int> range)
     var p = range.Head;
 
     //skip p, and remove further multiples of p
-    var filtered = range.Tail.Where(num => num % p != 0);
+    var filtered = range.Tail.Where(num => num % p != 0).Force();
 
     return new Sequence<int>(p, () => PrimesWithin(filtered));
 }
@@ -173,7 +171,7 @@ var triangle = Sequence.Iterate(
                             func: rowFactory);
 ```
 
-You start with row (1). From then on, every row is computed by shifting the row to the right, shift the row to the left, zipping both shifted rows together and producing the sum of each tuple. For example, given the row (1, 3, 3, 1):
+You start with row (1). From then on, every row is computed by shifting the row to the right, shifting the row to the left, zipping both shifted rows together and producing the sum of each tuple. For example, given the row (1, 3, 3, 1):
 
 ```
 0 1 3 3 1       //shift right
