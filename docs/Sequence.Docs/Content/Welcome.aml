@@ -6,6 +6,20 @@
         <linkText>Stream[+A]</linkText>
         <linkUri>http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Stream</linkUri>
       </externalLink> to C#.</para>
+
+      <para>
+        Sequences is available on
+        <externalLink>
+          <linkText>NuGet</linkText>
+          <linkUri>https://www.nuget.org/packages/Sequences</linkUri>
+        </externalLink>
+        and the source code is on
+        <externalLink>
+          <linkText>GitHub</linkText>
+          <linkUri>https://github.com/dcastro/Sequences</linkUri>
+        </externalLink>
+        
+      </para>
 		</introduction>
 
 		<section>
