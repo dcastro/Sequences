@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Sequences</id>
+        <version>1.0.0</version>
+        <title>Sequences</title>
+        <authors>DCastro</authors>
+        <owners>DCastro</owners>
+        <projectUrl>https://github.com/dcastro/Sequences</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Sequences is a port of Scala's Stream[+A] to C#.
+
+A Sequence&lt;T&gt; is an immutable lazy list whose elements are only evaluated when they are needed. A sequence is composed by a head (the first element) and a lazily-evaluated tail (the remaining elements).
+
+The fact that the tail is lazily-evaluated, makes it easy to represent infinite series or sets. 
+
+See the project's page for examples: https://github.com/dcastro/Sequences</description>
+        <summary>Sequences is a port of Scala's Streams to C#. It features lazy evaluation, immutability and memoization.</summary>
+        <releaseNotes />
+        <copyright>© 2014 Diogo Castro</copyright>
+        <tags>enumerable sequence collection immutable data-structures scala lazy stream</tags>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.Numerics" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="..\bin\Sequences.dll" target="lib\portable-net45+sl5+win8\Sequences.dll" />
+        <file src="..\bin\Sequences.pdb" target="lib\portable-net45+sl5+win8\Sequences.pdb" />
+        <file src="..\bin\Sequences.XML" target="lib\portable-net45+sl5+win8\Sequences.XML" />
+    </files>
+</package>
