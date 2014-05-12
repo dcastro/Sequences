@@ -132,8 +132,9 @@ Assistance Markup Language (MAML) which is used to create these topics.</para>
     </content>
 		</section>
 
-		<relatedTopics>
-			<link xlink:href="f9e21197-e60e-4af1-9c38-c4ed4498ac04" />
-		</relatedTopics>
+    <relatedTopics>
+      <link xlink:href="f9e21197-e60e-4af1-9c38-c4ed4498ac04" />
+      <link xlink:href="d926337d-29d9-4fba-96a3-080e2a7f31e2"/>
+    </relatedTopics>
 	</developerConceptualDocument>
 </topic>

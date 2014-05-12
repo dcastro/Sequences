@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="3a04061c-5bf3-4ebd-a084-cf60e7f7a13a" visible="True" isDefault="true" isSelected="true" title="Welcome to Sequences">
+  <Topic id="3a04061c-5bf3-4ebd-a084-cf60e7f7a13a" visible="True" isDefault="true" title="Welcome to Sequences">
     <HelpKeywords>
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>
   </Topic>
+  <Topic id="d926337d-29d9-4fba-96a3-080e2a7f31e2" visible="True" isSelected="true" title="Examples" />
   <Topic id="f9e21197-e60e-4af1-9c38-c4ed4498ac04" visible="True" isExpanded="true" title="Version History">
     <HelpKeywords>
       <HelpKeyword index="K" term="version, history" />
