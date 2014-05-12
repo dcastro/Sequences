@@ -28,8 +28,7 @@ var naturals = Sequence.From(1);
 
 Sequences also features memoization, i.e., the sequence stores previously computed values to avoid re-evaluation.
 
-```chsarp
-
+```cs
 //start with number 1, and then keep adding 2 to the previous number
 var odds = Sequence.Iterate(1, odd =>
     {
@@ -126,7 +125,6 @@ To find the prime numbers up to 100, a slight variation of the sieve goes like t
 Here's a way of implementing the sieve as a sequence.
 
 ```cs
-
 var range = Sequence.Range(2, 101);
 var primes = PrimesWithin(range);
 
@@ -182,11 +180,6 @@ You start with row (1). From then on, every row is computed by shifting the row 
 
 For more examples, refer to the [functional tests project][1].
 
-
-## Documentation
-Documentation is available at [dcastro.github.io/Sequences][2].
-
-
 ## Limitations
 
 Due to a limitation in [generic type constraints][5] as of C# 5.0, sequences are *not* covariant, as opposed to Scala's `Stream[+A]`.
@@ -199,6 +192,15 @@ copyToBuffer[B >: A](dest: Buffer[B]): Unit
 
 The constraint `B >: A` (read *A derives from B*) cannot be expressed in C# (even though the opposite can be expressed as `where B : A` or *B derives from A*) unless `A` is also one of *copyToBuffer*'s type parameters - which it isn't.
 
+## Documentation
+Documentation is available at [dcastro.github.io/Sequences][2].
+
+## NuGet
+To install [Sequences][7], run the following command in the Package Manager Console
+
+```
+PM> Install-Package Sequences
+```
 
 [1]: https://github.com/dcastro/Sequences/tree/master/tests/Sequences.Tests.Functional
 [2]: http://diogocastro.com/Sequences
@@ -206,4 +208,5 @@ The constraint `B >: A` (read *A derives from B*) cannot be expressed in C# (eve
 [4]: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 [5]: http://msdn.microsoft.com/en-gb/library/d5x73970.aspx
 [6]: http://en.wikipedia.org/wiki/Pascal's_triangle
-[pascal]: https://lh5.googleusercontent.com/-PSz_Hc91byA/U2-3Ov8NAaI/AAAAAAAABpg/6gxF4YaPt0E/w200-h195-no/pascals-triangle.png
+[7]: https://www.nuget.org/packages/Sequences/
+[pascal]: https://raw.githubusercontent.com/dcastro/Sequences/master/docs/Sequence.Docs/Media/pascals-triangle.png
