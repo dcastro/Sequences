@@ -2,16 +2,17 @@
 <HelpTOC>
 
   <HelpTOCNode Title="Welcome to Sequences" Url="html/3a04061c-5bf3-4ebd-a084-cf60e7f7a13a.htm" />
-  <HelpTOCNode Id="359a6520-df2f-4b68-aea3-46b414ddcaf5" Title="Version History" Url="html/f9e21197-e60e-4af1-9c38-c4ed4498ac04.htm">
+  <HelpTOCNode Title="Examples" Url="html/d926337d-29d9-4fba-96a3-080e2a7f31e2.htm" />
+  <HelpTOCNode Id="10488d0e-7355-49aa-a645-24aee2275cfc" Title="Version History" Url="html/f9e21197-e60e-4af1-9c38-c4ed4498ac04.htm">
     <HelpTOCNode Title="Version 1.0.0.0" Url="html/b285c333-2fce-426e-b9d1-a5d591c7b6d0.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="5a854dc6-f131-44c2-ac6d-aa9d9262610b" Title="Sequences" Url="html/11006482-8791-6205-9f63-bdbb13db6834.htm">
-    <HelpTOCNode Id="80c8352a-5978-4c36-8508-30ee18e773f2" Title="ISequence(T) Interface" Url="html/3b6a3c7e-a6e5-eec8-e046-c3f2320ef836.htm">
-      <HelpTOCNode Id="7ba7f7ef-6903-4fcd-b11a-6a17065a6f6c" Title="ISequence(T) Methods" Url="html/d1c39df8-c63c-a26d-fec1-0774e1d93445.htm">
+  <HelpTOCNode Id="8b1c0400-bec6-49f5-88ea-ba4d1732028d" Title="Sequences" Url="html/11006482-8791-6205-9f63-bdbb13db6834.htm">
+    <HelpTOCNode Id="d409275a-02cf-4c73-896b-843ecb2fc91c" Title="ISequence(T) Interface" Url="html/3b6a3c7e-a6e5-eec8-e046-c3f2320ef836.htm">
+      <HelpTOCNode Id="9315864c-fbb0-4b92-8d49-bef4518c6e5b" Title="ISequence(T) Methods" Url="html/d1c39df8-c63c-a26d-fec1-0774e1d93445.htm">
         <HelpTOCNode Title="Append Method " Url="html/da58ecba-a441-940b-0f1c-2f91bdb40b74.htm" />
         <HelpTOCNode Title="Combinations Method " Url="html/cc99b64f-87a8-7d6f-72ee-8a763b05856c.htm" />
         <HelpTOCNode Title="Concat Method " Url="html/30fb007d-a36e-9426-5abc-0f0e38577f6d.htm" />
-        <HelpTOCNode Id="9247a49e-77f6-4c10-957b-cfda8b12d044" Title="CopyTo Method " Url="html/431af332-6187-7c0f-300f-3812c2c5f82d.htm">
+        <HelpTOCNode Id="a9114846-eebf-42fc-b8e3-fec706f25220" Title="CopyTo Method " Url="html/431af332-6187-7c0f-300f-3812c2c5f82d.htm">
           <HelpTOCNode Title="CopyTo Method (T[])" Url="html/ba6b9e8a-0395-6811-76de-f25ff0c49402.htm" />
           <HelpTOCNode Title="CopyTo Method (T[], Int32)" Url="html/659cbbbf-813a-e581-5b77-d8ac91381fab.htm" />
           <HelpTOCNode Title="CopyTo Method (Int32, T[], Int32, Int32)" Url="html/f322242d-0c20-6184-7235-b5d01fddeb8b.htm" />
@@ -21,29 +22,30 @@
         <HelpTOCNode Title="Force Method " Url="html/235be8fc-e345-5aad-49c4-7d11f97dfe23.htm" />
         <HelpTOCNode Title="ForEach Method " Url="html/cee38703-e066-c5bc-5040-d9bc7e6a4b14.htm" />
         <HelpTOCNode Title="Grouped Method " Url="html/31555d0c-fc0d-cb6e-9847-5693c587fb62.htm" />
-        <HelpTOCNode Id="754c4e94-e77e-4eba-a872-db7053f85232" Title="IndexOf Method " Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm">
+        <HelpTOCNode Id="23a2ba16-13bf-47a0-8c9b-3dde58e8ebc9" Title="IndexOf Method " Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm">
           <HelpTOCNode Title="IndexOf Method (T)" Url="html/a5ac7d69-6a08-ca20-6f5b-5ce13f8e10a0.htm" />
           <HelpTOCNode Title="IndexOf Method (T, Int32)" Url="html/91f22463-ec93-c80d-cd78-bfbe2992e7a7.htm" />
           <HelpTOCNode Title="IndexOf Method (T, Int32, Int32)" Url="html/77f84bdc-2657-b985-909f-0889b2ee0db2.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="650fba3b-c2c6-490d-be4e-07071e1b0a1d" Title="IndexWhere Method " Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm">
+        <HelpTOCNode Id="a5a78396-0d86-42a9-bf17-219783a5e7dc" Title="IndexWhere Method " Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm">
           <HelpTOCNode Title="IndexWhere Method (Func(T, Boolean))" Url="html/436cff8b-4228-a974-9256-49bfaa85ca5c.htm" />
           <HelpTOCNode Title="IndexWhere Method (Func(T, Boolean), Int32)" Url="html/c2795850-40d3-1d1d-ccd8-a576bd669ffa.htm" />
           <HelpTOCNode Title="IndexWhere Method (Func(T, Boolean), Int32, Int32)" Url="html/9017ae04-2615-f922-eb67-1e7144421628.htm" />
         </HelpTOCNode>
+        <HelpTOCNode Title="Indices Method " Url="html/0ebf0beb-4836-577f-46f6-a3a0e1397f12.htm" />
         <HelpTOCNode Title="Inits Method " Url="html/79628eea-381b-a869-82f0-7a8d5cac1aec.htm" />
-        <HelpTOCNode Id="5f38801f-3e51-4346-b343-d5306c9627b3" Title="LastIndexOf Method " Url="html/97fa9285-aabe-e95d-2aa6-34fe2b76594f.htm">
+        <HelpTOCNode Id="4f7a3acf-61b7-49a3-8638-cd8bb8b1f914" Title="LastIndexOf Method " Url="html/97fa9285-aabe-e95d-2aa6-34fe2b76594f.htm">
           <HelpTOCNode Title="LastIndexOf Method (T)" Url="html/86e12f81-8f16-4938-3513-347b5f095c2c.htm" />
           <HelpTOCNode Title="LastIndexOf Method (T, Int32)" Url="html/6ed55ab1-64b6-9209-fc12-9c91909c3bf8.htm" />
           <HelpTOCNode Title="LastIndexOf Method (T, Int32, Int32)" Url="html/05644b96-9a7d-049b-541b-d4ad3cbc1fe9.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="530730cb-d43e-46d1-9f76-07f36dba3a79" Title="LastIndexWhere Method " Url="html/ab281eb8-f406-df31-497b-b87c14d82f55.htm">
+        <HelpTOCNode Id="7ea7b621-136a-4e69-9614-6d18e767265f" Title="LastIndexWhere Method " Url="html/ab281eb8-f406-df31-497b-b87c14d82f55.htm">
           <HelpTOCNode Title="LastIndexWhere Method (Func(T, Boolean))" Url="html/5d66d2c0-5371-a3be-1ace-dd118cc8e47b.htm" />
           <HelpTOCNode Title="LastIndexWhere Method (Func(T, Boolean), Int32)" Url="html/05c92549-d639-1254-e1f3-c0171df60218.htm" />
           <HelpTOCNode Title="LastIndexWhere Method (Func(T, Boolean), Int32, Int32)" Url="html/68b38ebd-5c80-2c5a-9692-7517d0324c0d.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="LengthCompare Method " Url="html/da54ce1c-f86f-00bd-e65f-38a3a2d5a47e.htm" />
-        <HelpTOCNode Id="0c9cf448-0f14-4ced-9af6-ebbef81dbf8b" Title="MkString Method " Url="html/728653b5-bd27-7ed5-a3b2-e6dc6e0427fa.htm">
+        <HelpTOCNode Id="91db2e93-f703-4105-b48d-2e63bd6c9f55" Title="MkString Method " Url="html/728653b5-bd27-7ed5-a3b2-e6dc6e0427fa.htm">
           <HelpTOCNode Title="MkString Method " Url="html/a33156f4-7409-1b85-ceee-24b63d8ab01b.htm" />
           <HelpTOCNode Title="MkString Method (String)" Url="html/c204cd77-a340-4436-dea6-ff2445cb9a59.htm" />
         </HelpTOCNode>
@@ -59,7 +61,7 @@
         <HelpTOCNode Title="Scan Method " Url="html/b6ab7896-4e21-a406-05a7-6738edff1242.htm" />
         <HelpTOCNode Title="ScanRight Method " Url="html/4b66e94b-9710-216c-44df-dc726f41f1fd.htm" />
         <HelpTOCNode Title="Slice Method " Url="html/d40f6385-d88c-fb9c-e468-d26b762044a0.htm" />
-        <HelpTOCNode Id="fe4c86b9-cdd5-42ea-9f3e-5ebf0dc3b8ae" Title="Sliding Method " Url="html/3ace615f-acdf-753d-1496-f08f9d7dcb60.htm">
+        <HelpTOCNode Id="1631ed12-3b02-4dd4-b725-1d84912e6d66" Title="Sliding Method " Url="html/3ace615f-acdf-753d-1496-f08f9d7dcb60.htm">
           <HelpTOCNode Title="Sliding Method (Int32)" Url="html/fd66bbad-29f4-fcff-cb5d-c9d02db8b800.htm" />
           <HelpTOCNode Title="Sliding Method (Int32, Int32)" Url="html/51260b8a-1562-10dd-1f97-b19b1251f02a.htm" />
         </HelpTOCNode>
@@ -71,11 +73,10 @@
         <HelpTOCNode Title="ZipAll(TSecond) Method " Url="html/598df1e1-f1d4-7e9d-4aff-983cecaffa8e.htm" />
         <HelpTOCNode Title="ZipWithIndex Method " Url="html/71b7a74a-57f5-2494-69b2-1bf5e53fcd51.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c1eb42ee-3653-4697-8c78-588d72ac5943" Title="ISequence(T) Properties" Url="html/ba8d0746-a322-dc7c-ba6f-f4b3a0e4b759.htm">
+      <HelpTOCNode Id="1626ddd8-dfdd-46e0-9c4a-04fc9741f0cb" Title="ISequence(T) Properties" Url="html/ba8d0746-a322-dc7c-ba6f-f4b3a0e4b759.htm">
         <HelpTOCNode Title="Count Property " Url="html/5e47f00f-3f25-de96-affb-c4078c461922.htm" />
         <HelpTOCNode Title="HasDefiniteSize Property " Url="html/e54ca251-0a2f-9715-91ee-9acfba566e49.htm" />
         <HelpTOCNode Title="Head Property " Url="html/7e41aaab-7655-656f-d937-b760ac00f4f2.htm" />
-        <HelpTOCNode Title="Indices Property " Url="html/6fb6a2fb-3c7e-d449-91bf-d1d42ff30c5b.htm" />
         <HelpTOCNode Title="Init Property " Url="html/f74f855a-de71-4343-8ed4-984edb907e2c.htm" />
         <HelpTOCNode Title="IsEmpty Property " Url="html/1b9b1a22-1a38-a952-dfcf-defd8dd1c4a3.htm" />
         <HelpTOCNode Title="IsTailDefined Property " Url="html/7573a890-d7c4-8e43-8169-2262c0ed23af.htm" />
@@ -84,31 +85,31 @@
         <HelpTOCNode Title="Tail Property " Url="html/c33ca4a6-b869-cf5c-aec4-6d323c879daa.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="bdff8fc6-4083-4c81-bc4e-034800399400" Title="Sequence Class" Url="html/724d51e6-91d7-5334-ae31-0e918f93f065.htm">
-      <HelpTOCNode Id="3bd611ee-f015-45aa-813a-63e551186964" Title="Sequence Methods" Url="html/a98cb31b-02e8-98ee-a13c-be083294f1b2.htm">
+    <HelpTOCNode Id="fb9cffff-5a35-4862-9db5-c19d10d0a33a" Title="Sequence Class" Url="html/724d51e6-91d7-5334-ae31-0e918f93f065.htm">
+      <HelpTOCNode Id="5a19053f-be86-4256-afe4-915e50715324" Title="Sequence Methods" Url="html/a98cb31b-02e8-98ee-a13c-be083294f1b2.htm">
         <HelpTOCNode Title="AsSequence(T) Method " Url="html/9cf8aaf5-db79-9eee-68c7-12d210740370.htm" />
-        <HelpTOCNode Id="755f31dd-c60b-4eb0-b3bf-1266c6fb7c08" Title="Continually Method " Url="html/7d1c02cb-1e00-dbb6-dc1f-eb62940a5eb0.htm">
+        <HelpTOCNode Id="3e3dbb97-de44-41c6-93fc-1cb238f031ce" Title="Continually Method " Url="html/7d1c02cb-1e00-dbb6-dc1f-eb62940a5eb0.htm">
           <HelpTOCNode Title="Continually(T) Method (Func(T))" Url="html/1c1ede56-b430-f858-bdb2-8347bb7eaaab.htm" />
           <HelpTOCNode Title="Continually(T) Method (T)" Url="html/5301b34f-e260-6c97-5bfb-7a8bda0c7b85.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="b63b3df9-c72a-4637-8d52-bd40fe609434" Title="Distinct Method " Url="html/044c0de8-98ac-429e-4f83-cc9ea8c0323a.htm">
+        <HelpTOCNode Id="1e98b72d-f942-4cac-aede-f7ab8a3e9e0a" Title="Distinct Method " Url="html/044c0de8-98ac-429e-4f83-cc9ea8c0323a.htm">
           <HelpTOCNode Title="Distinct(TSource) Method (ISequence(TSource))" Url="html/8eb76c03-b8bd-2478-2e36-b113395a50b8.htm" />
           <HelpTOCNode Title="Distinct(TSource) Method (ISequence(TSource), IEqualityComparer(TSource))" Url="html/a982e69a-86d4-47ad-6ef3-d7e2b02a87e2.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Empty(T) Method " Url="html/b7101d5a-e4c8-c3d3-7f56-fe2ef122fcc8.htm" />
-        <HelpTOCNode Id="7dec5077-8e01-4d55-9da6-5267328abeb3" Title="Except Method " Url="html/8945a3be-12aa-8e31-1f8c-5297987954c3.htm">
+        <HelpTOCNode Id="2c6939a4-34dc-4f3f-8d3d-b365160be256" Title="Except Method " Url="html/8945a3be-12aa-8e31-1f8c-5297987954c3.htm">
           <HelpTOCNode Title="Except(TSource) Method (ISequence(TSource), IEnumerable(TSource))" Url="html/78e099eb-ee6e-bfa2-cda9-24cf7f6b5ca7.htm" />
           <HelpTOCNode Title="Except(TSource) Method (ISequence(TSource), IEnumerable(TSource), IEqualityComparer(TSource))" Url="html/bd506f20-7225-bafa-fb2f-f235b9a90d99.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="727772d0-226e-430b-92d6-b643400c6f8b" Title="Fill Method " Url="html/f4bc99ef-bffa-2261-8d6b-b358c44bc1b4.htm">
+        <HelpTOCNode Id="2298b9fa-fa04-4607-a3b3-d5e373c3fb07" Title="Fill Method " Url="html/f4bc99ef-bffa-2261-8d6b-b358c44bc1b4.htm">
           <HelpTOCNode Title="Fill(T) Method (Func(T), Int32)" Url="html/3250f423-c37b-306d-cc1a-90750edf032e.htm" />
           <HelpTOCNode Title="Fill(T) Method (T, Int32)" Url="html/b897eaab-fa35-d7fb-2719-ee4490efd4da.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="7e0722f9-1f5f-43ae-9be9-2346fc15e8f4" Title="Flatten Method " Url="html/f9b1a5df-2c8d-63d0-eb33-91f9ffa7298b.htm">
+        <HelpTOCNode Id="0a2781a2-1e4c-4ef2-a5ed-0a258edc3092" Title="Flatten Method " Url="html/f9b1a5df-2c8d-63d0-eb33-91f9ffa7298b.htm">
           <HelpTOCNode Title="Flatten(TSource) Method (ISequence(IEnumerable(TSource)))" Url="html/89b3f5f4-7ad9-315a-d4da-55b57058c0a3.htm" />
           <HelpTOCNode Title="Flatten(TSource) Method (IEnumerable(ISequence(TSource)))" Url="html/9b6f498d-d427-5d32-a4f1-ee43e8bc6145.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="a4196fb8-e9eb-4faa-ae48-61faf3061eee" Title="From Method " Url="html/f71734bb-5cc2-e4a4-8c82-f3597838670e.htm">
+        <HelpTOCNode Id="91d734ff-efd1-48f9-8d1b-7209abbddec1" Title="From Method " Url="html/f71734bb-5cc2-e4a4-8c82-f3597838670e.htm">
           <HelpTOCNode Title="From Method (Int32)" Url="html/72a2d918-df2e-8401-35ac-d929d80d4950.htm" />
           <HelpTOCNode Title="From Method (Int64)" Url="html/a6ff4ec0-c1d8-f8e9-4222-3ebb0928e850.htm" />
           <HelpTOCNode Title="From Method (BigInteger)" Url="html/ff98e945-88ce-7f1a-4098-330d569fc243.htm" />
@@ -116,16 +117,16 @@
           <HelpTOCNode Title="From Method (Int64, Int64)" Url="html/23fef467-ab28-8030-d854-db2282f0b971.htm" />
           <HelpTOCNode Title="From Method (BigInteger, BigInteger)" Url="html/0d9c192a-d91e-117f-cc60-e678b5c95a2d.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="f9ae587f-811b-4c62-a05b-5013c21fc9f1" Title="Intersect Method " Url="html/a1542fdf-f97e-d9ce-9335-b770c12eccff.htm">
+        <HelpTOCNode Id="879afa14-d9ca-497e-97f2-b1d3ba7b2c49" Title="Intersect Method " Url="html/a1542fdf-f97e-d9ce-9335-b770c12eccff.htm">
           <HelpTOCNode Title="Intersect(TSource) Method (ISequence(TSource), IEnumerable(TSource))" Url="html/c82d75c5-3144-c242-7584-d6c3829e62da.htm" />
           <HelpTOCNode Title="Intersect(TSource) Method (ISequence(TSource), IEnumerable(TSource), IEqualityComparer(TSource))" Url="html/20453763-14d1-77a2-e5a6-bde6fab0b464.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="b8076812-06e5-4cea-9941-448a552b2917" Title="Iterate Method " Url="html/a2b4e480-562f-e855-cfbb-925bf82b8e25.htm">
+        <HelpTOCNode Id="3c6fb88f-e075-46c8-b775-c1c80d040e2e" Title="Iterate Method " Url="html/a2b4e480-562f-e855-cfbb-925bf82b8e25.htm">
           <HelpTOCNode Title="Iterate(T) Method (T, Func(T, T))" Url="html/8e499ceb-fd06-dd2e-e870-a21209ba4816.htm" />
           <HelpTOCNode Title="Iterate(T) Method (T, Int32, Func(T, T))" Url="html/8a448616-f624-185b-ee7e-b81160654850.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="NewBuilder(T) Method " Url="html/c11a961b-8614-2784-6671-757fb63f915e.htm" />
-        <HelpTOCNode Id="71fe97a5-7f47-409e-8ec8-ec5b44301eb7" Title="Range Method " Url="html/6eb8d5ce-46e1-6871-4fe7-8a9ecdab5679.htm">
+        <HelpTOCNode Id="ffb61a4b-ae00-4b22-8c55-e55d920398d1" Title="Range Method " Url="html/6eb8d5ce-46e1-6871-4fe7-8a9ecdab5679.htm">
           <HelpTOCNode Title="Range Method (Int32, Int32)" Url="html/690f1d81-aa8d-cea7-6813-6216f5a71d8a.htm" />
           <HelpTOCNode Title="Range Method (Int64, Int64)" Url="html/6239d20a-326c-57d5-8a12-f0edf42a135e.htm" />
           <HelpTOCNode Title="Range Method (BigInteger, BigInteger)" Url="html/90c2c3eb-f2f4-0c43-08a3-fe09dfa248ed.htm" />
@@ -134,22 +135,22 @@
           <HelpTOCNode Title="Range Method (BigInteger, BigInteger, BigInteger)" Url="html/3488a25b-1ea8-5832-56d2-07f8681aa381.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Reverse(TSource) Method " Url="html/fe417c5a-6919-fab5-a4b5-23da6bb49a7d.htm" />
-        <HelpTOCNode Id="9d9d4572-bffb-4309-a306-46504632a807" Title="Select Method " Url="html/7e3690e9-c303-e55e-5590-4dc23d5d40ba.htm">
+        <HelpTOCNode Id="d301ba7a-9d72-43b2-bc48-364900bffb63" Title="Select Method " Url="html/7e3690e9-c303-e55e-5590-4dc23d5d40ba.htm">
           <HelpTOCNode Title="Select(TSource, TResult) Method (ISequence(TSource), Func(TSource, TResult))" Url="html/7ae54909-a907-a848-e2ba-b8d9d62d472a.htm" />
           <HelpTOCNode Title="Select(TSource, TResult) Method (ISequence(TSource), Func(TSource, Int32, TResult))" Url="html/60f6911e-11aa-0d5b-fd3d-93f335a77d6a.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="4bc50700-3ec6-4a5d-93d4-bc1920bf9400" Title="SelectMany Method " Url="html/174faebb-5466-d8ad-63f1-4d6955d5dd78.htm">
+        <HelpTOCNode Id="afcedb8a-baff-43cb-b5ba-0e3da9eae4d3" Title="SelectMany Method " Url="html/174faebb-5466-d8ad-63f1-4d6955d5dd78.htm">
           <HelpTOCNode Title="SelectMany(TSource, TResult) Method (ISequence(TSource), Func(TSource, IEnumerable(TResult)))" Url="html/227af0b7-8e81-62f3-913c-8a084571dee1.htm" />
           <HelpTOCNode Title="SelectMany(TSource, TResult) Method (ISequence(TSource), Func(TSource, Int32, IEnumerable(TResult)))" Url="html/7aeca0da-ab76-8af4-0118-d8042dc15f9b.htm" />
           <HelpTOCNode Title="SelectMany(TSource, TCollection, TResult) Method (ISequence(TSource), Func(TSource, IEnumerable(TCollection)), Func(TSource, TCollection, TResult))" Url="html/2d8c24d5-fbb5-2c23-da73-9ed8400c48f0.htm" />
           <HelpTOCNode Title="SelectMany(TSource, TCollection, TResult) Method (ISequence(TSource), Func(TSource, Int32, IEnumerable(TCollection)), Func(TSource, TCollection, TResult))" Url="html/f2e80077-1e6b-02cb-94ea-d14223d5bd99.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Skip(TSource) Method " Url="html/bf689b8e-9b0f-af9f-aa41-d54d230d6338.htm" />
-        <HelpTOCNode Id="461f9cf5-fc46-4c71-a687-2fa121acdd78" Title="SkipWhile Method " Url="html/931fdca5-9b37-9add-0f4f-ea330ab1e9ce.htm">
+        <HelpTOCNode Id="4ab8d1c1-604d-40d4-955f-a87b7a059373" Title="SkipWhile Method " Url="html/931fdca5-9b37-9add-0f4f-ea330ab1e9ce.htm">
           <HelpTOCNode Title="SkipWhile(TSource) Method (ISequence(TSource), Func(TSource, Boolean))" Url="html/a45ba6bc-f8f0-127f-bfb3-e308b8a6596c.htm" />
           <HelpTOCNode Title="SkipWhile(TSource) Method (ISequence(TSource), Func(TSource, Int32, Boolean))" Url="html/16d620e6-2578-26da-2492-1773207c199b.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="3e835f04-3109-4a60-b3c3-8d80b69595a6" Title="Sum Method " Url="html/8e2ce519-a66b-bf42-299e-001dd21b5807.htm">
+        <HelpTOCNode Id="d5ee3f61-7740-456b-96c5-f8c293e597aa" Title="Sum Method " Url="html/8e2ce519-a66b-bf42-299e-001dd21b5807.htm">
           <HelpTOCNode Title="Sum Method (ISequence(Nullable(BigInteger)))" Url="html/1ad97a66-7c34-9de0-b0c9-a05ed72509c2.htm" />
           <HelpTOCNode Title="Sum Method (ISequence(BigInteger))" Url="html/dbaa315e-de04-03ca-95b0-6f8fb666cc29.htm" />
           <HelpTOCNode Title="Sum(TSource) Method (ISequence(TSource), Func(TSource, Nullable(BigInteger)))" Url="html/c6651d34-5802-93a4-7192-28c16bb1ca2f.htm" />
@@ -157,35 +158,35 @@
         </HelpTOCNode>
         <HelpTOCNode Title="Tabulate(T) Method " Url="html/cbff167d-288d-03a9-a1f9-e3e45629ba5f.htm" />
         <HelpTOCNode Title="Take(TSource) Method " Url="html/684cd61b-ab89-8a08-4dca-6bdb144c3e2b.htm" />
-        <HelpTOCNode Id="a63c64cf-e978-4919-8905-57f316bb7c67" Title="TakeWhile Method " Url="html/78b731e8-0b7e-c25f-9647-8b54becd7715.htm">
+        <HelpTOCNode Id="8dd17be3-684a-48d7-90d1-93b56c0fda72" Title="TakeWhile Method " Url="html/78b731e8-0b7e-c25f-9647-8b54becd7715.htm">
           <HelpTOCNode Title="TakeWhile(TSource) Method (ISequence(TSource), Func(TSource, Boolean))" Url="html/2203c04e-9237-c539-3c4a-18af4c2539c5.htm" />
           <HelpTOCNode Title="TakeWhile(TSource) Method (ISequence(TSource), Func(TSource, Int32, Boolean))" Url="html/fa3e637e-3b99-cfa3-2c48-ca38c1cba3aa.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="5e97afcd-7265-4ab0-b5e3-8a6e49903871" Title="Union Method " Url="html/a5a20fa6-77fc-262f-8744-6d5da651c916.htm">
+        <HelpTOCNode Id="feaeac11-65d6-4004-bbf7-212fce0195e9" Title="Union Method " Url="html/a5a20fa6-77fc-262f-8744-6d5da651c916.htm">
           <HelpTOCNode Title="Union(TSource) Method (ISequence(TSource), IEnumerable(TSource))" Url="html/22212a62-0bf9-5a33-6cc5-d355817e5a48.htm" />
           <HelpTOCNode Title="Union(TSource) Method (ISequence(TSource), IEnumerable(TSource), IEqualityComparer(TSource))" Url="html/de19ec8b-f877-094b-0219-aad05dcdd820.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="5f86b7d1-2b71-4756-82e0-fbd8d24f24a1" Title="Where Method " Url="html/b155df51-2fbd-7d31-b20b-2eb884637da9.htm">
+        <HelpTOCNode Id="2acc0485-8f85-4a60-926e-f62ec11d112c" Title="Where Method " Url="html/b155df51-2fbd-7d31-b20b-2eb884637da9.htm">
           <HelpTOCNode Title="Where(TSource) Method (ISequence(TSource), Func(TSource, Boolean))" Url="html/d8e38f30-5298-de27-319b-a874997ce5e9.htm" />
           <HelpTOCNode Title="Where(TSource) Method (ISequence(TSource), Func(TSource, Int32, Boolean))" Url="html/1e529d78-ddce-1999-0215-2da68c6ba61b.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="f296f51d-c479-4835-b5e3-318e07bd90ba" Title="With Method " Url="html/bb2b04a6-e100-abf0-e007-6d382e1fd103.htm">
+        <HelpTOCNode Id="7f60b2d2-0f8c-4938-8d65-8fd1fa69c14b" Title="With Method " Url="html/bb2b04a6-e100-abf0-e007-6d382e1fd103.htm">
           <HelpTOCNode Title="With(T) Method (IEnumerable(T))" Url="html/f9f4d5f7-b0f3-d496-7887-b31b9037a4ed.htm" />
           <HelpTOCNode Title="With(T) Method (T[])" Url="html/a2654778-df45-cbad-3435-5cd9a37549fe.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Zip(TFirst, TSecond, TResult) Method " Url="html/997cfa0f-a011-e1f7-f803-298dc4b90137.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="a0186d2d-e551-4c1a-a831-fc14bf690595" Title="Sequence(T) Class" Url="html/e5d6f711-0d01-b800-dec0-b5fc645505db.htm">
-      <HelpTOCNode Id="014fd63e-3497-420d-b665-f738bcdf116a" Title="Sequence(T) Constructor " Url="html/b2e5fca3-259e-ea1e-7f4e-a889d6a4d81d.htm">
+    <HelpTOCNode Id="1782c942-0f1e-4996-ab17-d566c3651f25" Title="Sequence(T) Class" Url="html/e5d6f711-0d01-b800-dec0-b5fc645505db.htm">
+      <HelpTOCNode Id="1bb846f1-e26b-4a71-a163-bb780dc12d99" Title="Sequence(T) Constructor " Url="html/b2e5fca3-259e-ea1e-7f4e-a889d6a4d81d.htm">
         <HelpTOCNode Title="Sequence(T) Constructor (T, Func(ISequence(T)))" Url="html/d5a95656-58d0-4b48-114f-f718b4620c17.htm" />
         <HelpTOCNode Title="Sequence(T) Constructor (T, Lazy(ISequence(T)))" Url="html/54e0a38c-3b8f-7086-baec-34456f9e5075.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="67917b7a-efb3-4c55-875c-c7bc6503586e" Title="Sequence(T) Methods" Url="html/7713d8c4-82e2-dd92-cb09-e750937bff78.htm">
+      <HelpTOCNode Id="e7abdc32-aac3-4b82-bab7-e7a46f6c4ff9" Title="Sequence(T) Methods" Url="html/7713d8c4-82e2-dd92-cb09-e750937bff78.htm">
         <HelpTOCNode Title="Append Method " Url="html/54cd38c4-2853-6d71-d0d6-c44e2a699ecc.htm" />
         <HelpTOCNode Title="Combinations Method " Url="html/acfa3722-af91-d095-09d0-6aa4ae0bdf4b.htm" />
         <HelpTOCNode Title="Concat Method " Url="html/7a4d77cd-9637-7db1-48cd-6c5287d863d6.htm" />
-        <HelpTOCNode Id="904b16c4-0e59-4ab4-bcc9-34181cd0cb00" Title="CopyTo Method " Url="html/8c799010-da2c-ba21-199d-07cc635eb474.htm">
+        <HelpTOCNode Id="f2c0d049-e936-47c3-96fb-46f80c06c005" Title="CopyTo Method " Url="html/8c799010-da2c-ba21-199d-07cc635eb474.htm">
           <HelpTOCNode Title="CopyTo Method (T[])" Url="html/5dd4d8e2-c814-9a53-388c-3189574301ce.htm" />
           <HelpTOCNode Title="CopyTo Method (T[], Int32)" Url="html/5dabc367-c576-3d91-a9ad-6e70f4d9ad68.htm" />
           <HelpTOCNode Title="CopyTo Method (Int32, T[], Int32, Int32)" Url="html/de5deabd-d34e-02c1-0b4a-cfbae35b70db.htm" />
@@ -196,29 +197,30 @@
         <HelpTOCNode Title="ForEach Method " Url="html/994b2278-6b28-712b-33e1-df477b7542c2.htm" />
         <HelpTOCNode Title="GetEnumerator Method " Url="html/27d979a8-09d1-4a8e-27d8-8440d0cec23f.htm" />
         <HelpTOCNode Title="Grouped Method " Url="html/bd200bd2-aa9f-fcae-26a4-527df7115ef7.htm" />
-        <HelpTOCNode Id="75290e2c-496b-47e8-a50c-ddf81d1b495e" Title="IndexOf Method " Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm">
+        <HelpTOCNode Id="1401894f-34eb-427d-be9d-c8e68762e85f" Title="IndexOf Method " Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm">
           <HelpTOCNode Title="IndexOf Method (T)" Url="html/c5c16cc3-a653-0ca8-d56f-2cc7fa57d158.htm" />
           <HelpTOCNode Title="IndexOf Method (T, Int32)" Url="html/cd1611e7-be02-ae19-26a9-2548df06cf88.htm" />
           <HelpTOCNode Title="IndexOf Method (T, Int32, Int32)" Url="html/c2075ff9-2d4b-5d75-b426-e2e9f40dba26.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="3dee901f-f38b-472c-905f-5e3545ae0fb5" Title="IndexWhere Method " Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm">
+        <HelpTOCNode Id="0dd8bb94-0a9b-4f9a-9120-f64499c8d2d7" Title="IndexWhere Method " Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm">
           <HelpTOCNode Title="IndexWhere Method (Func(T, Boolean))" Url="html/503bf95a-633e-b9a9-0477-438c772cc53f.htm" />
           <HelpTOCNode Title="IndexWhere Method (Func(T, Boolean), Int32)" Url="html/a3aa9a68-b232-5d26-4ed2-3c0c7cb766ca.htm" />
           <HelpTOCNode Title="IndexWhere Method (Func(T, Boolean), Int32, Int32)" Url="html/363c3eff-4538-3f71-c958-e6a4a1d7590b.htm" />
         </HelpTOCNode>
+        <HelpTOCNode Title="Indices Method " Url="html/d8cdae91-a147-2223-f825-ad4b0eff0404.htm" />
         <HelpTOCNode Title="Inits Method " Url="html/00794e02-a492-7e2e-bca6-a383dbc7681d.htm" />
-        <HelpTOCNode Id="e441802d-1c87-4375-8879-a673860ee8e9" Title="LastIndexOf Method " Url="html/8d8cc747-8b4c-1782-5936-8d54fd1c0d78.htm">
+        <HelpTOCNode Id="92fa96cf-c3a2-409d-8588-5613d6399fcf" Title="LastIndexOf Method " Url="html/8d8cc747-8b4c-1782-5936-8d54fd1c0d78.htm">
           <HelpTOCNode Title="LastIndexOf Method (T)" Url="html/b28131ca-3bbd-9d17-be07-3c669d9f795a.htm" />
           <HelpTOCNode Title="LastIndexOf Method (T, Int32)" Url="html/16c35383-6bbe-e6fb-555b-ce660306caad.htm" />
           <HelpTOCNode Title="LastIndexOf Method (T, Int32, Int32)" Url="html/8af14c54-aa93-117a-4e1a-002af2365513.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="7f8404b5-ad01-44f5-a8ae-8af4850541cc" Title="LastIndexWhere Method " Url="html/2cd34e98-4e25-567e-3883-4ea4e001a7fd.htm">
+        <HelpTOCNode Id="7781e748-6980-4966-be49-ee6ec24dd3f4" Title="LastIndexWhere Method " Url="html/2cd34e98-4e25-567e-3883-4ea4e001a7fd.htm">
           <HelpTOCNode Title="LastIndexWhere Method (Func(T, Boolean))" Url="html/5e7a5ad3-3200-a4d2-5d23-1a58d8426604.htm" />
           <HelpTOCNode Title="LastIndexWhere Method (Func(T, Boolean), Int32)" Url="html/c4804a1e-9a65-d01d-80d2-57d22cf567f9.htm" />
           <HelpTOCNode Title="LastIndexWhere Method (Func(T, Boolean), Int32, Int32)" Url="html/1660763b-2c73-11b3-5d3b-a16d964c5996.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="LengthCompare Method " Url="html/7bc94f7d-fb71-ad83-8083-69e43b9d427c.htm" />
-        <HelpTOCNode Id="1817d4ff-dd11-4631-b419-61a00e85b83d" Title="MkString Method " Url="html/df3096fe-6784-b682-dfa4-c03bf6f710af.htm">
+        <HelpTOCNode Id="883e572c-f11c-45e6-9984-1ceca54b278f" Title="MkString Method " Url="html/df3096fe-6784-b682-dfa4-c03bf6f710af.htm">
           <HelpTOCNode Title="MkString Method " Url="html/cb3baad1-7ff4-57fc-70d7-6637737877d1.htm" />
           <HelpTOCNode Title="MkString Method (String)" Url="html/c211d1c9-06cb-c6d8-0a19-39242c1ce5d1.htm" />
         </HelpTOCNode>
@@ -234,7 +236,7 @@
         <HelpTOCNode Title="Scan Method " Url="html/17dfe636-4034-4d7c-84ad-2e65eeb8648b.htm" />
         <HelpTOCNode Title="ScanRight Method " Url="html/b8cb8e1d-6575-87ac-f679-93f1646cc3d9.htm" />
         <HelpTOCNode Title="Slice Method " Url="html/5247d3d5-449b-834e-ea2e-0668dec5e6b0.htm" />
-        <HelpTOCNode Id="9e60b27f-beb8-43f2-80d3-16ea8cd4e6a6" Title="Sliding Method " Url="html/bfebbb4d-9712-0502-c9b3-567b4ace1aee.htm">
+        <HelpTOCNode Id="fba9b76a-4e0f-4e80-92f2-20da5f8d792f" Title="Sliding Method " Url="html/bfebbb4d-9712-0502-c9b3-567b4ace1aee.htm">
           <HelpTOCNode Title="Sliding Method (Int32)" Url="html/fe65d751-948e-f38f-cf3b-2a7940e120cf.htm" />
           <HelpTOCNode Title="Sliding Method (Int32, Int32)" Url="html/1cb25b25-d761-f484-e828-ba4e254e9222.htm" />
         </HelpTOCNode>
@@ -247,11 +249,10 @@
         <HelpTOCNode Title="ZipAll(TSecond) Method " Url="html/d9622627-fa94-84cf-9062-203bbabab395.htm" />
         <HelpTOCNode Title="ZipWithIndex Method " Url="html/bcc734cc-bb7b-bc3f-c377-42da36da2683.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="ccb4fade-1961-4c10-9e3c-981847166f14" Title="Sequence(T) Properties" Url="html/cf326810-b1a5-86d7-e4f8-f7e3cbc42965.htm">
+      <HelpTOCNode Id="c5be1c58-1f31-4cef-a84e-667fc40c1f8f" Title="Sequence(T) Properties" Url="html/cf326810-b1a5-86d7-e4f8-f7e3cbc42965.htm">
         <HelpTOCNode Title="Count Property " Url="html/91060f47-7c1c-7b2c-c792-02b23f8137fd.htm" />
         <HelpTOCNode Title="HasDefiniteSize Property " Url="html/ee77006f-6c2a-112b-31d1-cf38a41ea943.htm" />
         <HelpTOCNode Title="Head Property " Url="html/884447ac-5895-cf66-af7b-33785b29080e.htm" />
-        <HelpTOCNode Title="Indices Property " Url="html/aca90b5e-5b07-8c3f-cd7f-bc78aeadd528.htm" />
         <HelpTOCNode Title="Init Property " Url="html/b0b38082-8637-f662-196b-0852366b2493.htm" />
         <HelpTOCNode Title="IsEmpty Property " Url="html/f915a516-b769-b805-8ebf-b23e79f2b90e.htm" />
         <HelpTOCNode Title="IsTailDefined Property " Url="html/46cecd0d-5387-5d75-e985-e9995f4a700a.htm" />
@@ -260,10 +261,10 @@
         <HelpTOCNode Title="Tail Property " Url="html/75ba0ac3-7b6a-9a77-eb6f-7c09e046fa06.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="44d4475c-72bd-488e-bcc9-01dbf2e5f8b0" Title="SequenceBuilder(T) Class" Url="html/2d0efe72-62a0-af21-cf20-268f1e8c9711.htm">
+    <HelpTOCNode Id="f90b4840-b674-4f6c-9339-6f4a717232f0" Title="SequenceBuilder(T) Class" Url="html/2d0efe72-62a0-af21-cf20-268f1e8c9711.htm">
       <HelpTOCNode Title="SequenceBuilder(T) Constructor " Url="html/684e2ff9-8850-8d7d-b150-85cda55ae019.htm" />
-      <HelpTOCNode Id="88d541ac-083e-41eb-84ef-941d2999e3ff" Title="SequenceBuilder(T) Methods" Url="html/26630b84-f033-69c8-28d4-e9c1fe229eea.htm">
-        <HelpTOCNode Id="a2dfb8d4-8187-466a-bddf-0ec79fb3275b" Title="Append Method " Url="html/bd20fc93-fb08-a456-17d9-f7259c5a927a.htm">
+      <HelpTOCNode Id="066c60ba-5ef6-466b-bf41-041e8b18afe9" Title="SequenceBuilder(T) Methods" Url="html/26630b84-f033-69c8-28d4-e9c1fe229eea.htm">
+        <HelpTOCNode Id="d61041ed-b0bd-4652-8575-be72a37e069d" Title="Append Method " Url="html/bd20fc93-fb08-a456-17d9-f7259c5a927a.htm">
           <HelpTOCNode Title="Append Method (IEnumerable(T))" Url="html/a086d360-115a-7f03-3c4e-0ab3cfb16ae7.htm" />
           <HelpTOCNode Title="Append Method (Func(IEnumerable(T)))" Url="html/7d27e1ba-a0c8-f1e3-f53b-b784b73de5c9.htm" />
           <HelpTOCNode Title="Append Method (Func(T))" Url="html/1031c39a-1c13-967e-e776-3a451e1801c5.htm" />
@@ -273,8 +274,8 @@
         <HelpTOCNode Title="Clear Method " Url="html/8ff92ece-f7c0-5e95-67dd-b17b308b6fbc.htm" />
         <HelpTOCNode Title="ToSequence Method " Url="html/5e976c93-f84c-be6c-6ac5-98e3e905ed5a.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c807d9c0-9962-4add-b828-eec8a1bc66c0" Title="SequenceBuilder(T) Operators" Url="html/e8090011-cfe8-2579-6c70-327025fa88b7.htm">
-        <HelpTOCNode Id="b878229a-1168-4279-a606-38aaaf3a0317" Title="Addition Operator " Url="html/ff7b38ba-b04d-02c5-f654-2dc6be51b746.htm">
+      <HelpTOCNode Id="19427af2-4265-460b-9198-d207ff6aab06" Title="SequenceBuilder(T) Operators" Url="html/e8090011-cfe8-2579-6c70-327025fa88b7.htm">
+        <HelpTOCNode Id="2a3e1a42-da88-4c0e-98eb-f7d278e71ba3" Title="Addition Operator " Url="html/ff7b38ba-b04d-02c5-f654-2dc6be51b746.htm">
           <HelpTOCNode Title="Addition Operator (SequenceBuilder(T), IEnumerable(T))" Url="html/67564d39-7a40-a369-9435-f2e41acbe000.htm" />
           <HelpTOCNode Title="Addition Operator (SequenceBuilder(T), T)" Url="html/eb738000-bd53-df2d-8588-c590920d4a1c.htm" />
         </HelpTOCNode>

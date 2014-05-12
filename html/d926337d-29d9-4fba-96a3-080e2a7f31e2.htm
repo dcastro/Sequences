@@ -1,0 +1,137 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Examples</title><meta name="Language" content="en-us" /><meta name="Microsoft.Help.Id" content="d926337d-29d9-4fba-96a3-080e2a7f31e2" /><meta name="Description" content="In , we saw how to represent sequences of natural and odd numbers. In this section, we take a look at a few more complex examples." /><meta name="Microsoft.Help.ContentType" content="Concepts" /><meta name="BrandingAware" content="'true'" /><link type="text/css" rel="stylesheet" href="../styles/highlight.css" /><script type="text/javascript" src="../scripts/highlight.js"></script><meta name="SelfBranded" content="true" /></head><body onload="onLoad()"><div class="VS2013_outerDiv"><div class="VS2013_outerContent"><table class="TitleTable"><tr><td class="VS2013_tdLogoColumn"><img src="../icons/Help.png" /></td><td class="VS2013_tdTitleColumn">Examples</td><td class="VS2013_tdRunningTitleColumn">A Sandcastle Documented Class Library</td></tr></table><div id="mainSection"><div id="mainBody"><span class="introStyle"></span><div class="introduction"><p>This topic contains the following sections.</p><ul class="autoOutline"><li class="outlineSectionEntry"><a href="#fibonacci">Fibonacci sequence</a></li><li class="outlineSectionEntry"><a href="#primes">Prime numbers</a></li><li class="outlineSectionEntry"><a href="#pascal">Pascal's Triangle</a></li><li class="outlineSectionEntry"><a href="#seeAlsoSection">See Also</a></li></ul><p>
+        In <a href="3a04061c-5bf3-4ebd-a084-cf60e7f7a13a.htm">Welcome to Sequences</a>, we saw how to represent sequences of natural and odd numbers.
+        In this section, we take a look at a few more complex examples.
+      </p><p>
+        For more examples, refer to the <a href="https://github.com/dcastro/Sequences/tree/master/tests/Sequences.Tests.Functional" target="_blank">functional tests project</a>.
+      </p></div><a id="fibonacci"></a><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID1RB')" onkeypress="ExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Fibonacci sequence</span></div><div id="ID1RBSection" class="VS2013_CollapsibleSection"><p>
+          The Fibonacci sequence is a famous series in mathematics,
+          where each fibonacci number is defined as the sum of the two previous fibonacci numbers,
+          i.e. <span class="code">F(n) = F(n-1) + F(n-2)</span>, with seed values <span class="code">F(0) = 0</span> and <span class="code">F(1) = 1</span>.
+        </p><p>
+          In scala, the fibonacci sequence is commonly expressed as follows:
+        </p><div id="ID0EEAGAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0EEAGAAABAA_tabs"><div id="ID0EEAGAAABAA_tab1" class="codeSnippetContainerTabSingle" EnableCopyCode="true"><a xmlns="">Fibonacci sequence in Scala</a></div></div><div id="ID0EEAGAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EEAGAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0EEAGAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0EEAGAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0EEAGAAABAA','4')" title="Print">Print</a></div></div><div id="ID0EEAGAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre>val fibs: Stream[Int] = <span class="highlight-number">0</span> #:: <span class="highlight-number">1</span> #:: fibs.zip(fibs.tail).map { n =&gt; n._1 + n._2 }</pre></div><div id="ID0EEAGAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>val fibs: Stream[Int] = 0 #:: 1 #:: fibs.zip(fibs.tail).map { n =&gt; n._1 + n._2 }</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0EEAGAAABAA');</script><p>
+          In C#, the syntax is a little more verbose, but still readable:
+        </p><div id="ID0ECAGAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0ECAGAAABAA_tabs"><div id="ID0ECAGAAABAA_tab1" class="codeSnippetContainerTabSingle" EnableCopyCode="true"><a xmlns="">Fibonacci sequence in C#</a></div></div><div id="ID0ECAGAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0ECAGAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0ECAGAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0ECAGAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0ECAGAAABAA','4')" title="Print">Print</a></div></div><div id="ID0ECAGAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre>Func&lt;Tuple&lt;<span class="highlight-keyword">int</span>, <span class="highlight-keyword">int</span>&gt;, <span class="highlight-keyword">int</span>&gt; sum = pair =&gt; pair.Item1 + pair.Item2;
+
+ISequence&lt;<span class="highlight-keyword">int</span>&gt; fibs = <span class="highlight-keyword">null</span>;
+
+fibs = Sequence.With(<span class="highlight-number">0</span>, <span class="highlight-number">1</span>)               <span class="highlight-comment">//start with (0, 1, ?)</span>
+               .Concat(() =&gt;             <span class="highlight-comment">//and then</span>
+                   fibs.Zip(fibs.Tail)   <span class="highlight-comment">//zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))</span>
+                       .Select(sum));    <span class="highlight-comment">//select the sum of each pair (i.e., 1, 2, 3, 5, 8)</span></pre></div><div id="ID0ECAGAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>Func&lt;Tuple&lt;int, int&gt;, int&gt; sum = pair =&gt; pair.Item1 + pair.Item2;
+
+ISequence&lt;int&gt; fibs = null;
+
+fibs = Sequence.With(0, 1)               //start with (0, 1, ?)
+               .Concat(() =&gt;             //and then
+                   fibs.Zip(fibs.Tail)   //zip the sequence with its tail (i.e., (0,1), (1,1), (1,2), (2,3), (3, 5))
+                       .Select(sum));    //select the sum of each pair (i.e., 1, 2, 3, 5, 8)</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0ECAGAAABAA');</script><p>
+          The code above creates more objects than needed. The following implementation shows a more efficient way of representing the fibonacci sequence:
+        </p><div id="ID0EAAGAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0EAAGAAABAA_tabs"><div id="ID0EAAGAAABAA_tab1" class="codeSnippetContainerTabSingle" EnableCopyCode="true"><a xmlns="">Efficient Fibonacci sequence</a></div></div><div id="ID0EAAGAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAGAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0EAAGAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0EAAGAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0EAAGAAABAA','4')" title="Print">Print</a></div></div><div id="ID0EAAGAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre><span class="highlight-keyword">using</span> System.Numerics;
+
+<span class="highlight-comment">//current and next are any two consecutive fibonacci numbers.</span>
+ISequence&lt;BigInteger&gt; Fibs(BigInteger current, BigInteger next)
+{
+    <span class="highlight-keyword">return</span> <span class="highlight-keyword">new</span> Sequence&lt;BigInteger&gt;(current, () =&gt; Fibs(next, current + next));
+}
+
+<span class="highlight-keyword">var</span> fibs = Fibs(<span class="highlight-number">0</span>, <span class="highlight-number">1</span>);
+
+<span class="highlight-comment">//prints 0 1 1 2 3 5 8 13 21 34</span>
+fibs.Take(<span class="highlight-number">10</span>).ForEach(Console.WriteLine);</pre></div><div id="ID0EAAGAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>using System.Numerics;
+
+//current and next are any two consecutive fibonacci numbers.
+ISequence&lt;BigInteger&gt; Fibs(BigInteger current, BigInteger next)
+{
+    return new Sequence&lt;BigInteger&gt;(current, () =&gt; Fibs(next, current + next));
+}
+
+var fibs = Fibs(0, 1);
+
+//prints 0 1 1 2 3 5 8 13 21 34
+fibs.Take(10).ForEach(Console.WriteLine);</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0EAAGAAABAA');</script></div><a id="primes"></a><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID2RB')" onkeypress="ExpandCollapse_CheckKey('ID2RB', event)" tabindex="0"><img id="ID2RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Prime numbers</span></div><div id="ID2RBSection" class="VS2013_CollapsibleSection"><p>
+          One way to find every prime number in a given range is to use the <a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes" target="_blank">Sieve of Eratosthenes</a>.
+          To find the prime numbers up to 100, a slight variation of the sieve goes like this:
+        </p><ol><li><p>Start with a list representing the range <span class="code">[2, 100]</span>.</p></li><li><p>Let <em>p</em> be the head of the list.</p></li><li><p>Take <em>p</em> as the next prime number, and remove every multiple of <em>p</em> from the list.</p></li><li><p>If the list is empty:</p><ul><li><p>stop;</p></li><li><p>otherwise, repeat from step 2.</p></li></ul></li></ol><p>
+          Here's a way of implementing the sieve as a sequence.
+        </p><div id="ID0EAAEAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0EAAEAAABAA_tabs"><div id="ID0EAAEAAABAA_tab1" class="codeSnippetContainerTabSingle" EnableCopyCode="true"><a xmlns="">Sieve of Eratosthenes</a></div></div><div id="ID0EAAEAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAAEAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0EAAEAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0EAAEAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0EAAEAAABAA','4')" title="Print">Print</a></div></div><div id="ID0EAAEAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre><span class="highlight-keyword">var</span> range = Sequence.Range(<span class="highlight-number">2</span>, <span class="highlight-number">101</span>);
+<span class="highlight-keyword">var</span> primes = PrimesWithin(range);
+
+<span class="highlight-comment">//prints: 2 3 5 7 11</span>
+Console.WriteLine(primes.Take(<span class="highlight-number">5</span>).MkString(<span class="highlight-literal">" "</span>));            
+
+<span class="highlight-keyword">public</span> ISequence&lt;<span class="highlight-keyword">int</span>&gt; PrimesWithin(ISequence&lt;<span class="highlight-keyword">int</span>&gt; range)
+{
+    <span class="highlight-keyword">if</span> (range.IsEmpty)
+        <span class="highlight-keyword">return</span> Sequence.Empty&lt;<span class="highlight-keyword">int</span>&gt;();
+
+    <span class="highlight-comment">//take the next prime number</span> 
+    <span class="highlight-keyword">var</span> p = range.Head;
+
+    <span class="highlight-comment">//skip p, and remove further multiples of p</span> 
+    <span class="highlight-keyword">var</span> filtered = range.Tail.Where(num =&gt; num % p != <span class="highlight-number">0</span>).Force();
+
+    <span class="highlight-keyword">return</span> <span class="highlight-keyword">new</span> Sequence&lt;<span class="highlight-keyword">int</span>&gt;(p, () =&gt; PrimesWithin(filtered));
+}</pre></div><div id="ID0EAAEAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>var range = Sequence.Range(2, 101);
+var primes = PrimesWithin(range);
+
+//prints: 2 3 5 7 11
+Console.WriteLine(primes.Take(5).MkString(" "));            
+
+public ISequence&lt;int&gt; PrimesWithin(ISequence&lt;int&gt; range)
+{
+    if (range.IsEmpty)
+        return Sequence.Empty&lt;int&gt;();
+
+    //take the next prime number 
+    var p = range.Head;
+
+    //skip p, and remove further multiples of p 
+    var filtered = range.Tail.Where(num =&gt; num % p != 0).Force();
+
+    return new Sequence&lt;int&gt;(p, () =&gt; PrimesWithin(filtered));
+}</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0EAAEAAABAA');</script></div><a id="pascal"></a><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID3RB')" onkeypress="ExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />Pascal's Triangle</span></div><div id="ID3RBSection" class="VS2013_CollapsibleSection"><p>
+          Everyone knows the famous <a href="http://en.wikipedia.org/wiki/Pascal's_triangle" target="_blank">Pascal's Triangle</a>.
+        </p><div class="ps_mediaNear"><img alt="pascals-triangle" src="../media/pascals-triangle.png" /></div><p>
+          The triangle starts with a 1 at the top. In every other row, each number is the sum of the two directly above it.
+        </p><p>
+          There are all sorts of ways of representing Pascal's triangle using sequences, but here's an interesting one:
+        </p><div id="ID0ECACAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0ECACAAABAA_tabs"><div id="ID0ECACAAABAA_tab1" class="codeSnippetContainerTabSingle" EnableCopyCode="true"><a xmlns="">Pascal's Triangle</a></div></div><div id="ID0ECACAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0ECACAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0ECACAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0ECACAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0ECACAAABAA','4')" title="Print">Print</a></div></div><div id="ID0ECACAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre>Func&lt;Tuple&lt;<span class="highlight-keyword">int</span>, <span class="highlight-keyword">int</span>&gt;, <span class="highlight-keyword">int</span>&gt; sum = pair =&gt; pair.Item1 + pair.Item2;
+
+Func&lt;ISequence&lt;<span class="highlight-keyword">int</span>&gt;, ISequence&lt;<span class="highlight-keyword">int</span>&gt;&gt; rowFactory =
+    row =&gt; row.Append(<span class="highlight-number">0</span>)                <span class="highlight-comment">//shift row to the left</span>
+              .Zip(row.Prepend(<span class="highlight-number">0</span>))      <span class="highlight-comment">//shift row to the right, and zip both shifted rows</span>
+              .Select(sum);             <span class="highlight-comment">//sum the two shifted rows</span> 
+
+<span class="highlight-keyword">var</span> triangle = Sequence.Iterate(
+                            start: Sequence.With(<span class="highlight-number">1</span>),
+                            func: rowFactory);</pre></div><div id="ID0ECACAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>Func&lt;Tuple&lt;int, int&gt;, int&gt; sum = pair =&gt; pair.Item1 + pair.Item2;
+
+Func&lt;ISequence&lt;int&gt;, ISequence&lt;int&gt;&gt; rowFactory =
+    row =&gt; row.Append(0)                //shift row to the left
+              .Zip(row.Prepend(0))      //shift row to the right, and zip both shifted rows
+              .Select(sum);             //sum the two shifted rows 
+
+var triangle = Sequence.Iterate(
+                            start: Sequence.With(1),
+                            func: rowFactory);</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0ECACAAABAA');</script><p>
+          You start with row (1).
+          From then on, every row is computed by shifting the row to the right, shifting the row to the left, zipping both shifted rows together and producing the sum of each tuple.
+          For example, given the row (1, 3, 3, 1):
+        </p><div id="ID0EAACAAABAA" class="codeSnippetContainer"><div class="codeSnippetContainerTabs" id="ID0EAACAAABAA_tabs"></div><div id="ID0EAACAAABAA_codecollection" class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID0EAACAAABAA_copycode" href="#" onclick="javascript:CopyToClipboard('ID0EAACAAABAA','4')" title="Copy to Clipboard">Copy to Clipboard</a><a id="ID0EAACAAABAA_PrintText" class="OH_PrintText" href="#" onclick="javascript:Print('ID0EAACAAABAA','4')" title="Print">Print</a></div></div><div id="ID0EAACAAABAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre>0 1 3 3 1       //shift right
+1 3 3 1 0       //shift left
+↓ ↓ ↓ ↓ ↓
+1 4 6 4 1</pre></div><div id="ID0EAACAAABAA_code_Plain_Div1" class="codeSnippetContainerCode" style="display: none"><pre>0 1 3 3 1       //shift right
+1 3 3 1 0       //shift left
+↓ ↓ ↓ ↓ ↓
+1 4 6 4 1</pre></div></div></div><script>addSpecificTextLanguageTagSet('ID0EAACAAABAA');</script></div><a name="seeAlsoSection"></a><div class="VS2013_CollapsibleAreaRegion"><span class="VS2013_RegionTitle" onclick="ExpandCollapse('ID4RB')" onkeypress="ExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="CollapseToggle" src="../icons/Expanded.png" />See Also</span></div><div id="ID4RBSection" class="VS2013_CollapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="3b6a3c7e-a6e5-eec8-e046-c3f2320ef836.htm">ISequence<span id="ID0ECABAAAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0ECABAAAAABAA?vb=(Of |cpp=&lt;|cs=&lt;|fs=&lt;'|nu=(");
+				</script>T<span id="ID0EAABAAAAABAA"> </span><script type="text/javascript">
+					addToLanSpecTextIdSet("ID0EAABAAAAABAA?vb=)|cpp=&gt;|cs=&gt;|fs=&gt;|nu=)");
+				</script></a></div><div class="seeAlsoStyle"><a href="724d51e6-91d7-5334-ae31-0e918f93f065.htm">Sequence</a></div></div></div></div></div></div><div id="VS2013_footer" class="VS2013_footer"><div class="VS2013_feedbacklink">Send comments on this topic to
+        <a id="HT_MailLink" href="mailto:diogo.filipe.acastro%40gmail.com?Subject=A Sandcastle Documented Class Library">diogo.filipe.acastro@gmail.com</a></div><script type="text/javascript">
+        var HT_mailLink = document.getElementById("HT_MailLink");
+        var HT_mailLinkText = HT_mailLink.innerHTML;
+        HT_mailLink.href += ": " + document.title + "\u0026body=" + encodeURIComponent("Your feedback is used to improve the documentation and the product. Your e-mail address will not be used for any other purpose and is disposed of after the issue you report is resolved. While working to resolve the issue that you report, you may be contacted via e-mail to get further details or clarification on the feedback you sent. After the issue you report has been addressed, you may receive an e-mail to let you know that your feedback has been addressed.");
+        HT_mailLink.innerHTML = HT_mailLinkText;
+        </script></div></body></html>

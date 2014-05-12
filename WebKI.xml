@@ -70,9 +70,9 @@
     <HelpKINode Title="ISequence(T).IndexWhere Method " Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm" />
     <HelpKINode Title="Sequence(T).IndexWhere Method " Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm" />
   </HelpKINode>
-  <HelpKINode Title="Indices property">
-    <HelpKINode Title="ISequence(T).Indices Property " Url="html/6fb6a2fb-3c7e-d449-91bf-d1d42ff30c5b.htm" />
-    <HelpKINode Title="Sequence(T).Indices Property " Url="html/aca90b5e-5b07-8c3f-cd7f-bc78aeadd528.htm" />
+  <HelpKINode Title="Indices method">
+    <HelpKINode Title="ISequence(T).Indices Method " Url="html/0ebf0beb-4836-577f-46f6-a3a0e1397f12.htm" />
+    <HelpKINode Title="Sequence(T).Indices Method " Url="html/d8cdae91-a147-2223-f825-ad4b0eff0404.htm" />
   </HelpKINode>
   <HelpKINode Title="Init property">
     <HelpKINode Title="ISequence(T).Init Property " Url="html/f74f855a-de71-4343-8ed4-984edb907e2c.htm" />
@@ -107,7 +107,7 @@
   <HelpKINode Title="ISequence(Of T).Head property" Url="html/7e41aaab-7655-656f-d937-b760ac00f4f2.htm" />
   <HelpKINode Title="ISequence(Of T).IndexOf method" Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm" />
   <HelpKINode Title="ISequence(Of T).IndexWhere method" Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm" />
-  <HelpKINode Title="ISequence(Of T).Indices property" Url="html/6fb6a2fb-3c7e-d449-91bf-d1d42ff30c5b.htm" />
+  <HelpKINode Title="ISequence(Of T).Indices method" Url="html/0ebf0beb-4836-577f-46f6-a3a0e1397f12.htm" />
   <HelpKINode Title="ISequence(Of T).Init property" Url="html/f74f855a-de71-4343-8ed4-984edb907e2c.htm" />
   <HelpKINode Title="ISequence(Of T).Inits method" Url="html/79628eea-381b-a869-82f0-7a8d5cac1aec.htm" />
   <HelpKINode Title="ISequence(Of T).IsEmpty property" Url="html/1b9b1a22-1a38-a952-dfcf-defd8dd1c4a3.htm" />
@@ -159,7 +159,7 @@
   <HelpKINode Title="ISequence&lt;T&gt;.Head property" Url="html/7e41aaab-7655-656f-d937-b760ac00f4f2.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.IndexOf method" Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.IndexWhere method" Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm" />
-  <HelpKINode Title="ISequence&lt;T&gt;.Indices property" Url="html/6fb6a2fb-3c7e-d449-91bf-d1d42ff30c5b.htm" />
+  <HelpKINode Title="ISequence&lt;T&gt;.Indices method" Url="html/0ebf0beb-4836-577f-46f6-a3a0e1397f12.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Init property" Url="html/f74f855a-de71-4343-8ed4-984edb907e2c.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Inits method" Url="html/79628eea-381b-a869-82f0-7a8d5cac1aec.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.IsEmpty property" Url="html/1b9b1a22-1a38-a952-dfcf-defd8dd1c4a3.htm" />
@@ -298,7 +298,7 @@
   <HelpKINode Title="Sequence(Of T).Head property" Url="html/884447ac-5895-cf66-af7b-33785b29080e.htm" />
   <HelpKINode Title="Sequence(Of T).IndexOf method" Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm" />
   <HelpKINode Title="Sequence(Of T).IndexWhere method" Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm" />
-  <HelpKINode Title="Sequence(Of T).Indices property" Url="html/aca90b5e-5b07-8c3f-cd7f-bc78aeadd528.htm" />
+  <HelpKINode Title="Sequence(Of T).Indices method" Url="html/d8cdae91-a147-2223-f825-ad4b0eff0404.htm" />
   <HelpKINode Title="Sequence(Of T).Init property" Url="html/b0b38082-8637-f662-196b-0852366b2493.htm" />
   <HelpKINode Title="Sequence(Of T).Inits method" Url="html/00794e02-a492-7e2e-bca6-a383dbc7681d.htm" />
   <HelpKINode Title="Sequence(Of T).IsEmpty property" Url="html/f915a516-b769-b805-8ebf-b23e79f2b90e.htm" />
@@ -387,7 +387,7 @@
   <HelpKINode Title="Sequence&lt;T&gt;.Head property" Url="html/884447ac-5895-cf66-af7b-33785b29080e.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.IndexOf method" Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.IndexWhere method" Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm" />
-  <HelpKINode Title="Sequence&lt;T&gt;.Indices property" Url="html/aca90b5e-5b07-8c3f-cd7f-bc78aeadd528.htm" />
+  <HelpKINode Title="Sequence&lt;T&gt;.Indices method" Url="html/d8cdae91-a147-2223-f825-ad4b0eff0404.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Init property" Url="html/b0b38082-8637-f662-196b-0852366b2493.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Inits method" Url="html/00794e02-a492-7e2e-bca6-a383dbc7681d.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.IsEmpty property" Url="html/f915a516-b769-b805-8ebf-b23e79f2b90e.htm" />
