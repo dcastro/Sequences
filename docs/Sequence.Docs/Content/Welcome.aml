@@ -2,14 +2,97 @@
 <topic id="3a04061c-5bf3-4ebd-a084-cf60e7f7a13a" revisionNumber="1">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
-			<para>This is a sample conceptual topic.  You can use this as a starting point for adding more conceptual
-content to your help project.</para>
+			<para>Sequences is a port of Scala's <externalLink>
+        <linkText>Stream[+A]</linkText>
+        <linkUri>http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Stream</linkUri>
+      </externalLink> to C#.</para>
 		</introduction>
 
 		<section>
-			<title>Getting Started</title>
+			<title>Intro</title>
 			<content>
-				<para>To get started, add a documentation source to the project (a Visual Studio solution, project, or
+
+        <para>
+          A <codeEntityReference>T:Sequences.Sequence`1</codeEntityReference> is an immutable lazy list whose elements are only evaluated when they are needed.
+          A sequence is composed by a <legacyItalic>head</legacyItalic> (the first element) and a lazily-evaluated <legacyItalic>tail</legacyItalic> (the remaining elements).
+        </para>
+        <para>
+          The fact that the tail is lazily-evaluated, makes it easy to represent infinite series or sets. For example, here's how to represent the set of all natural numbers.
+        </para>
+
+        <code language="cs" title="Natural numbers">
+          <![CDATA[
+            public ISequence<int> Naturals(int start)
+            {
+                return new Sequence<int>( head: start,
+                                          tail: () => Naturals(start + 1));
+            }
+
+            var naturals = Naturals(1);
+
+            //take the first 5 natural numbers
+            naturals.Take(5).ForEach(Console.Write); //prints 12345]]>
+        </code>
+
+        <para>
+          Or, even simpler:
+        </para>
+
+        <code language="cs" title="Natural numbers">
+        <![CDATA[
+          var naturals = Sequence.From(1);]]>
+        </code>
+
+        <para>
+        Sequences also features memoization, i.e., the sequence stores previously computed values to avoid re-evaluation.
+        </para>
+
+        <code language="cs" title="Memoizing odd numbers">
+          <![CDATA[
+            //start with number 1, and then keep adding 2 to the previous number
+            var odds = Sequence.Iterate(1, odd =>
+                {
+                    Console.WriteLine("Adding " + odd + " + 2");
+                    return odd + 2;
+                });
+
+            odds.Take(3).ForEach(Console.WriteLine);
+            odds.Take(5).ForEach(Console.WriteLine);
+
+            //prints
+            //1
+            //Adding 1 + 2
+            //3
+            //Adding 3 + 2
+            //5
+
+            //and then
+            //1
+            //3
+            //5
+            //Adding 5 + 2
+            //7
+            //Adding 7 + 2
+            //9]]>
+        </code>
+
+        <para>
+          You can iterate through an infinite sequence for as long as you want.
+          As long as you don't hold onto its head, each sequence will be elected for garbage collection as soon as you move to the next value.
+          This prevents an infinite sequence from occupying a large and growing ammount of memory.
+        </para>
+
+        <code language="cs" title="Continuous garbage collection">
+          <![CDATA[
+            foreach (var odd in Sequence.Iterate(1, odd => odd + 2))
+            {
+                //when you move to Sequence(11, ?),
+                //the previous Sequence(9, ?) is elected for collection.
+            }]]>
+        </code>
+        
+
+        <para>To get started, add a documentation source to the project (a Visual Studio solution, project, or
 assembly and XML comments file).  See the <legacyBold>Getting Started</legacyBold> topics in the Sandcastle Help
 File Builder's help file for more information.  The following default items are included in this project:</para>
 
@@ -45,7 +128,8 @@ in order to be compiled into the help file.</para>
 				<para>See the <legacyBold>Conceptual Content</legacyBold> topics in the Sandcastle Help File Builder's
 help file for more information.  See the <legacyBold> Sandcastle MAML Guide</legacyBold> for details on Microsoft
 Assistance Markup Language (MAML) which is used to create these topics.</para>
-			</content>
+			
+    </content>
 		</section>
 
 		<relatedTopics>
