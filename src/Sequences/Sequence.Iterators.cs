@@ -73,171 +73,125 @@ namespace Sequences
             }
         }
 
-        private class SlidingEnumerator : IEnumerable<ISequence<T>>
+        private class SlidingIterator : IEnumerator<ISequence<T>>
         {
-            private readonly ISequence<T> _sequence;
+            private ISequence<T> _seq;
             private readonly int _size;
             private readonly int _step;
 
-            public SlidingEnumerator(ISequence<T> sequence, int size, int step)
+            private bool _hasMoved;
+            private bool _hasMoreElems;
+
+            private readonly List<T> _buffer;
+
+            public SlidingIterator(ISequence<T> seq, int size, int step)
             {
-                _sequence = sequence;
+                _seq = seq;
                 _size = size;
                 _step = step;
+
+                _buffer = new List<T>(_size);
+                _hasMoreElems = _seq.NonEmpty;
             }
 
-            public IEnumerator<ISequence<T>> GetEnumerator()
+            public bool MoveNext()
             {
-                return new SlidingIterator(_sequence, _size, _step);
+                //move "_step" elements on every call but the first
+                if (_hasMoved)
+                    _seq = _seq.Skip(_step);
+                else
+                    _hasMoved = true;
+
+                //in addition to checking if the previous iterator had more elements,
+                //we also need to check if the sequence is still not empty after advancing "_step" elements
+                _hasMoreElems &= _seq.NonEmpty;
+
+                if (!_hasMoreElems)
+                    return false;
+
+                //group elements into a buffer
+                var iterator = _seq.GetEnumerator();
+
+                for (int i = 0; i < _size && iterator.MoveNext(); i++)
+                    _buffer.Add(iterator.Current);
+
+                //force the evaluation of the buffer's contents, before we clear the buffer.
+                Current = _buffer.AsSequence().Force();
+                _buffer.Clear();
+
+                //check if there are any more elements
+                _hasMoreElems = iterator.MoveNext();
+
+                return true;
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
+            void IEnumerator.Reset()
             {
-                return GetEnumerator();
+                throw new NotSupportedException();
             }
 
-            private class SlidingIterator : IEnumerator<ISequence<T>>
+            public ISequence<T> Current { get; private set; }
+
+            object IEnumerator.Current
             {
-                private ISequence<T> _seq;
-                private readonly int _size;
-                private readonly int _step;
+                get { return Current; }
+            }
 
-                private bool _hasMoved;
-                private bool _hasMoreElems;
-
-                private readonly List<T> _buffer;
-
-                public SlidingIterator(ISequence<T> seq, int size, int step)
-                {
-                    _seq = seq;
-                    _size = size;
-                    _step = step;
-
-                    _buffer = new List<T>(_size);
-                    _hasMoreElems = _seq.NonEmpty;
-                }
-
-                public bool MoveNext()
-                {
-                    //move "_step" elements on every call but the first
-                    if (_hasMoved)
-                        _seq = _seq.Skip(_step);
-                    else
-                        _hasMoved = true;
-
-                    //in addition to checking if the previous iterator had more elements,
-                    //we also need to check if the sequence is still not empty after advancing "_step" elements
-                    _hasMoreElems &= _seq.NonEmpty;
-
-                    if (!_hasMoreElems)
-                        return false;
-
-                    //group elements into a buffer
-                    var iterator = _seq.GetEnumerator();
-
-                    for (int i = 0; i < _size && iterator.MoveNext(); i++)
-                        _buffer.Add(iterator.Current);
-
-                    //force the evaluation of the buffer's contents, before we clear the buffer.
-                    Current = _buffer.AsSequence().Force();
-                    _buffer.Clear();
-
-                    //check if there are any more elements
-                    _hasMoreElems = iterator.MoveNext();
-
-                    return true;
-                }
-
-                void IEnumerator.Reset()
-                {
-                    throw new NotSupportedException();
-                }
-
-                public ISequence<T> Current { get; private set; }
-
-                object IEnumerator.Current
-                {
-                    get { return Current; }
-                }
-
-                public void Dispose()
-                {
-                }
+            public void Dispose()
+            {
             }
         }
 
-        private class GroupedEnumerator : IEnumerable<ISequence<T>>
+        private class GroupedIterator : IEnumerator<ISequence<T>>
         {
-            private readonly ISequence<T> _sequence;
+            private ISequence<T> _seq;
             private readonly int _size;
 
-            public GroupedEnumerator(ISequence<T> sequence, int size)
+            private bool _hasMoved;
+
+            public GroupedIterator(ISequence<T> seq, int size)
             {
-                _sequence = sequence;
+                _seq = seq;
                 _size = size;
             }
 
-            public IEnumerator<ISequence<T>> GetEnumerator()
+            public bool MoveNext()
             {
-                return new GroupedIterator(_sequence, _size);
+                if (_hasMoved)
+                    _seq = _seq.Skip(_size);
+                else
+                    _hasMoved = true;
+
+                if (_seq.IsEmpty)
+                    return false;
+
+                Current = _seq.Take(_size);
+                return true;
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
+            void IEnumerator.Reset()
             {
-                return GetEnumerator();
+                throw new NotSupportedException();
             }
 
-            private class GroupedIterator : IEnumerator<ISequence<T>>
+            public ISequence<T> Current { get; private set; }
+
+            object IEnumerator.Current
             {
-                private ISequence<T> _seq;
-                private readonly int _size;
+                get { return Current; }
+            }
 
-                private bool _hasMoved;
+            public void Dispose()
+            {
+            }
+        } 
 
-                public GroupedIterator(ISequence<T> seq, int size)
-                {
-                    _seq = seq;
-                    _size = size;
-                }
-
-                public bool MoveNext()
-                {
-                    if (_hasMoved)
-                        _seq = _seq.Skip(_size);
-                    else
-                        _hasMoved = true;
-
-                    if (_seq.IsEmpty)
-                        return false;
-
-                    Current = _seq.Take(_size);
-                    return true;
-                }
-
-                void IEnumerator.Reset()
-                {
-                    throw new NotSupportedException();
-                }
-
-                public ISequence<T> Current { get; private set; }
-
-                object IEnumerator.Current
-                {
-                    get { return Current; }
-                }
-
-                public void Dispose()
-                {
-                }
-            } 
-        }
-
-        private class CombinationsIterator : IEnumerable<ISequence<T>>
+        private class CombinationsEnumerable : IEnumerable<ISequence<T>>
         {
             private readonly ISequence<T> _sequence;
             private readonly int _size;
 
-            public CombinationsIterator(ISequence<T> sequence, int size)
+            public CombinationsEnumerable(ISequence<T> sequence, int size)
             {
                 _sequence = sequence;
                 _size = size;
@@ -279,11 +233,11 @@ namespace Sequences
             }
         }
 
-        private class PermutationsIterator : IEnumerable<ISequence<T>>
+        private class PermutationsEnumerable : IEnumerable<ISequence<T>>
         {
             private readonly ISequence<T> _sequence;
 
-            public PermutationsIterator(ISequence<T> sequence)
+            public PermutationsEnumerable(ISequence<T> sequence)
             {
                 _sequence = sequence;
             }
@@ -296,6 +250,26 @@ namespace Sequences
                     foreach (var elem in _sequence.Distinct())
                         foreach (var restPermutation in _sequence.Remove(elem).Permutations())
                             yield return new Sequence<T>(elem, () => restPermutation);
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
+        private class GenericEnumerable<TElem> : IEnumerable<TElem>
+        {
+            private readonly Func<IEnumerator<TElem>> _iteratorFactory;
+
+            public GenericEnumerable(Func<IEnumerator<TElem>> iteratorFactory)
+            {
+                _iteratorFactory = iteratorFactory;
+            }
+
+            public IEnumerator<TElem> GetEnumerator()
+            {
+                return _iteratorFactory();
             }
 
             IEnumerator IEnumerable.GetEnumerator()

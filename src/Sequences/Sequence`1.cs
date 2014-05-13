@@ -548,8 +548,9 @@ namespace Sequences
                 throw new ArgumentOutOfRangeException("size", "size must be a positive integer.");
             if (step <= 0)
                 throw new ArgumentOutOfRangeException("step", "step must be a positive integer.");
-            
-            return new SlidingEnumerator(this, size, step);
+
+            return new GenericEnumerable<ISequence<T>>(
+                () => new SlidingIterator(this, size, step));
         }
 
         /// <summary>
@@ -580,7 +581,8 @@ namespace Sequences
             if (size <= 0)
                 throw new ArgumentOutOfRangeException("size", "size must be a positive integer.");
 
-            return new GroupedEnumerator(this, size);
+            return new GenericEnumerable<ISequence<T>>(
+                () => new GroupedIterator(this, size));
         }
 
         /// <summary>
@@ -923,7 +925,7 @@ namespace Sequences
             if (size < 0)
                 throw new ArgumentOutOfRangeException("size", "size must be a non-negative integer.");
 
-            return new CombinationsIterator(this, size);
+            return new CombinationsEnumerable(this, size);
         }
 
         /// <summary>
@@ -935,7 +937,7 @@ namespace Sequences
         [Pure]
         public IEnumerable<ISequence<T>> Permutations()
         {
-            return new PermutationsIterator(this);
+            return new PermutationsEnumerable(this);
         }
 
         /// <summary>
