@@ -23,17 +23,19 @@ namespace Sequences
          * Using these iterators, the GC will be able to collect all intermediate sequences as the loop progresses.
          */
 
-        private class NonEmptyTailsIterator<TElem> : IEnumerator<TElem>
+        private class TailsIterator<TElem> : IEnumerator<TElem>
         {
             private ISequence<T> _seq;
             private readonly Func<ISequence<T>, TElem> _selector;
+            private readonly bool _returnEmptyTail;
             private bool _hasMoved;
             private bool _hasFinished;
 
-            public NonEmptyTailsIterator(ISequence<T> seq, Func<ISequence<T>, TElem> selector)
+            public TailsIterator(ISequence<T> seq, Func<ISequence<T>, TElem> selector, bool returnEmptyTail)
             {
                 _seq = seq;
                 _selector = selector;
+                _returnEmptyTail = returnEmptyTail;
             }
 
             public bool MoveNext()
@@ -47,16 +49,18 @@ namespace Sequences
                     _seq = _seq.Tail;
                 else
                     _hasMoved = true;
-
+                
                 //check if the iterator has reached the end of the sequence
                 if (_seq.IsEmpty)
-                {
                     _hasFinished = true;
-                    return false;
+
+                if (_seq.NonEmpty || _returnEmptyTail)
+                {
+                    Current = _selector(_seq);
+                    return true;
                 }
 
-                Current = _selector(_seq);
-                return true;
+                return false;
             }
 
             void IEnumerator.Reset()

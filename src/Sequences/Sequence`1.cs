@@ -139,7 +139,7 @@ namespace Sequences
         {
             //instead of using an "iterator block" (using yield) and letting the compiler generate an IEnumerator<T> for us,
             //we return our own specialized IEnumerator<T> that lets sequences be garbage collected along the way.
-            return new NonEmptyTailsIterator<T>(this, seq => seq.Head);
+            return new TailsIterator<T>(this, seq => seq.Head, returnEmptyTail: false);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -156,16 +156,9 @@ namespace Sequences
         [Pure]
         public IEnumerable<ISequence<T>> Tails()
         {
-            ISequence<T> sequence = this;
-
-            while (sequence.NonEmpty)
-            {
-                yield return sequence;
-                sequence = sequence.Tail;
-            }
-
-            //return empty sequence
-            yield return sequence;
+            return new GenericEnumerable<ISequence<T>>(
+                () => new TailsIterator<ISequence<T>>(
+                          this, seq => seq, returnEmptyTail: true));
         }
 
         /// <summary>
@@ -177,13 +170,9 @@ namespace Sequences
         [Pure]
         public IEnumerable<ISequence<T>> NonEmptyTails()
         {
-            ISequence<T> sequence = this;
-
-            while (sequence.NonEmpty)
-            {
-                yield return sequence;
-                sequence = sequence.Tail;
-            }
+            return new GenericEnumerable<ISequence<T>>(
+                () => new TailsIterator<ISequence<T>>(
+                          this, seq => seq, returnEmptyTail: false));
         }
 
         /// <summary>
