@@ -98,7 +98,7 @@ namespace Sequences.Tests
             var list = sequence.Take(10).ToList();
 
             //Assert
-            elemFuncMock.Verify(f => f(), Times.Exactly(10));
+            elemFuncMock.Verify(f => f(), Times.AtLeast(10));
         }
 
         [Fact]

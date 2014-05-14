@@ -187,8 +187,8 @@ namespace Sequences.Tests
         [Fact]
         public void Where_With_Index()
         {
-            Assert.Equal(_enumerable.Where((i, index) => i + index%2 == 0),
-                         _sequence.Where((i, index) => i + index%2 == 0));
+            Assert.Equal(_enumerable.Where((i, index) => (i + index)%2 == 0),
+                         _sequence.Where((i, index) => (i + index)%2 == 0));
         }
 
         [Fact]

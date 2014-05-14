@@ -63,8 +63,8 @@ namespace Sequences
         private static ISequence<T> With<T>(IEnumerator<T> iterator)
         {
             return iterator.MoveNext()
-                ? new Sequence<T>(iterator.Current, () => With(iterator))
-                : Empty<T>();
+                       ? new Sequence<T>(iterator.Current, () => With(iterator))
+                       : Empty<T>();
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Sequences
             if (func == null) throw new ArgumentNullException("func");
 
             return length <= 0
-                ? Empty<T>()
-                : new Sequence<T>(start, () => Iterate(func(start), length - 1, func));
+                       ? Empty<T>()
+                       : new Sequence<T>(start, () => Iterate(func(start), length - 1, func));
         }
 
         /// <summary>
@@ -116,8 +116,8 @@ namespace Sequences
         private static ISequence<T> Tabulate<T>(int length, int current, Func<int, T> func)
         {
             return current >= length
-                ? Empty<T>()
-                : new Sequence<T>(func(current), () => Tabulate(length, current + 1, func));
+                       ? Empty<T>()
+                       : new Sequence<T>(func(current), () => Tabulate(length, current + 1, func));
         }
 
         /// <summary>
@@ -132,8 +132,8 @@ namespace Sequences
         {
             if (elem == null) throw new ArgumentNullException("elem");
             return (count > 0)
-                ? new Sequence<T>(elem(), () => Fill(elem, count - 1))
-                : Empty<T>();
+                       ? new Sequence<T>(elem(), () => Fill(elem, count - 1))
+                       : Empty<T>();
         }
 
         /// <summary>
@@ -408,7 +408,7 @@ namespace Sequences
         /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
         [Pure]
         public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
-            Func<TSource, bool> predicate)
+                                                            Func<TSource, bool> predicate)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -435,7 +435,7 @@ namespace Sequences
         /// <returns>A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by <paramref name="predicate"/></returns>
         [Pure]
         public static ISequence<TSource> SkipWhile<TSource>(this ISequence<TSource> source,
-            Func<TSource, int, bool> predicate)
+                                                            Func<TSource, int, bool> predicate)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -462,7 +462,7 @@ namespace Sequences
         /// <returns>A sequence whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.</returns>
         [Pure]
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
-            Func<TSource, TResult> selector)
+                                                                  Func<TSource, TResult> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -484,7 +484,7 @@ namespace Sequences
         /// <returns>A sequence whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.</returns>
         [Pure]
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
-            Func<TSource, int, TResult> selector)
+                                                                  Func<TSource, int, TResult> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -677,7 +677,15 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Where<TSource>(this ISequence<TSource> source, Func<TSource, bool> predicate)
         {
-            return Enumerable.Where(source, predicate).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
+            while (source.NonEmpty && !predicate(source.Head))
+                source = source.Tail;
+
+            return source.IsEmpty
+                       ? source
+                       : new Sequence<TSource>(source.Head, () => source.Tail.Where(predicate));
         }
 
         /// <summary>
@@ -690,9 +698,24 @@ namespace Sequences
         /// <returns>A sequence that contains elements from <paramref name="source"/> that satisfy the condition.</returns>
         [Pure]
         public static ISequence<TSource> Where<TSource>(this ISequence<TSource> source,
-            Func<TSource, int, bool> predicate)
+                                                        Func<TSource, int, bool> predicate)
         {
-            return Enumerable.Where(source, predicate).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
+            return Where(source, predicate, 0);
+        }
+
+        private static ISequence<TSource> Where<TSource>(ISequence<TSource> source,
+                                                         Func<TSource, int, bool> predicate,
+                                                         int index)
+        {
+            while (source.NonEmpty && !predicate(source.Head, index++))
+                source = source.Tail;
+
+            return source.IsEmpty
+                       ? source
+                       : new Sequence<TSource>(source.Head, () => Where(source.Tail, predicate, index));
         }
 
         /// <summary>
@@ -705,7 +728,11 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Take<TSource>(this ISequence<TSource> source, int count)
         {
-            return Enumerable.Take(source, count).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+
+            return count <= 0 || source.IsEmpty
+                       ? Empty<TSource>()
+                       : new Sequence<TSource>(source.Head, () => source.Tail.Take(count - 1));
         }
 
         /// <summary>
@@ -717,9 +744,14 @@ namespace Sequences
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.</returns>
         [Pure]
         public static ISequence<TSource> TakeWhile<TSource>(this ISequence<TSource> source,
-            Func<TSource, bool> predicate)
+                                                            Func<TSource, bool> predicate)
         {
-            return Enumerable.TakeWhile(source, predicate).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
+            return source.IsEmpty || !predicate(source.Head)
+                       ? Empty<TSource>()
+                       : new Sequence<TSource>(source.Head, () => source.Tail.TakeWhile(predicate));
         }
 
         /// <summary>
@@ -732,9 +764,20 @@ namespace Sequences
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.</returns>
         [Pure]
         public static ISequence<TSource> TakeWhile<TSource>(this ISequence<TSource> source,
-            Func<TSource, int, bool> predicate)
+                                                            Func<TSource, int, bool> predicate)
         {
-            return Enumerable.TakeWhile(source, predicate).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (predicate == null) throw new ArgumentNullException("predicate");
+            return TakeWhile(source, predicate, 0);
+        }
+
+        private static ISequence<TSource> TakeWhile<TSource>(ISequence<TSource> source,
+                                                             Func<TSource, int, bool> predicate,
+                                                             int index)
+        {
+            return source.IsEmpty || !predicate(source.Head, index)
+                       ? Empty<TSource>()
+                       : new Sequence<TSource>(source.Head, () => TakeWhile(source.Tail, predicate, index + 1));
         }
 
         /// <summary>
@@ -749,8 +792,8 @@ namespace Sequences
         /// <returns>A sequence that contains merged elements of two input sequences.</returns>
         [Pure]
         public static ISequence<TResult> Zip<TFirst, TSecond, TResult>(this ISequence<TFirst> first,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
+                                                                       IEnumerable<TSecond> second,
+                                                                       Func<TFirst, TSecond, TResult> resultSelector)
         {
             return Enumerable.Zip(first, second, resultSelector).AsSequence();
         }
@@ -776,7 +819,7 @@ namespace Sequences
         /// <returns>A sequence that contains distinct elements from the input sequence.</returns>
         [Pure]
         public static ISequence<TSource> Distinct<TSource>(this ISequence<TSource> source,
-            IEqualityComparer<TSource> comparer)
+                                                           IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Distinct(source, comparer).AsSequence();
         }
@@ -806,7 +849,7 @@ namespace Sequences
         /// <returns>A sequence that contains the set difference of the elements of two sequences.</returns>
         [Pure]
         public static ISequence<TSource> Except<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
-            IEqualityComparer<TSource> comparer)
+                                                         IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Except(first, second, comparer).AsSequence();
         }
@@ -836,7 +879,7 @@ namespace Sequences
         /// <returns>A sequence that contains the elements that form the set intersection of two sequences.</returns>
         [Pure]
         public static ISequence<TSource> Intersect<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
-            IEqualityComparer<TSource> comparer)
+                                                            IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Intersect(first, second, comparer).AsSequence();
         }
@@ -922,7 +965,7 @@ namespace Sequences
         {
             return Enumerable.Union(first, second).AsSequence();
         }
-        
+
         /// <summary>
         /// Produces the set union of two sequences by using a specified <see cref="IEqualityComparer{T}"/>.
         /// </summary>
@@ -933,7 +976,7 @@ namespace Sequences
         /// <returns></returns>
         [Pure]
         public static ISequence<TSource> Union<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
-            IEqualityComparer<TSource> comparer)
+                                                        IEqualityComparer<TSource> comparer)
         {
             return Enumerable.Union(first, second, comparer).AsSequence();
         }
