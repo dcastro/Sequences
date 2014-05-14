@@ -464,7 +464,13 @@ namespace Sequences
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
             Func<TSource, TResult> selector)
         {
-            return Enumerable.Select(source, selector).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            return source.IsEmpty
+                       ? Empty<TResult>()
+                       : new Sequence<TResult>(selector(source.Head),
+                                               () => source.Tail.Select(selector));
         }
 
         /// <summary>
@@ -480,7 +486,18 @@ namespace Sequences
         public static ISequence<TResult> Select<TSource, TResult>(this ISequence<TSource> source,
             Func<TSource, int, TResult> selector)
         {
-            return Enumerable.Select(source, selector).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+            return Select(source, selector, 0);
+        }
+
+        private static ISequence<TResult> Select<TSource, TResult>(ISequence<TSource> source,
+                                                                   Func<TSource, int, TResult> selector, int index)
+        {
+            return source.IsEmpty
+                       ? Empty<TResult>()
+                       : new Sequence<TResult>(selector(source.Head, index),
+                                               () => Select(source.Tail, selector, index + 1));
         }
 
         /// <summary>
@@ -493,9 +510,27 @@ namespace Sequences
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.</returns>
         [Pure]
         public static ISequence<TResult> SelectMany<TSource, TResult>(this ISequence<TSource> source,
-            Func<TSource, IEnumerable<TResult>> selector)
+                                                                      Func<TSource, IEnumerable<TResult>> selector)
         {
-            return Enumerable.SelectMany(source, selector).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            //apply "selector" to the source's head, and iterate through the resulting enumerable
+            return source.IsEmpty
+                       ? Empty<TResult>()
+                       : SelectMany(source, selector, selector(source.Head).GetEnumerator());
+        }
+
+        private static ISequence<TResult> SelectMany<TSource, TResult>(ISequence<TSource> source,
+                                                                       Func<TSource, IEnumerable<TResult>> selector,
+                                                                       IEnumerator<TResult> iter)
+        {
+            if (iter.MoveNext())
+                return new Sequence<TResult>(iter.Current,
+                                             () => SelectMany(source, selector, iter));
+
+            //if this iterator has been exhausted, move onto the tail
+            return source.Tail.SelectMany(selector);
         }
 
         /// <summary>
@@ -509,9 +544,34 @@ namespace Sequences
         /// <returns>A sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.</returns>
         [Pure]
         public static ISequence<TResult> SelectMany<TSource, TResult>(this ISequence<TSource> source,
-            Func<TSource, int, IEnumerable<TResult>> selector)
+                                                                      Func<TSource, int, IEnumerable<TResult>> selector)
         {
-            return Enumerable.SelectMany(source, selector).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+
+            return SelectMany(source, selector, 0);
+        }
+
+        private static ISequence<TResult> SelectMany<TSource, TResult>(ISequence<TSource> source,
+                                                                       Func<TSource, int, IEnumerable<TResult>> selector,
+                                                                       int index)
+        {
+            //apply "selector" to the source's head, and iterate through the resulting enumerable
+            return source.IsEmpty
+                       ? Empty<TResult>()
+                       : SelectMany(source, selector, selector(source.Head, index).GetEnumerator(), index);
+        }
+
+        private static ISequence<TResult> SelectMany<TSource, TResult>(ISequence<TSource> source,
+                                                                       Func<TSource, int, IEnumerable<TResult>> selector,
+                                                                       IEnumerator<TResult> iter, int index)
+        {
+            if (iter.MoveNext())
+                return new Sequence<TResult>(iter.Current,
+                                             () => SelectMany(source, selector, iter, index));
+
+            //if this iterator has been exhausted, move onto the tail
+            return SelectMany(source.Tail, selector, index + 1);
         }
 
         /// <summary>
@@ -530,7 +590,29 @@ namespace Sequences
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector)
         {
-            return Enumerable.SelectMany(source, collectionSelector, resultSelector).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (collectionSelector == null) throw new ArgumentNullException("collectionSelector");
+            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+
+            //apply "selector" to the source's head, and iterate through the resulting enumerable
+            return source.IsEmpty
+                       ? Empty<TResult>()
+                       : SelectMany(source, collectionSelector, resultSelector,
+                                    collectionSelector(source.Head).GetEnumerator());
+        }
+
+        private static ISequence<TResult> SelectMany<TSource, TCollection, TResult>(
+            ISequence<TSource> source,
+            Func<TSource, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector,
+            IEnumerator<TCollection> iter)
+        {
+            if (iter.MoveNext())
+                return new Sequence<TResult>(resultSelector(source.Head, iter.Current),
+                                             () => SelectMany(source, collectionSelector, resultSelector, iter));
+
+            //if this iterator has been exhausted, move onto the tail
+            return source.Tail.SelectMany(collectionSelector, resultSelector);
         }
 
         /// <summary>
@@ -550,7 +632,39 @@ namespace Sequences
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector)
         {
-            return Enumerable.SelectMany(source, collectionSelector, resultSelector).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (collectionSelector == null) throw new ArgumentNullException("collectionSelector");
+            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+
+            return SelectMany(source, collectionSelector, resultSelector, 0);
+        }
+
+        private static ISequence<TResult> SelectMany<TSource, TCollection, TResult>(
+            ISequence<TSource> source,
+            Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector,
+            int index)
+        {
+            //apply "collectionSelector" to the source's head, and iterate through the resulting enumerable
+            return source.IsEmpty
+                       ? Empty<TResult>()
+                       : SelectMany(source, collectionSelector, resultSelector,
+                                    collectionSelector(source.Head, index).GetEnumerator(), index);
+        }
+
+        private static ISequence<TResult> SelectMany<TSource, TCollection, TResult>(
+            ISequence<TSource> source,
+            Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector,
+            IEnumerator<TCollection> iter,
+            int index)
+        {
+            if (iter.MoveNext())
+                return new Sequence<TResult>(resultSelector(source.Head, iter.Current),
+                                             () => SelectMany(source, collectionSelector, resultSelector, iter, index));
+
+            //if this iterator has been exhausted, move onto the tail
+            return SelectMany(source.Tail, collectionSelector, resultSelector, index + 1);
         }
 
         /// <summary>
