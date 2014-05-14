@@ -9,27 +9,31 @@ namespace Sequences
 {
     public partial class Sequence<T>
     {
-        /// <summary>
-        /// An "iterator block" lets the compiler generate an <see cref="IEnumerator{T}"/> for us.
-        /// However, that enumerator holds onto the sequence that created it, and doesn't let the GC collect it.
-        /// 
-        /// This specialized iterator doesn't do that.
-        /// Instead, when it moves to a sequence's tail, it replaces the reference to the sequence with a reference to its tail,
-        /// letting GC collect the original sequence.
-        /// 
-        /// This lets us, for example, iterate through an infinite sequence for as long as we want, e.g., foreach(var e in Sequence.From(1L)) { }.
-        /// A compiler-generated iterator would keep a reference to the first sequence - Sequence(1, ?) - and, therefore, to all its tails.
-        /// Using this iterator, the GC will be able to collect all intermediate sequences as the loop progresses.
-        /// </summary>
-        private class Iterator : IEnumerator<T>
+
+        /**
+         * An "iterator block" lets the compiler generate an <see cref="IEnumerator{T}"/> for us.
+         * However, that enumerator holds onto the sequence that created it, and doesn't let the GC collect it.
+         * 
+         * These specialized iterators don't do that.
+         * Instead, when they move to a sequence's tail, they replace the reference to the sequence with a reference to its tail,
+         * letting GC collect the original sequence.
+         * 
+         * This lets us, for example, iterate through an infinite sequence for as long as we want, e.g., foreach(var e in Sequence.From(1L)) { }.
+         * A compiler-generated iterator would keep a reference to the first sequence - Sequence(1, ?) - and, therefore, to all its tails.
+         * Using these iterators, the GC will be able to collect all intermediate sequences as the loop progresses.
+         */
+
+        private class NonEmptyTailsIterator<TElem> : IEnumerator<TElem>
         {
             private ISequence<T> _seq;
+            private readonly Func<ISequence<T>, TElem> _selector;
             private bool _hasMoved;
             private bool _hasFinished;
 
-            public Iterator(ISequence<T> seq)
+            public NonEmptyTailsIterator(ISequence<T> seq, Func<ISequence<T>, TElem> selector)
             {
                 _seq = seq;
+                _selector = selector;
             }
 
             public bool MoveNext()
@@ -51,8 +55,7 @@ namespace Sequences
                     return false;
                 }
 
-                //update Current
-                Current = _seq.Head;
+                Current = _selector(_seq);
                 return true;
             }
 
@@ -61,7 +64,7 @@ namespace Sequences
                 throw new NotSupportedException();
             }
 
-            public T Current { get; private set; }
+            public TElem Current { get; private set; }
 
             object IEnumerator.Current
             {

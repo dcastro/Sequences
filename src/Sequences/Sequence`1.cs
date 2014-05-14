@@ -139,7 +139,7 @@ namespace Sequences
         {
             //instead of using an "iterator block" (using yield) and letting the compiler generate an IEnumerator<T> for us,
             //we return our own specialized IEnumerator<T> that lets sequences be garbage collected along the way.
-            return new Iterator(this);
+            return new NonEmptyTailsIterator<T>(this, seq => seq.Head);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
