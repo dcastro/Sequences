@@ -647,7 +647,8 @@ namespace Sequences
         /// <returns>The range of all indices of this sequence.</returns>
         public IEnumerable<int> Indices()
         {
-            return this.Select((elem, index) => index);
+            return new GenericEnumerable<int>(
+                () => new IndexIterator(this));
         }
 
         /// <summary>

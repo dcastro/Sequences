@@ -80,6 +80,46 @@ namespace Sequences
             }
         }
 
+        private class IndexIterator : IEnumerator<int>
+        {
+            private readonly IEnumerator<T> _iter;
+            private int _index;
+            private bool _hasFinished;
+
+            public IndexIterator(IEnumerable<T> seq)
+            {
+                _iter = seq.GetEnumerator();
+            }
+
+            public bool MoveNext()
+            {
+                if (_hasFinished || ! _iter.MoveNext())
+                {
+                    _hasFinished = true;
+                    return false;
+                }
+
+                Current = _index++;
+                return true;
+            }
+
+            void IEnumerator.Reset()
+            {
+                throw new NotSupportedException();
+            }
+
+            public int Current { get; private set; }
+
+            object IEnumerator.Current
+            {
+                get { return Current; }
+            }
+
+            public void Dispose()
+            {
+            }
+        }
+
         private class SlidingIterator : IEnumerator<ISequence<T>>
         {
             private ISequence<T> _seq;
