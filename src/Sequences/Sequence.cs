@@ -62,7 +62,7 @@ namespace Sequences
 
         private static ISequence<T> With<T>(IEnumerator<T> iterator)
         {
-            return iterator.MoveNext()
+            return iterator.TryMoveNext()
                        ? new Sequence<T>(iterator.Current, () => With(iterator))
                        : Empty<T>();
         }

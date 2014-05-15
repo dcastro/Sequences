@@ -242,8 +242,8 @@ namespace Sequences
             if (otherSequence == null) throw new ArgumentNullException("otherSequence");
 
             return IsEmpty
-                ? otherSequence().AsSequence()
-                : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
+                       ? otherSequence().AsSequence()
+                       : new Sequence<T>(Head, () => Tail.Concat(otherSequence));
         }
 
         /// <summary>
@@ -284,8 +284,8 @@ namespace Sequences
                 return this;
 
             return index == 0
-                ? new Sequence<T>(elem, () => Tail)
-                : new Sequence<T>(Head, () => Tail.Updated(index - 1, elem));
+                       ? new Sequence<T>(elem, () => Tail)
+                       : new Sequence<T>(Head, () => Tail.Updated(index - 1, elem));
         }
 
         /// <summary>
@@ -354,9 +354,9 @@ namespace Sequences
             if (patch == null) throw new ArgumentNullException("patch");
 
             return (IsEmpty || from <= 0)
-                ? patch.AsSequence()
-                    .Concat(() => this.Skip(replaced))
-                : new Sequence<T>(Head, () => Tail.Patch(from - 1, patch, replaced));
+                       ? patch.AsSequence()
+                              .Concat(() => this.Skip(replaced))
+                       : new Sequence<T>(Head, () => Tail.Patch(from - 1, patch, replaced));
         }
 
         /// <summary>
@@ -396,9 +396,9 @@ namespace Sequences
             var testIndex = length - 1;
             var iter = Indices().GetEnumerator();
 
-            while (iter.MoveNext() && iter.Current <= testIndex)
+            while (iter.TryMoveNext() && iter.Current <= testIndex)
                 if (iter.Current == testIndex)
-                    return iter.MoveNext() ? 1 : 0;
+                    return iter.TryMoveNext() ? 1 : 0;
 
             return -1;
         }
@@ -484,7 +484,7 @@ namespace Sequences
                 return Sequence.With(seed);
 
             return new Sequence<T>(seed, () =>
-                Tail.Scan(op(seed, Head), op));
+                                         Tail.Scan(op(seed, Head), op));
         }
 
         /// <summary>
@@ -613,7 +613,7 @@ namespace Sequences
             //if either sequence is empty, replace it with an infinite sequence and perform a normal, truncated zip.
             if (first.IsEmpty)
                 return Zip(Sequence.Continually(elem1), second);
-            if (!second.MoveNext())
+            if (!second.TryMoveNext())
                 return Zip(first, Sequence.Continually(elem2).GetEnumerator());
 
             return new Sequence<Tuple<T, TSecond>>(Tuple.Create(first.Head, second.Current),
@@ -624,7 +624,7 @@ namespace Sequences
         private static ISequence<Tuple<T, TSecond>> Zip<TSecond>(ISequence<T> first, IEnumerator<TSecond> second)
         {
             //if either sequence is empty, return an empty sequence.
-            if (first.IsEmpty || !second.MoveNext())
+            if (first.IsEmpty || !second.TryMoveNext())
                 return Sequence.Empty<Tuple<T, TSecond>>();
 
             return new Sequence<Tuple<T, TSecond>>(Tuple.Create(first.Head, second.Current),
@@ -891,11 +891,11 @@ namespace Sequences
             if (index < 0) throw new ArgumentOutOfRangeException("index", "index must be a non-negative integer.");
 
             T[] original = this.Skip(index)
-                .Take(count)
-                .ToArray();
+                               .Take(count)
+                               .ToArray();
 
             count = Math.Min(count,
-                Math.Min(original.Length, destination.Length - destinationIndex));
+                             Math.Min(original.Length, destination.Length - destinationIndex));
 
             //delegate further error-checking to Array.Copy
             Array.Copy(original, 0, destination, destinationIndex, count);
@@ -951,8 +951,8 @@ namespace Sequences
         public string MkString(string separator)
         {
             return string.Join(separator,
-                Enumerable.Select(this,
-                    elem => elem.ToString()));
+                               Enumerable.Select(this,
+                                                 elem => elem.ToString()));
         }
 
         /// <summary>

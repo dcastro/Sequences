@@ -49,7 +49,7 @@ namespace Sequences
                     _seq = _seq.Tail;
                 else
                     _hasMoved = true;
-                
+
                 //check if the iterator has reached the end of the sequence
                 if (_seq.IsEmpty)
                     _hasFinished = true;
@@ -93,7 +93,7 @@ namespace Sequences
 
             public bool MoveNext()
             {
-                if (_hasFinished || ! _iter.MoveNext())
+                if (_hasFinished || !_iter.TryMoveNext())
                 {
                     _hasFinished = true;
                     return false;
@@ -159,7 +159,7 @@ namespace Sequences
                 //group elements into a buffer
                 var iterator = _seq.GetEnumerator();
 
-                for (int i = 0; i < _size && iterator.MoveNext(); i++)
+                for (int i = 0; i < _size && iterator.TryMoveNext(); i++)
                     _buffer.Add(iterator.Current);
 
                 //force the evaluation of the buffer's contents, before we clear the buffer.
@@ -167,7 +167,7 @@ namespace Sequences
                 _buffer.Clear();
 
                 //check if there are any more elements
-                _hasMoreElems = iterator.MoveNext();
+                _hasMoreElems = iterator.TryMoveNext();
 
                 return true;
             }
@@ -231,7 +231,7 @@ namespace Sequences
             public void Dispose()
             {
             }
-        } 
+        }
 
         private class CombinationsEnumerable : IEnumerable<ISequence<T>>
         {

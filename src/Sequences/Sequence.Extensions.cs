@@ -196,7 +196,7 @@ namespace Sequences
                                                                        Func<TSource, IEnumerable<TResult>> selector,
                                                                        IEnumerator<TResult> iter)
         {
-            if (iter.MoveNext())
+            if (iter.TryMoveNext())
                 return new Sequence<TResult>(iter.Current,
                                              () => SelectMany(source, selector, iter));
 
@@ -237,7 +237,7 @@ namespace Sequences
                                                                        Func<TSource, int, IEnumerable<TResult>> selector,
                                                                        IEnumerator<TResult> iter, int index)
         {
-            if (iter.MoveNext())
+            if (iter.TryMoveNext())
                 return new Sequence<TResult>(iter.Current,
                                              () => SelectMany(source, selector, iter, index));
 
@@ -278,7 +278,7 @@ namespace Sequences
             Func<TSource, TCollection, TResult> resultSelector,
             IEnumerator<TCollection> iter)
         {
-            if (iter.MoveNext())
+            if (iter.TryMoveNext())
                 return new Sequence<TResult>(resultSelector(source.Head, iter.Current),
                                              () => SelectMany(source, collectionSelector, resultSelector, iter));
 
@@ -330,7 +330,7 @@ namespace Sequences
             IEnumerator<TCollection> iter,
             int index)
         {
-            if (iter.MoveNext())
+            if (iter.TryMoveNext())
                 return new Sequence<TResult>(resultSelector(source.Head, iter.Current),
                                              () => SelectMany(source, collectionSelector, resultSelector, iter, index));
 
@@ -473,11 +473,11 @@ namespace Sequences
         }
 
         private static ISequence<TResult> Zip<TFirst, TSecond, TResult>(ISequence<TFirst> first,
-                                                                       IEnumerator<TSecond> second,
-                                                                       Func<TFirst, TSecond, TResult> resultSelector)
+                                                                        IEnumerator<TSecond> second,
+                                                                        Func<TFirst, TSecond, TResult> resultSelector)
         {
             //when either sequence is empty, return an empty sequence.
-            return first.NonEmpty && second.MoveNext()
+            return first.NonEmpty && second.TryMoveNext()
                        ? new Sequence<TResult>(resultSelector(first.Head, second.Current),
                                                () => Zip(first.Tail, second, resultSelector))
                        : Empty<TResult>();
@@ -709,7 +709,7 @@ namespace Sequences
                 return new Sequence<TSource>(first.Head, () => Union(first.Tail, second, bucket));
 
             //try to find the next distinct item from "second"
-            while (second.MoveNext())
+            while (second.TryMoveNext())
                 if (bucket.Add(second.Current))
                     return new Sequence<TSource>(second.Current, () => Union(first, second, bucket));
 
