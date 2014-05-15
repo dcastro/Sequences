@@ -46,7 +46,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Compile Include="Sequence.Iterators.cs" />
+    <Compile Include="Sequence.Extensions.cs" />
+    <Compile Include="Sequence`1.Iterators.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmptySequence`1.cs" />
