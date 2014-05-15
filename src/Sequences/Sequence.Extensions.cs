@@ -466,7 +466,21 @@ namespace Sequences
                                                                        IEnumerable<TSecond> second,
                                                                        Func<TFirst, TSecond, TResult> resultSelector)
         {
-            return Enumerable.Zip(first, second, resultSelector).AsSequence();
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            return Zip(first, second.GetEnumerator(), resultSelector);
+        }
+
+        private static ISequence<TResult> Zip<TFirst, TSecond, TResult>(ISequence<TFirst> first,
+                                                                       IEnumerator<TSecond> second,
+                                                                       Func<TFirst, TSecond, TResult> resultSelector)
+        {
+            //when either sequence is empty, return an empty sequence.
+            return first.NonEmpty && second.MoveNext()
+                       ? new Sequence<TResult>(resultSelector(first.Head, second.Current),
+                                               () => Zip(first.Tail, second, resultSelector))
+                       : Empty<TResult>();
         }
 
         /// <summary>
@@ -478,7 +492,7 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Distinct<TSource>(this ISequence<TSource> source)
         {
-            return Enumerable.Distinct(source).AsSequence();
+            return source.Distinct(EqualityComparer<TSource>.Default);
         }
 
         /// <summary>
@@ -492,7 +506,9 @@ namespace Sequences
         public static ISequence<TSource> Distinct<TSource>(this ISequence<TSource> source,
                                                            IEqualityComparer<TSource> comparer)
         {
-            return Enumerable.Distinct(source, comparer).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            return Except(source, new HashSet<TSource>(comparer));
         }
 
         /// <summary>
@@ -506,7 +522,7 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Except<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second)
         {
-            return Enumerable.Except(first, second).AsSequence();
+            return first.Except(second, EqualityComparer<TSource>.Default);
         }
 
         /// <summary>
@@ -522,7 +538,20 @@ namespace Sequences
         public static ISequence<TSource> Except<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
                                                          IEqualityComparer<TSource> comparer)
         {
-            return Enumerable.Except(first, second, comparer).AsSequence();
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            return Except(first, new HashSet<TSource>(second, comparer));
+        }
+
+        private static ISequence<TSource> Except<TSource>(ISequence<TSource> source, HashSet<TSource> bucket)
+        {
+            while (source.NonEmpty && !bucket.Add(source.Head))
+                source = source.Tail;
+
+            return source.IsEmpty
+                       ? Empty<TSource>()
+                       : new Sequence<TSource>(source.Head, () => Except(source.Tail, bucket));
         }
 
         /// <summary>
@@ -536,7 +565,7 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Intersect<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second)
         {
-            return Enumerable.Intersect(first, second).AsSequence();
+            return first.Intersect(second, EqualityComparer<TSource>.Default);
         }
 
         /// <summary>
@@ -552,7 +581,20 @@ namespace Sequences
         public static ISequence<TSource> Intersect<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
                                                             IEqualityComparer<TSource> comparer)
         {
-            return Enumerable.Intersect(first, second, comparer).AsSequence();
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            return Intersect(first, new HashSet<TSource>(second, comparer));
+        }
+
+        private static ISequence<TSource> Intersect<TSource>(ISequence<TSource> source, HashSet<TSource> bucket)
+        {
+            while (source.NonEmpty && !bucket.Remove(source.Head))
+                source = source.Tail;
+
+            return source.IsEmpty
+                       ? Empty<TSource>()
+                       : new Sequence<TSource>(source.Head, () => Intersect(source.Tail, bucket));
         }
 
         /// <summary>
@@ -565,7 +607,8 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Reverse<TSource>(this ISequence<TSource> source)
         {
-            return Enumerable.Reverse(source).AsSequence();
+            if (source == null) throw new ArgumentNullException("source");
+            return new Stack<TSource>(source).AsSequence();
         }
 
         /// <summary>
@@ -634,7 +677,7 @@ namespace Sequences
         [Pure]
         public static ISequence<TSource> Union<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second)
         {
-            return Enumerable.Union(first, second).AsSequence();
+            return first.Union(second, EqualityComparer<TSource>.Default);
         }
 
         /// <summary>
@@ -649,7 +692,28 @@ namespace Sequences
         public static ISequence<TSource> Union<TSource>(this ISequence<TSource> first, IEnumerable<TSource> second,
                                                         IEqualityComparer<TSource> comparer)
         {
-            return Enumerable.Union(first, second, comparer).AsSequence();
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            return Union(first, second.GetEnumerator(), new HashSet<TSource>(comparer));
+        }
+
+        private static ISequence<TSource> Union<TSource>(ISequence<TSource> first, IEnumerator<TSource> second,
+                                                         HashSet<TSource> bucket)
+        {
+            //try to find the next distinct item from "first"
+            while (first.NonEmpty && !bucket.Add(first.Head))
+                first = first.Tail;
+
+            if (first.NonEmpty)
+                return new Sequence<TSource>(first.Head, () => Union(first.Tail, second, bucket));
+
+            //try to find the next distinct item from "second"
+            while (second.MoveNext())
+                if (bucket.Add(second.Current))
+                    return new Sequence<TSource>(second.Current, () => Union(first, second, bucket));
+
+            return Empty<TSource>();
         }
     }
 }
