@@ -80,6 +80,7 @@
     <Compile Include="GroupedTests.cs" />
     <Compile Include="IndexTests.cs" />
     <Compile Include="InitTests.cs" />
+    <Compile Include="KmpSearchTests.cs" />
     <Compile Include="PadToTests.cs" />
     <Compile Include="PartitionTests.cs" />
     <Compile Include="PatchTests.cs" />

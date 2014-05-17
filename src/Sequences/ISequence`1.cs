@@ -356,6 +356,23 @@ namespace Sequences
         int IndexOf(T elem, int from, int count);
 
         /// <summary>
+        /// Finds the index of the first occurrence of a given sequence as a slice.
+        /// </summary>
+        /// <param name="slice">The sequence to search for.</param>
+        /// <returns>The index of the first occurrence of <paramref name="slice"/> if any is found; otherwise, -1.</returns>
+        [Pure]
+        int IndexOfSlice(IEnumerable<T> slice);
+
+        /// <summary>
+        /// Finds the index after or at a given start index of the first occurrence of a given sequence as a slice.
+        /// </summary>
+        /// <param name="slice">The sequence to search for.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index of the first occurrence of <paramref name="slice"/> if any is found; otherwise, -1.</returns>
+        [Pure]
+        int IndexOfSlice(IEnumerable<T> slice, int from);
+
+        /// <summary>
         /// Finds the index of the first element satisfying some predicate.
         /// If this sequence represents an infinite set or series and no element satisfies the predicate, this will never return!
         /// </summary>

@@ -47,6 +47,7 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Compile Include="EnumeratorEx.cs" />
+    <Compile Include="KmpSearchAlgorithm.cs" />
     <Compile Include="Sequence.Extensions.cs" />
     <Compile Include="Sequence`1.Iterators.cs" />
   </ItemGroup>
