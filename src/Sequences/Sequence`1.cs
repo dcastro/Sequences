@@ -203,9 +203,9 @@ namespace Sequences
         /// <returns>The fully realized sequence.</returns>
         public ISequence<T> Force()
         {
-            foreach (var elem in this)
-            {
-            }
+            //force the evaluation of the sequence
+            int c = Count;
+            _hasDefiniteSize = true;
             return this;
         }
 
