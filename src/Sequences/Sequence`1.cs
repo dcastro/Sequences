@@ -645,10 +645,78 @@ namespace Sequences
         /// Produces the range of all indices of this sequence.
         /// </summary>
         /// <returns>The range of all indices of this sequence.</returns>
+        [Pure]
         public IEnumerable<int> Indices()
         {
             return new GenericEnumerable<int>(
                 () => new IndexIterator(this));
+        }
+
+        /// <summary>
+        /// Tests whether this sequence contains a given sequence as a slice.
+        /// If this sequence represents an infinite set or series and doesn't contain <paramref name="slice"/>, this will never return!
+        /// </summary>
+        /// <param name="slice">The sequence to search for.</param>
+        /// <returns>True if this sequence contains a slice with the same elements as <paramref name="slice"/>; otherwise, False.</returns>
+        [Pure]
+        public bool ContainsSlice(IEnumerable<T> slice)
+        {
+            return IndexOfSlice(slice) != -1;
+        }
+
+        /// <summary>
+        /// Finds the index of the first occurrence of a given sequence as a slice.
+        /// If this sequence represents an infinite set or series and doesn't contain <paramref name="slice"/>, this will never return!
+        /// </summary>
+        /// <param name="slice">The sequence to search for.</param>
+        /// <returns>The index of the first occurrence of <paramref name="slice"/> if any is found; otherwise, -1.</returns>
+        [Pure]
+        public int IndexOfSlice(IEnumerable<T> slice)
+        {
+            return IndexOfSlice(slice, 0);
+        }
+
+        /// <summary>
+        /// Finds the index after or at a given start index of the first occurrence of a given sequence as a slice.
+        /// If this sequence represents an infinite set or series and doesn't contain <paramref name="slice"/>, this will never return!
+        /// </summary>
+        /// <param name="slice">The sequence to search for.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index of the first occurrence of <paramref name="slice"/> if any is found; otherwise, -1.</returns>
+        [Pure]
+        public int IndexOfSlice(IEnumerable<T> slice, int from)
+        {
+            from = Math.Max(0, from);
+
+            var source = this.Skip(from);
+            T[] sliceArray = slice.ToArray();
+            int sliceLength = sliceArray.Length;
+
+            //handle edge cases
+            //searching for an empty slice within an empty sequence
+            if (IsEmpty && from == 0 && sliceLength == 0)
+                return 0;
+
+            if (source.HasDefiniteSize)
+            {
+                if (source.IsEmpty)
+                    return -1;
+                if (sliceLength > source.Count)
+                    return -1;
+                if (sliceLength == source.Count)
+                    return source.SequenceEqual(sliceArray) ? 0 : -1;
+            }
+
+            switch (sliceLength)
+            {
+                case 0:
+                    return from;
+                case 1:
+                    return IndexOf(sliceArray[0]);
+                default:
+                    int res = KmpSearchAlgorithm.Search(source, sliceArray);
+                    return res == -1 ? res : res + from;
+            }
         }
 
         /// <summary>
@@ -689,59 +757,6 @@ namespace Sequences
         {
             IEqualityComparer<T> comparer = EqualityComparer<T>.Default;
             return IndexWhere(current => comparer.Equals(current, elem), from, count);
-        }
-
-        /// <summary>
-        /// Finds the index of the first occurrence of a given sequence as a slice.
-        /// </summary>
-        /// <param name="slice">The sequence to search for.</param>
-        /// <returns>The index of the first occurrence of <paramref name="slice"/> if any is found; otherwise, -1.</returns>
-        [Pure]
-        public int IndexOfSlice(IEnumerable<T> slice)
-        {
-            return IndexOfSlice(slice, 0);
-        }
-
-        /// <summary>
-        /// Finds the index after or at a given start index of the first occurrence of a given sequence as a slice.
-        /// </summary>
-        /// <param name="slice">The sequence to search for.</param>
-        /// <param name="from">The start index.</param>
-        /// <returns>The index of the first occurrence of <paramref name="slice"/> if any is found; otherwise, -1.</returns>
-        [Pure]
-        public int IndexOfSlice(IEnumerable<T> slice, int from)
-        {
-            from = Math.Max(0, from);
-
-            var source = this.Skip(from);
-            T[] sliceArray = slice.ToArray();
-            int sliceLength = sliceArray.Length;
-
-            //handle edge cases
-            //searching for an empty slice within an empty sequence
-            if (IsEmpty && from == 0 && sliceLength == 0)
-                return 0;
-
-            if (source.HasDefiniteSize)
-            {
-                if (source.IsEmpty)
-                    return -1;
-                if (sliceLength > source.Count)
-                    return -1;
-                if (sliceLength == source.Count)
-                    return source.SequenceEqual(sliceArray) ? 0 : -1;
-            }
-
-            switch (sliceLength)
-            {
-                case 0:
-                    return from;
-                case 1:
-                    return IndexOf(sliceArray[0]);
-                default:
-                    int res = KmpSearchAlgorithm.Search(source, sliceArray);
-                    return res == -1 ? res : res + from;
-            }
         }
 
         /// <summary>
