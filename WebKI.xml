@@ -17,6 +17,10 @@
     <HelpKINode Title="ISequence(T).Concat Method " Url="html/30fb007d-a36e-9426-5abc-0f0e38577f6d.htm" />
     <HelpKINode Title="Sequence(T).Concat Method " Url="html/7a4d77cd-9637-7db1-48cd-6c5287d863d6.htm" />
   </HelpKINode>
+  <HelpKINode Title="ContainsSlice method">
+    <HelpKINode Title="ISequence(T).ContainsSlice Method " Url="html/7c2c0e33-5bee-47c7-57b0-183523857ff2.htm" />
+    <HelpKINode Title="Sequence(T).ContainsSlice Method " Url="html/6efa4169-0369-7666-84bc-5df9ef4db288.htm" />
+  </HelpKINode>
   <HelpKINode Title="Continually method" Url="html/7d1c02cb-1e00-dbb6-dc1f-eb62940a5eb0.htm" />
   <HelpKINode Title="CopyTo method">
     <HelpKINode Title="ISequence(T).CopyTo Method " Url="html/431af332-6187-7c0f-300f-3812c2c5f82d.htm" />
@@ -66,6 +70,10 @@
     <HelpKINode Title="ISequence(T).IndexOf Method " Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm" />
     <HelpKINode Title="Sequence(T).IndexOf Method " Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm" />
   </HelpKINode>
+  <HelpKINode Title="IndexOfSlice method">
+    <HelpKINode Title="ISequence(T).IndexOfSlice Method " Url="html/4498e6c5-1e6e-e1e6-a23f-fcafeb5d4436.htm" />
+    <HelpKINode Title="Sequence(T).IndexOfSlice Method " Url="html/d0d3d310-b2e9-e6a5-261b-93d038a3484d.htm" />
+  </HelpKINode>
   <HelpKINode Title="IndexWhere method">
     <HelpKINode Title="ISequence(T).IndexWhere Method " Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm" />
     <HelpKINode Title="Sequence(T).IndexWhere Method " Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm" />
@@ -96,6 +104,7 @@
   <HelpKINode Title="ISequence(Of T).Append method" Url="html/da58ecba-a441-940b-0f1c-2f91bdb40b74.htm" />
   <HelpKINode Title="ISequence(Of T).Combinations method" Url="html/cc99b64f-87a8-7d6f-72ee-8a763b05856c.htm" />
   <HelpKINode Title="ISequence(Of T).Concat method" Url="html/30fb007d-a36e-9426-5abc-0f0e38577f6d.htm" />
+  <HelpKINode Title="ISequence(Of T).ContainsSlice method" Url="html/7c2c0e33-5bee-47c7-57b0-183523857ff2.htm" />
   <HelpKINode Title="ISequence(Of T).CopyTo method" Url="html/431af332-6187-7c0f-300f-3812c2c5f82d.htm" />
   <HelpKINode Title="ISequence(Of T).Count property" Url="html/5e47f00f-3f25-de96-affb-c4078c461922.htm" />
   <HelpKINode Title="ISequence(Of T).Fold method" Url="html/5816d5d4-1394-7ad2-da87-3b5d10685e37.htm" />
@@ -106,6 +115,7 @@
   <HelpKINode Title="ISequence(Of T).HasDefiniteSize property" Url="html/e54ca251-0a2f-9715-91ee-9acfba566e49.htm" />
   <HelpKINode Title="ISequence(Of T).Head property" Url="html/7e41aaab-7655-656f-d937-b760ac00f4f2.htm" />
   <HelpKINode Title="ISequence(Of T).IndexOf method" Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm" />
+  <HelpKINode Title="ISequence(Of T).IndexOfSlice method" Url="html/4498e6c5-1e6e-e1e6-a23f-fcafeb5d4436.htm" />
   <HelpKINode Title="ISequence(Of T).IndexWhere method" Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm" />
   <HelpKINode Title="ISequence(Of T).Indices method" Url="html/0ebf0beb-4836-577f-46f6-a3a0e1397f12.htm" />
   <HelpKINode Title="ISequence(Of T).Init property" Url="html/f74f855a-de71-4343-8ed4-984edb907e2c.htm" />
@@ -148,6 +158,7 @@
   <HelpKINode Title="ISequence&lt;T&gt;.Append method" Url="html/da58ecba-a441-940b-0f1c-2f91bdb40b74.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Combinations method" Url="html/cc99b64f-87a8-7d6f-72ee-8a763b05856c.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Concat method" Url="html/30fb007d-a36e-9426-5abc-0f0e38577f6d.htm" />
+  <HelpKINode Title="ISequence&lt;T&gt;.ContainsSlice method" Url="html/7c2c0e33-5bee-47c7-57b0-183523857ff2.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.CopyTo method" Url="html/431af332-6187-7c0f-300f-3812c2c5f82d.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Count property" Url="html/5e47f00f-3f25-de96-affb-c4078c461922.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Fold method" Url="html/5816d5d4-1394-7ad2-da87-3b5d10685e37.htm" />
@@ -158,6 +169,7 @@
   <HelpKINode Title="ISequence&lt;T&gt;.HasDefiniteSize property" Url="html/e54ca251-0a2f-9715-91ee-9acfba566e49.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Head property" Url="html/7e41aaab-7655-656f-d937-b760ac00f4f2.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.IndexOf method" Url="html/9561a3a1-9b00-2a45-37ad-873a50c17a5b.htm" />
+  <HelpKINode Title="ISequence&lt;T&gt;.IndexOfSlice method" Url="html/4498e6c5-1e6e-e1e6-a23f-fcafeb5d4436.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.IndexWhere method" Url="html/af727e2e-35fd-da7d-1fcc-d69c4b844c1c.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Indices method" Url="html/0ebf0beb-4836-577f-46f6-a3a0e1397f12.htm" />
   <HelpKINode Title="ISequence&lt;T&gt;.Init property" Url="html/f74f855a-de71-4343-8ed4-984edb907e2c.htm" />
@@ -286,6 +298,7 @@
   <HelpKINode Title="Sequence(Of T).Append method" Url="html/54cd38c4-2853-6d71-d0d6-c44e2a699ecc.htm" />
   <HelpKINode Title="Sequence(Of T).Combinations method" Url="html/acfa3722-af91-d095-09d0-6aa4ae0bdf4b.htm" />
   <HelpKINode Title="Sequence(Of T).Concat method" Url="html/7a4d77cd-9637-7db1-48cd-6c5287d863d6.htm" />
+  <HelpKINode Title="Sequence(Of T).ContainsSlice method" Url="html/6efa4169-0369-7666-84bc-5df9ef4db288.htm" />
   <HelpKINode Title="Sequence(Of T).CopyTo method" Url="html/8c799010-da2c-ba21-199d-07cc635eb474.htm" />
   <HelpKINode Title="Sequence(Of T).Count property" Url="html/91060f47-7c1c-7b2c-c792-02b23f8137fd.htm" />
   <HelpKINode Title="Sequence(Of T).Fold method" Url="html/c9dc12b1-26fb-7c3e-ef03-bedb63f25784.htm" />
@@ -297,6 +310,7 @@
   <HelpKINode Title="Sequence(Of T).HasDefiniteSize property" Url="html/ee77006f-6c2a-112b-31d1-cf38a41ea943.htm" />
   <HelpKINode Title="Sequence(Of T).Head property" Url="html/884447ac-5895-cf66-af7b-33785b29080e.htm" />
   <HelpKINode Title="Sequence(Of T).IndexOf method" Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm" />
+  <HelpKINode Title="Sequence(Of T).IndexOfSlice method" Url="html/d0d3d310-b2e9-e6a5-261b-93d038a3484d.htm" />
   <HelpKINode Title="Sequence(Of T).IndexWhere method" Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm" />
   <HelpKINode Title="Sequence(Of T).Indices method" Url="html/d8cdae91-a147-2223-f825-ad4b0eff0404.htm" />
   <HelpKINode Title="Sequence(Of T).Init property" Url="html/b0b38082-8637-f662-196b-0852366b2493.htm" />
@@ -375,6 +389,7 @@
   <HelpKINode Title="Sequence&lt;T&gt;.Append method" Url="html/54cd38c4-2853-6d71-d0d6-c44e2a699ecc.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Combinations method" Url="html/acfa3722-af91-d095-09d0-6aa4ae0bdf4b.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Concat method" Url="html/7a4d77cd-9637-7db1-48cd-6c5287d863d6.htm" />
+  <HelpKINode Title="Sequence&lt;T&gt;.ContainsSlice method" Url="html/6efa4169-0369-7666-84bc-5df9ef4db288.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.CopyTo method" Url="html/8c799010-da2c-ba21-199d-07cc635eb474.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Count property" Url="html/91060f47-7c1c-7b2c-c792-02b23f8137fd.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Fold method" Url="html/c9dc12b1-26fb-7c3e-ef03-bedb63f25784.htm" />
@@ -386,6 +401,7 @@
   <HelpKINode Title="Sequence&lt;T&gt;.HasDefiniteSize property" Url="html/ee77006f-6c2a-112b-31d1-cf38a41ea943.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Head property" Url="html/884447ac-5895-cf66-af7b-33785b29080e.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.IndexOf method" Url="html/4ef8e68c-0aca-cdf0-d53a-53810d541f03.htm" />
+  <HelpKINode Title="Sequence&lt;T&gt;.IndexOfSlice method" Url="html/d0d3d310-b2e9-e6a5-261b-93d038a3484d.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.IndexWhere method" Url="html/80e3484a-e2b3-b165-c599-9a4cc02cdce8.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Indices method" Url="html/d8cdae91-a147-2223-f825-ad4b0eff0404.htm" />
   <HelpKINode Title="Sequence&lt;T&gt;.Init property" Url="html/b0b38082-8637-f662-196b-0852366b2493.htm" />
@@ -495,6 +511,7 @@
   </HelpKINode>
   <HelpKINode Title="version">
     <HelpKINode Title="1.0.0.0" Url="html/b285c333-2fce-426e-b9d1-a5d591c7b6d0.htm" />
+    <HelpKINode Title="1.0.1.0" Url="html/1e487d9d-1dcb-4382-a62f-cd30546f83ab.htm" />
     <HelpKINode Title="history" Url="html/f9e21197-e60e-4af1-9c38-c4ed4498ac04.htm" />
   </HelpKINode>
   <HelpKINode Title="Welcome" Url="html/3a04061c-5bf3-4ebd-a084-cf60e7f7a13a.htm" />
