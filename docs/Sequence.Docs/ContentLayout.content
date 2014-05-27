@@ -5,7 +5,7 @@
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>
   </Topic>
-  <Topic id="d926337d-29d9-4fba-96a3-080e2a7f31e2" visible="True" isSelected="true" title="Examples" />
+  <Topic id="d926337d-29d9-4fba-96a3-080e2a7f31e2" visible="True" title="Examples" />
   <Topic id="f9e21197-e60e-4af1-9c38-c4ed4498ac04" visible="True" isExpanded="true" title="Version History">
     <HelpKeywords>
       <HelpKeyword index="K" term="version, history" />
@@ -13,6 +13,11 @@
     <Topic id="b285c333-2fce-426e-b9d1-a5d591c7b6d0" visible="True" title="Version 1.0.0.0">
       <HelpKeywords>
         <HelpKeyword index="K" term="version, 1.0.0.0" />
+      </HelpKeywords>
+    </Topic>
+    <Topic id="1e487d9d-1dcb-4382-a62f-cd30546f83ab" visible="True" isSelected="true" title="Version 1.0.1.0">
+      <HelpKeywords>
+        <HelpKeyword index="K" term="version, 1.0.1.0" />
       </HelpKeywords>
     </Topic>
   </Topic>
