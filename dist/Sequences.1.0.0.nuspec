@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Sequences</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>Sequences</title>
         <authors>DCastro</authors>
         <owners>DCastro</owners>
@@ -16,7 +16,8 @@ The fact that the tail is lazily-evaluated, makes it easy to represent infinite 
 
 See the project's page for examples: https://github.com/dcastro/Sequences</description>
         <summary>Sequences is a port of Scala's Streams to C#. It features lazy evaluation, immutability and memoization.</summary>
-        <releaseNotes />
+        <releaseNotes>- Improved iterators to allow a more efficient garbage collection;
+- Added IndexOfSlice and ContainsSlice.</releaseNotes>
         <copyright>© 2014 Diogo Castro</copyright>
         <tags>enumerable sequence collection immutable data-structures scala lazy stream</tags>
         <frameworkAssemblies>
