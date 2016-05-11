@@ -22,8 +22,8 @@ See the project's page for examples: https://github.com/dcastro/Sequences</descr
         <tags>enumerable sequence collection immutable data-structures scala lazy stream</tags>
     </metadata>
     <files>
-        <file src="..\bin\Sequences.dll" target="lib\portable-net45+sl5+win8\Sequences.dll" />
-        <file src="..\bin\Sequences.pdb" target="lib\portable-net45+sl5+win8\Sequences.pdb" />
-        <file src="..\bin\Sequences.XML" target="lib\portable-net45+sl5+win8\Sequences.XML" />
+        <file src="..\bin\Sequences.dll" target="lib\portable-net45+netcore45+wpa81\Sequences.dll" />
+        <file src="..\bin\Sequences.pdb" target="lib\portable-net45+netcore45+wpa81\Sequences.pdb" />
+        <file src="..\bin\Sequences.XML" target="lib\portable-net45+netcore45+wpa81\Sequences.XML" />
     </files>
 </package>
