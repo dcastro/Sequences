@@ -16,8 +16,7 @@ The fact that the tail is lazily-evaluated, makes it easy to represent infinite 
 
 See the project's page for examples: https://github.com/dcastro/Sequences</description>
         <summary>Sequences is a port of Scala's Streams to C#. It features lazy evaluation, immutability and memoization.</summary>
-        <releaseNotes>- Improved iterators to allow a more efficient garbage collection;
-- Added IndexOfSlice and ContainsSlice.</releaseNotes>
+        <releaseNotes>https://github.com/dcastro/Sequences/releases</releaseNotes>
         <copyright>© 2014 Diogo Castro</copyright>
         <tags>enumerable sequence collection immutable data-structures scala lazy stream</tags>
     </metadata>
