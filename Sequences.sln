@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequences.Tests.Unit", "tests\Sequences.Tests.Unit\Sequences.Tests.Unit.csproj", "{97B797FB-B2D8-414B-9459-71EB27113D60}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sequences.Tests.Unit", "tests\Sequences.Tests.Unit\Sequences.Tests.Unit.csproj", "{97B797FB-B2D8-414B-9459-71EB27113D60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequences", "src\Sequences\Sequences.csproj", "{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sequences", "src\Sequences\Sequences.csproj", "{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C5490B70-626D-48B8-BE58-0F395820FF35}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sequences.Tests.Functional", "tests\Sequences.Tests.Functional\Sequences.Tests.Functional.csproj", "{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sequences.Tests.Functional", "tests\Sequences.Tests.Functional\Sequences.Tests.Functional.csproj", "{C0460AD0-BE50-4A91-BBDF-BDBA5F2634C6}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Sequence.Docs", "docs\Sequence.Docs\Sequence.Docs.shfbproj", "{7807882D-4578-40A2-9E24-970E1E992EC5}"
 EndProject
@@ -48,5 +43,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C814083-2537-48FE-91B7-CD093AB4A51A}
 	EndGlobalSection
 EndGlobal
