@@ -1,79 +1,46 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6C9F9E66-E026-4966-AEB2-9B29B5F0DF85}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequences</RootNamespace>
-    <AssemblyName>Sequences</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Sequences.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Sequences.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Docs|AnyCPU'">
-    <OutputPath>bin\Docs\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>bin\Release\Sequences.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>Sequences</AssemblyTitle>
+    <Product>Sequences</Product>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright ©  2022</Copyright>
+    <Version>1.2.0</Version>
+    <Authors>DCastro,admalledd</Authors>
+    <PackageProjectUrl>https://github.com/dcastro/Sequences</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>
+      Sequences is a port of Scala's Stream[+A] to C#.
+
+      A Sequence&lt;T&gt; is an immutable lazy list whose elements are only evaluated when they are needed. A sequence is composed by a head (the first element) and a lazily-evaluated tail (the remaining elements).
+
+      The fact that the tail is lazily-evaluated, makes it easy to represent infinite series or sets.
+
+      See the project's page for examples: https://github.com/dcastro/Sequences
+    </Description>
+    <PackageSummary>Sequences is a port of Scala's Streams to C#. It features lazy evaluation, immutability and memoization.</PackageSummary>
+    <PackageReleaseNotes>https://github.com/dcastro/Sequences/releases</PackageReleaseNotes>
+    <Copyright>© 2014, 2022 Diogo Castro</Copyright>
+    <PackageTags>enumerable sequence collection immutable data-structures scala lazy stream</PackageTags>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>../../signing.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <Compile Include="EnumeratorEx.cs" />
-    <Compile Include="KmpSearchAlgorithm.cs" />
-    <Compile Include="Sequence.Extensions.cs" />
-    <Compile Include="Sequence`1.Iterators.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="EmptySequence`1.cs" />
-    <Compile Include="ISequence`1.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sequence.cs" />
-    <Compile Include="SequenceBuilder.cs" />
-    <Compile Include="Sequence`1.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /Q /Y /E "$(TargetDir)*.*" "$(SolutionDir)bin\"</PostBuildEvent>
+  
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DocumentationFile>bin\$(Configuration)\Sequences.XML</DocumentationFile>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DocumentationFile>bin\$(Configuration)\Sequences.XML</DocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Docs|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\Sequences.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 </Project>
